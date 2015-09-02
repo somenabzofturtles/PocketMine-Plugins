@@ -33,9 +33,7 @@ class BlockFreezer extends PluginBase implements Listener{
     private function isBlockSpecified(Block $block){
     	if(is_array($this->getConfig()->getNested("level.".strtolower($block->getLevel()->getName())))) return in_array($block->getId().":".$block->getDamage(), $this->getConfig()->getNested("level.".strtolower($block->getLevel()->getName())));	
     }
-    /**
-     * @param BlockUpdateEvent $event
-     */
+    /** @param BlockUpdateEvent $event */
     public function onBlockUpdate(BlockUpdateEvent $event){
 	if($this->isBlockSpecified($event->getBlock())){
 	    $event->setCancelled(true);
