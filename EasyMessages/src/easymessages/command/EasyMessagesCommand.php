@@ -20,11 +20,15 @@ class EasyMessagesCommand extends Command implements PluginIdentifiableCommand{
         $this->setPermission("easymessages.command.easymessages");
         $this->plugin = $plugin;
     }
-    /** @return EasyMessages */
+    /** 
+     * @return EasyMessages 
+     */
     public function getPlugin(){
         return $this->plugin;
     }
-    /** @param CommandSender $sender */
+    /** 
+     * @param CommandSender $sender 
+     */
     private function sendCommandHelp(CommandSender $sender){
         $sender->sendMessage("§6EasyMessages §bcommands:");
         $sender->sendMessage("§dMain command: §9easymessages§d, §9em");

@@ -12,7 +12,9 @@ class InfinitePopupTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** @return EasyMessages */
+    /** 
+     * @return EasyMessages 
+     */
     public function getPlugin(){
         return $this->plugin;
     }
