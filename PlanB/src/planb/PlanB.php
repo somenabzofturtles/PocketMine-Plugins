@@ -41,23 +41,17 @@ class PlanB extends PluginBase{
     public function isBackupPlayer($player){
         return $this->backups->exists(strtolower($player), true);
     }
-    /**
-     * @param string $player
-     */
+    /** @param string $player */
     public function addBackup($player){
         $this->backups->set(strtolower($player));
         $this->backups->save();
     }
-    /**
-     * @param string $player
-     */
+    /** @param string $player */
     public function removeBackup($player){
         $this->backups->remove(strtolower($player));
         $this->backups->save();
     }
-    /**
-     * @param CommandSender $sender
-     */
+    /** @param CommandSender $sender */
     public function sendBackups(CommandSender $sender){
         $sender->sendMessage(TextFormat::YELLOW."List of all backup players:");
         $sender->sendMessage(file_get_contents($this->getDataFolder()."backups.txt"));
