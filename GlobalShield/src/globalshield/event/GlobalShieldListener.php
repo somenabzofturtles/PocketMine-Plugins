@@ -20,55 +20,39 @@ class GlobalShieldListener implements Listener{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** @return \globalshield\GlobalShield */
+    /** @return GlobalShield */
     public function getPlugin(){
         return $this->plugin;
     }
-    /**
-     * @param BlockBreakEvent $event
-     */
+    /** @param BlockBreakEvent $event */
     public function onBlockBreak(BlockBreakEvent $event){
         
     }
-    /**
-     * @param EntityLevelChangeEvent $event
-     */
+    /** @param EntityLevelChangeEvent $event */
     public function onEntityLevelChange(EntityLevelChangeEvent $event){
         
     }
-    /**
-     * @param EntityTeleportEvent $event
-     */
+    /** @param EntityTeleportEvent $event */
     public function onEntityTeleport(EntityTeleportEvent $event){
         
     }
-    /**
-     * @param BlockPlaceEvent $event
-     */
+    /** @param BlockPlaceEvent $event */
     public function onBlockPlace(BlockPlaceEvent $event){
         
     }
-    /**
-     * @param PlayerBucketEmptyEvent $event
-     */
+    /** @param PlayerBucketEmptyEvent $event */
     public function onPlayerBucketEmpty(PlayerBucketEmptyEvent $event){
         
     }
-    /**
-     * @param PlayerBucketFillEvent $event
-     */
+    /** @param PlayerBucketFillEvent $event */
     public function onPlayerBucketFill(PlayerBucketFillEvent $event){
         
     }
-    /**
-     * @param PlayerInteractEvent $event
-     */
+    /** @param PlayerInteractEvent $event */
     public function onPlayerInteractEvent(PlayerInteractEvent $event){
         
     }
-    /**
-     * @param PlayerItemHeldEvent $event
-     */
+    /** @param PlayerItemHeldEvent $event */
     public function onPlayerItemHeld(PlayerItemHeldEvent $event){
         
     }
