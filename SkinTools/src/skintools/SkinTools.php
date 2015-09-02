@@ -39,9 +39,7 @@ class SkinTools extends PluginBase{
     public function hasTouchMode(Player $player){
     	return $this->skintools["touchMode"][strtolower($player->getName())] === true;
     }
-    /**
-     * @param Player $player
-     */
+    /** @param Player $player */
     public function storeSkinData(Player $player){
         $this->skintools["skinData"][strtolower($player->getName())] = $player->getSkinData();
     }
@@ -52,9 +50,7 @@ class SkinTools extends PluginBase{
     public function getSkinData(Player $player){
         return $this->skintools["skinData"][strtolower($player->getName())];
     }
-    /**
-     * @param Player $player
-     */
+    /** @param Player $player */
     public function removeSkinData(Player $player){
         if($this->isSkinStored($player)) unset($this->skintools["skinData"][strtolower($player->getName())]);
     }

@@ -17,15 +17,11 @@ class SkinToolsListener implements Listener{
     public function __construct(SkinTools $plugin){
         $this->plugin = $plugin;
     }
-    /**
-     * @return \skintools\SkinTools
-     */
+    /** @return SkinTools */
     public function getPlugin(){
         return $this->plugin;
     }
-    /**
-     * @param EntityDamageEvent $event
-     */
+    /** @param EntityDamageEvent $event */
     public function onEntityDamage(EntityDamageEvent $event){
         if($event instanceof EntityDamageByEntityEvent){
             if($event->getDamager() instanceof Player and $event->getEntity() instanceof Player){
@@ -37,16 +33,12 @@ class SkinToolsListener implements Listener{
             }
         }
     }
-    /**
-     * @param PlayerLoginEvent $event
-     */
+    /** @param PlayerLoginEvent $event */
     public function onPlayerLogin(PlayerLoginEvent $event){
         $this->getPlugin()->storeSkinData($event->getPlayer());
         $this->getPlugin()->setTouchMode($event->getPlayer(), false);
     }
-    /**
-     * @param PlayerQuitEvent $event
-     */
+    /** @param PlayerQuitEvent $event */
     public function onPlayerQuit(PlayerQuitEvent $event){
         if($this->getPlugin()->isSkinStored($event->getPlayer())){
             $this->getPlugin()->removeSkinData($event->getPlayer());
