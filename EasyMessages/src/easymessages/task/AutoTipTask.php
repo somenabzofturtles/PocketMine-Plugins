@@ -12,7 +12,7 @@ class AutoTipTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** @return \easymessages\EasyMessages */
+    /** @return EasyMessages */
     public function getPlugin(){
         return $this->plugin;
     }

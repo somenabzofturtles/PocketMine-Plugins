@@ -12,13 +12,11 @@ class EasyMessagesListener implements Listener{
     public function __construct(EasyMessages $plugin){
         $this->plugin = $plugin;
     }
-    /** @return \easymessages\EasyMessages */
+    /** @return EasyMessages */
     public function getPlugin(){
         return $this->plugin;
     }
-    /**
-     * @param PlayerChatEvent $event
-     */
+    /** @param PlayerChatEvent $event */
     public function onPlayerChat(PlayerChatEvent $event){
         if(!$this->getPlugin()->getConfig()->getNested("color.colorChat") !== true and !$event->getPlayer()->hasPermission("easymessages.action.color")){
             $event->setMessage($this->getPlugin()->replaceSymbols($event->getMessage(), true));

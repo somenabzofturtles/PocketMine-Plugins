@@ -81,17 +81,13 @@ class EasyMessages extends PluginBase{
         }
     	$this->getServer()->getPluginManager()->registerEvents(new EasyMessagesListener($this), $this);
     }
-    /**
-     * @param string $message
-     */
+    /** @param string $message */
     public function broadcastPopup($message){
         foreach($this->getServer()->getOnlinePlayers() as $player){
             $player->sendPopup($message);
         }
     }
-    /**
-     * @param string $message
-     */
+    /** @param string $message */
     public function broadcastTip($message){
     	foreach($this->getServer()->getOnlinePlayers() as $player){
     	    $player->sendTip($message);
