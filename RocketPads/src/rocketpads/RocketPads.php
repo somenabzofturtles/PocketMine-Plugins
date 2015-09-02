@@ -43,24 +43,34 @@ class RocketPads extends PluginBase{
     public function isRocketPad(Block $block){
         if(is_array($this->getConfig()->getNested("pad.blockId"))) return in_array($block->getId().":".$block->getDamage(), $this->getConfig()->getNested("pad.blockId")) === true;
     }
-    /** @param Block $block */
+    /** 
+     * @param Block $block 
+     */
     public function addRocketPad(Block $block){
         $this->pads->set($block->getFloorX().":".$block->getFloorY().":".$block->getFloorZ().":".strtolower($block->getLevel()->getName()));
         $this->pads->save();
     }
-    /** @param Block $block */
+    /** 
+     * @param Block $block 
+     */
     public function removeRocketPad(Block $block){
         $this->pads->remove($block->getFloorX().":".$block->getFloorY().":".$block->getFloorZ().":".strtolower($block->getLevel()->getName()));
     }
-    /** @return string */
+    /** 
+     * @return string 
+     */
     public function getBaseValue(){
         return $this->getConfig()->getNested("pad.baseValue");
     }
-    /** @return int */
+    /** 
+     * @return int 
+     */
     public function getLaunchDistance(){
         return (int) $this->getConfig()->getNested("pad.launchDistance");
     }
-    /** @param Player $player */
+    /** 
+     * @param Player $player 
+     */
     public function launchPlayer(Player $player){
         switch($player->getDirection()){
             case 0:
