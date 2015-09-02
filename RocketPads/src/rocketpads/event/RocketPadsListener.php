@@ -15,33 +15,23 @@ class RocketPadsListener implements Listener{
     public function __construct(RocketPads $plugin){
         $this->plugin = $plugin;
     }
-    /**
-     * @return \rocketpads\RocketPads
-     */
+    /** @return RocketPads */
     public function getPlugin(){
         return $this->plugin;
     }
-    /**
-     * @param BlockBreakEvent $event
-     */
+    /** @param BlockBreakEvent $event */
     public function onBlockBreak(BlockBreakEvent $event){
         
     }
-    /**
-     * @param BlockPlaceEvent $event
-     */
+    /** @param BlockPlaceEvent $event */
     public function onBlockPlace(BlockPlaceEvent $event){
         
     }
-    /**
-     * @param PlayerInteractEvent $event
-     */
+    /** @param PlayerInteractEvent $event */
     public function onPlayerInteract(PlayerInteractEvent $event){
         
     }
-    /**
-     * @param PlayerMoveEvent $event
-     */
+    /** @param PlayerMoveEvent $event */
     public function onPlayerMove(PlayerMoveEvent $event){
         if(!$event->isCancelled()){
             if($this->getPlugin()->isRocketPad($event->getPlayer()->getLevel()->getBlock($event->getPlayer()->subtract(0, 1, 0)))){
