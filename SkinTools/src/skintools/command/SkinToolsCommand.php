@@ -22,11 +22,15 @@ class SkinToolsCommand extends Command implements PluginIdentifiableCommand{
         $this->setPermission("skintools.command.skintools");
         $this->plugin = $plugin;
     }
-    /** @return SkinTools */
+    /** 
+     * @return SkinTools 
+     */
     public function getPlugin(){
         return $this->plugin;
     }
-    /** @param CommandSender $sender */
+    /** 
+     * @param CommandSender $sender 
+     */
     private function sendCommandHelp(CommandSender $sender){
         $sender->sendMessage("SkinTools commands:");
         $sender->sendMessage("/skintools help: Shows all the sub-commands for SkinTools");
