@@ -22,11 +22,15 @@ class PlanBCommand extends Command implements PluginIdentifiableCommand{
         $this->setPermission("planb.command.planb");
         $this->plugin = $plugin;
     }
-    /**  @return PlanB  */
+    /**  
+     * @return PlanB  
+     */
     public function getPlugin(){
         return $this->plugin;
     }
-    /** @param CommandSender $sender */
+    /** 
+     * @param CommandSender $sender 
+     */
     private function sendCommandHelp(CommandSender $sender){
         $sender->sendMessage("PlanB commands:");
         $sender->sendMessage("/planb addbackup: Adds a player to backups.txt");
