@@ -13,13 +13,11 @@ class PlanBCommand extends Command implements PluginIdentifiableCommand{
     /** @var PlanB */
     private $plugin;
     public function __construct(PlanB $plugin){
-        parent::__construct(
-            "planb", 
-            "Shows all the sub-commands for PlanB", 
-            "/planb <sub-command> [parameters]", 
-            array("pb")
-        );
+        parent::__construct("planb");
+        $this->setDescription("Shows all the sub-commands for PlanB");
+        $this->setUsage("/planb <sub-command> [parameters]");
         $this->setPermission("planb.command.planb");
+        $this->setAliases(["pb"]);
         $this->plugin = $plugin;
     }
     /**  
