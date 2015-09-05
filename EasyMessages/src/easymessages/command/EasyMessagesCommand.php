@@ -11,13 +11,11 @@ class EasyMessagesCommand extends Command implements PluginIdentifiableCommand{
     /** @var EasyMessages */
     private $plugin;
     public function __construct(EasyMessages $plugin){
-        parent::__construct(
-            "easymessages", 
-            "Shows all the sub-commands for EasyMessages", 
-            "/easymessages <sub-command> [parameters]", 
-            array("em")
-        );
+        parent::__construct("easymessages");
+        $this->setDescription("Shows all the sub-commands for EasyMessages");
+        $this->setUsage("/easymessages <sub-command> [parameters]");
         $this->setPermission("easymessages.command.easymessages");
+        $this->setAliases(["em"]);
         $this->plugin = $plugin;
     }
     /** 
@@ -68,7 +66,6 @@ class EasyMessagesCommand extends Command implements PluginIdentifiableCommand{
         }
         else{
             $this->sendCommandHelp($sender);
-            return true;
         }
     }
 }

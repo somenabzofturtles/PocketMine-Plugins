@@ -18,8 +18,6 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 
 class EasyMessages extends PluginBase{
-    /** @var array */
-    private $easymessages;
     public function onEnable(){
         $this->saveFiles();
         $this->registerAll();
@@ -41,7 +39,6 @@ class EasyMessages extends PluginBase{
         if(!file_exists($this->getDataFolder()."values.txt")) $this->saveResource("values.txt");
     }
     private function registerAll(){
-    	$this->easymessages = array();
     	$this->getServer()->getCommandMap()->register("easymessages", new EasyMessagesCommand($this));
     	if($this->getConfig()->getNested("message.autoBroadcast") === true){
     	    $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoMessageTask($this), ($this->getConfig()->getNested("message.interval") * 20));
