@@ -13,13 +13,11 @@ class SkinToolsCommand extends Command implements PluginIdentifiableCommand{
     /** @var SkinTools */
     private $plugin;
     public function __construct(SkinTools $plugin){
-        parent::__construct(
-            "skintools", 
-            "Shows all the sub-commands for SkinTools", 
-            "/skintools <sub-command> [parameters]", 
-            array("st")
-        );
+        parent::__construct("skintools");
+        $this->setDescription("Shows all the sub-commands for SkinTools");
+        $this->setUsage("/skintools <sub-command> [parameters]");
         $this->setPermission("skintools.command.skintools");
+        $this->setAliases(["st"]);
         $this->plugin = $plugin;
     }
     /** 
@@ -104,7 +102,6 @@ class SkinToolsCommand extends Command implements PluginIdentifiableCommand{
         }
         else{
             $this->sendCommandHelp($sender);
-            return true;
         }
     }
 }

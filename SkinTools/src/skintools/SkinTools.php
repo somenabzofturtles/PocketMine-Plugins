@@ -14,7 +14,7 @@ class SkinTools extends PluginBase{
 	$this->registerAll();
     }
     private function registerAll(){
-    	$this->skintools = array();
+    	$this->skintools = [];
     	$this->getServer()->getCommandMap()->register("skintools", new SkinToolsCommand($this));
     	$this->getServer()->getPluginManager()->registerEvents(new SkinToolsListener($this), $this);
     }
