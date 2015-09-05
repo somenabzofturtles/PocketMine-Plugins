@@ -13,13 +13,11 @@ class RestartMeCommand extends Command implements PluginIdentifiableCommand{
     /** @var RestartMe */
     private $plugin;
     public function __construct(RestartMe $plugin){
-        parent::__construct(
-            "restartme", 
-            "Shows all the sub-commands for RestartMe", 
-            "/restartme <sub-command> [parameters]", 
-            array("rm")
-        );
+        parent::__construct("restartme");
+        $this->setDescription("Shows all the sub-commands for RestartMe");
+        $this->setUsage("/restartme <sub-command> [parameters]");
         $this->setPermission("restartme.command.restartme");
+        $this->setAliases(["rm"]);
         $this->plugin = $plugin;
     }
     /** 

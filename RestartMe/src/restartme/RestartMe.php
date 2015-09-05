@@ -32,7 +32,7 @@ class RestartMe extends PluginBase{
         }
     }
     private function registerAll(){
-    	$this->restartme = array();
+    	$this->restartme = [];
     	$this->restartme["restartTime"] = ($this->getConfig()->getNested("restart.restartInterval") * 60);
         $this->getServer()->getCommandMap()->register("restartme", new RestartMeCommand($this));
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoBroadcastTask($this), ($this->getConfig()->getNested("restart.broadcastInterval") * 20));
