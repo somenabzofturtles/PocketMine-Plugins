@@ -35,7 +35,7 @@ class PlanB extends PluginBase{
         $this->getServer()->getCommandMap()->register("planb", new PlanBCommand($this));
     }
     /**
-     * @param type $player
+     * @param string $player
      * @return bool
      */
     public function isBackupPlayer($player){
