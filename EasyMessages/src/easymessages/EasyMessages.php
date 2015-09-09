@@ -96,11 +96,10 @@ class EasyMessages extends PluginBase{
     }
     /** 
      * @param array $messages
-     * @param int $amount
-     * @return array|int
+     * @return string
      */
-    public function drawRandomMessage(array $messages, $amount = 1){
-    	return $messages[array_rand($messages, $amount)];
+    public function getRandomMessage(array $messages){
+    	if(is_array($messages)) return $messages[array_rand($messages, 1)];
     }
     /**
      * @param string $message
@@ -108,7 +107,7 @@ class EasyMessages extends PluginBase{
      * @return string
      */
     public function replaceSymbols($message, $revert = false){
-    	$defaultFormat = array(
+    	$defaultFormat = [
     	    TextFormat::BLACK,
     	    TextFormat::DARK_BLUE,
     	    TextFormat::DARK_GREEN,
@@ -131,8 +130,8 @@ class EasyMessages extends PluginBase{
     	    TextFormat::UNDERLINE,
     	    TextFormat::ITALIC,
     	    TextFormat::RESET
-    	);
-    	$newFormat = array(
+    	];
+    	$newFormat = [
     	    "&0",
     	    "&1",
     	    "&2",
@@ -155,7 +154,7 @@ class EasyMessages extends PluginBase{
     	    "&n",
     	    "&o",
     	    "&r"
-    	);
+    	];
     	if($revert === true){
     	    return str_replace($defaultFormat, "", $message);
     	}

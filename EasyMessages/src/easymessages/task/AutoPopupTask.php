@@ -19,6 +19,6 @@ class AutoPopupTask extends PluginTask{
         return $this->plugin;
     }
     public function onRun($currentTick){
-        $this->getPlugin()->broadcastPopup($this->getPlugin()->drawRandomMessage($this->getPlugin()->getConfig()->getNested("popup.autoMessages")));
+        $this->getPlugin()->broadcastPopup($this->getPlugin()->getRandomMessage($this->getPlugin()->getConfig()->getNested("popup.autoMessages")));
     }
 }

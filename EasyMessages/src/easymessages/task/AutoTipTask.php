@@ -19,6 +19,6 @@ class AutoTipTask extends PluginTask{
         return $this->plugin;
     }
     public function onRun($currentTick){
-        $this->getPlugin()->broadcastTip($this->getPlugin()->drawRandomMessage($this->getPlugin()->getConfig()->getNested("tip.autoMessages")));
+        $this->getPlugin()->broadcastTip($this->getPlugin()->getRandomMessage($this->getPlugin()->getConfig()->getNested("tip.autoMessages")));
     }
 }

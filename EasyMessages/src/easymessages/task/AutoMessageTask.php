@@ -19,6 +19,6 @@ class AutoMessageTask extends PluginTask{
         return $this->plugin;
     }
     public function onRun($currentTick){
-        $this->getPlugin()->getServer()->broadcastMessage($this->getPlugin()->drawRandomMessage($this->getPlugin()->getConfig()->getNested("message.messages")));
+        $this->getPlugin()->getServer()->broadcastMessage($this->getPlugin()->getRandomMessage($this->getPlugin()->getConfig()->getNested("message.messages")));
     }
 }
