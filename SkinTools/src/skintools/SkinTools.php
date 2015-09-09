@@ -27,10 +27,10 @@ class SkinTools extends PluginBase{
     }
     /**
      * @param Player $player
-     * @param type $touchMode
+     * @param bool $touchMode
      */
     public function setTouchMode(Player $player, $touchMode = true){
-    	if(is_bool($touchMode)) $this->skintools["touchMode"][strtolower($player->getName())] = $touchMode;
+    	if(is_bool($touchMode)) $this->skintools["touchMode"][strtolower($player->getName())] = (bool) $touchMode;
     }
     /**
      * @param Player $player
