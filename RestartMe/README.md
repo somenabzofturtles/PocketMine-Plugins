@@ -4,6 +4,10 @@
 #RestartMe
 Make sure your server stays up all the time!
 
+###Commands:
+
+###Permissions:
+
 ###Releases:
 |Version|Release Date|Download|
 |:-------:|------------|:--------:|

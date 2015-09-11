@@ -23,7 +23,7 @@ class RestartServerTask extends PluginTask{
         if($this->getPlugin()->getTime() <= $this->getPlugin()->getConfig()->getNested("restart.startCountdown")){
             $this->getPlugin()->broadcastTime($this->getPlugin()->getConfig()->getNested("restart.displayType"));
         }
-        if($this->getPlugin()->getTime() < 3){
+        if($this->getPlugin()->getTime() < 1){
             $this->getPlugin()->initiateRestart(RestartMe::TYPE_NORMAL);
         }
     }

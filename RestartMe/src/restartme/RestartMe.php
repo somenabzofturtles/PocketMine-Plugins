@@ -5,14 +5,14 @@ namespace restartme;
 use pocketmine\plugin\PluginBase;
 use restartme\command\RestartMeCommand;
 use restartme\task\AutoBroadcastTask;
-use restartme\task\CheckMemoryTask;
+//use restartme\task\CheckMemoryTask;
 use restartme\task\RestartServerTask;
 
 class RestartMe extends PluginBase{
     const TYPE_NORMAL = 0;
     const TYPE_OVERLOADED = 1;
-    /** @var array */
-    public $restartme;
+    /** @var int */
+    public $timer = 0;
     public function onEnable(){
         $this->saveFiles();
         $this->registerAll();
@@ -29,39 +29,51 @@ class RestartMe extends PluginBase{
         }
         else{
             $this->saveDefaultConfig();
+            $this->getServer()->getLogger()->warning("Remember to use a server restarting script.");
+            $this->getServer()->getLogger()->warning("If you aren't using one, find one at ".$this->getServer()->getDataPath()."\\plugins\\RestartMe.");
+            $this->saveResource("start.cmd");
+            $this->saveResource("start.sh");
         }
     }
     private function registerAll(){
-    	$this->restartme = [];
-    	$this->restartme["restartTime"] = ($this->getConfig()->getNested("restart.restartInterval") * 60);
+    	$this->timer = ($this->getConfig()->getNested("restart.restartInterval") * 60);
         $this->getServer()->getCommandMap()->register("restartme", new RestartMeCommand($this));
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoBroadcastTask($this), ($this->getConfig()->getNested("restart.broadcastInterval") * 20));
-        if($this->getConfig()->getNested("restart.restartOnOverload") === true) $this->getServer()->getScheduler()->scheduleRepeatingTask(new CheckMemoryTask($this), 6000);
+        //if($this->getConfig()->getNested("restart.restartOnOverload") === true) $this->getServer()->getScheduler()->scheduleRepeatingTask(new CheckMemoryTask($this), 6000);
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new RestartServerTask($this), 20);
     }
     /** 
      * @return int 
      */
     public function getTime(){
-    	return $this->restartme["restartTime"];
+    	return $this->timer;
+    }
+    /**
+     * @return string
+     */
+    public function getFormattedTime(){
+        $hour = floor($this->getTime() / 3600);
+        $minute = floor(($this->getTime() / 60) - ($hour * 60));
+        $second = floor($this->getTime() % 60);
+        return $hour." hr ".$minute." min ".$second." sec";
     }
     /** 
      * @param int $seconds 
      */
     public function setTime($seconds){
-    	$this->restartme["restartTime"] = $seconds;
+    	$this->timer = floor($seconds);
     }
     /** 
      * @param int $seconds 
      */
     public function addTime($seconds){
-    	if(is_numeric($seconds)) $this->restartme["restartTime"] += $seconds;
+    	if(is_numeric($seconds)) $this->timer += floor($seconds);
     }
     /** 
      * @param int $seconds 
      */
     public function subtractTime($seconds){
-    	if(is_numeric($seconds)) $this->restartme["restartTime"] -= $seconds;
+    	if(is_numeric($seconds)) $this->timer -= floor($seconds);
     }
     /** 
      * @param string $messageType 
@@ -69,7 +81,7 @@ class RestartMe extends PluginBase{
     public function broadcastTime($messageType){
         $message = str_replace("{RESTART_TIME}", $this->getTime(), $this->getConfig()->getNested("restart.countdownMessage"));
         switch(strtolower($messageType)){
-            case "message":
+            case "chat":
                 $this->getServer()->broadcastMessage($message);
                 break;
             case "popup":
@@ -93,11 +105,13 @@ class RestartMe extends PluginBase{
                 foreach($this->getServer()->getOnlinePlayers() as $player){
                     $player->close("", $this->getConfig()->getNested("restart.quitMessage"));
                 }
+                $this->getServer()->getLogger()->info($this->getConfig()->getNested("restart.quitMessage"));
                 break;
             case self::TYPE_OVERLOADED:
                 foreach($this->getServer()->getOnlinePlayers() as $player){
                     $player->close("", $this->getConfig()->getNested("restart.overloadQuitMessage"));
                 }
+                $this->getServer()->getLogger()->info($this->getConfig()->getNested("restart.overloadQuitMessage"));
                 break;
         }
         $this->getServer()->shutdown();
