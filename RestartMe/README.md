@@ -5,7 +5,7 @@
 Make sure your server stays up all the time!
 
 ###Commands:
-Main command: **restartme**, **me**
+Main command: **restartme**, **rm**
 
 |Sub-command|Description|
 |-----------|-----------|
