@@ -9,8 +9,16 @@ Main command: **planb**, **pb**
 
 |Sub-command|Description|
 |-----------|-----------|
+|addbackup|Adds a player to backups.txt|
+|delbackup|Removes a player from backups.txt|
+|help|Shows all the sub-commands for PlanB|
+|list|Lists all backup players|
+|restore|Restores OP status of all online players listed in backup.txt|
 
 ###Permissions:
+|Node|Default|
+|----|:-------:|
+|planb.command.planb|true|
 
 ###Releases:
 |Version|Release Date|Download|

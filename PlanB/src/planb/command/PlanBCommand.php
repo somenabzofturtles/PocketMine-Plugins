@@ -39,66 +39,66 @@ class PlanBCommand extends Command implements PluginIdentifiableCommand{
     }
     public function execute(CommandSender $sender, $label, array $args){
         if(isset($args[0])){
-            if(strtolower($args[0]) === "addbackup" or strtolower($args[0]) === "ab"){
-                if(isset($args[1])){
-                    if($sender instanceof ConsoleCommandSender){
-                        if($this->getPlugin()->isBackupPlayer($args[1])){
-                            $sender->sendMessage(TextFormat::RED.$args[1]." already exists in backups.txt.");
+            switch(strtolower($args[0])){
+                case "ab":
+                case "addbackup":
+                    if(isset($args[1])){
+                        if($sender instanceof ConsoleCommandSender){
+                            if($this->getPlugin()->isBackupPlayer($args[1])){
+                                $sender->sendMessage(TextFormat::RED.$args[1]." already exists in backups.txt.");
+                            }
+                            else{
+                                $this->getPlugin()->addBackup($args[1]);
+                                $sender->sendMessage(TextFormat::GREEN."Added ".$args[1]." to backups.txt.");
+                            }
                         }
                         else{
-                            $this->getPlugin()->addBackup($args[1]);
-                            $sender->sendMessage(TextFormat::GREEN."Added ".$args[1]." to backups.txt.");
+                            $sender->sendMessage(TextFormat::RED."Please run this command on the console.");
                         }
                     }
                     else{
-                        $sender->sendMessage(TextFormat::RED."Please run this command on the console.");
+                        $sender->sendMessage(TextFormat::RED."Please specify a valid player."); 
                     }
-                }
-                else{
-                    $sender->sendMessage(TextFormat::RED."Please specify a valid player."); 
-                }
-                return true;
-            }
-            if(strtolower($args[0]) === "delbackup" or strtolower($args[0]) === "db"){
-                if(isset($args[1])){
-                    if($sender instanceof ConsoleCommandSender){
-                        if($this->getPlugin()->isBackupPlayer($args[1])){
-                            $this->getPlugin()->removeBackup($args[1]);
-                            $sender->sendMessage(TextFormat::GREEN."Removed ".$args[1]." from backups.txt.");
+                    break;
+                case "db":
+                case "delbackup":
+                    if(isset($args[1])){
+                        if($sender instanceof ConsoleCommandSender){
+                            if($this->getPlugin()->isBackupPlayer($args[1])){
+                                $this->getPlugin()->removeBackup($args[1]);
+                                $sender->sendMessage(TextFormat::GREEN."Removed ".$args[1]." from backups.txt.");
+                            }
+                            else{
+                                $sender->sendMessage(TextFormat::RED.$args[1]." does not exist in backups.txt.");
+                            }
                         }
                         else{
-                            $sender->sendMessage(TextFormat::RED.$args[1]." does not exist in backups.txt.");
+                            $sender->sendMessage(TextFormat::RED."Please run this command on the console.");
                         }
                     }
                     else{
-                        $sender->sendMessage(TextFormat::RED."Please run this command on the console.");
+                        $sender->sendMessage(TextFormat::RED."Please specify a valid player.");
                     }
-                }
-                else{
-                    $sender->sendMessage(TextFormat::RED."Please specify a valid player.");
-                }
-                return true;
-            }
-            if(strtolower($args[0]) === "help"){
-                $this->sendCommandHelp($sender);
-                return true;
-            }
-            if(strtolower($args[0]) === "list"){
-                $this->getPlugin()->sendBackups($sender);
-                return true;
-            }
-            if(strtolower($args[0]) === "restore"){
-                if($this->getPlugin()->isBackupPlayer($sender->getName()) or $sender instanceof ConsoleCommandSender){
-                    $this->getPlugin()->restoreOps();
-                    $sender->sendMessage(TextFormat::YELLOW."Restoring the statuses of OPs...");
-                }
-                else{
-                    $sender->sendMessage(TextFormat::RED."You do not not have permissions to restore OPs.");
-                }
-                return true;
-            }
-            else{
-                $sender->sendMessage("Usage: ".$this->getUsage());
+                    break;
+                case "?":
+                case "help":
+                    $this->sendCommandHelp($sender);
+                    break;
+                case "list":
+                    $this->getPlugin()->sendBackups($sender);
+                    break;
+                case "restore":
+                    if($this->getPlugin()->isBackupPlayer($sender->getName()) or $sender instanceof ConsoleCommandSender){
+                        $this->getPlugin()->restoreOps();
+                        $sender->sendMessage(TextFormat::YELLOW."Restoring the statuses of OPs...");
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."You do not not have permissions to restore OPs.");
+                    }
+                    break;
+                default:
+                    $sender->sendMessage("Usage: ".$this->getUsage());
+                    break;
             }
         }
         else{
