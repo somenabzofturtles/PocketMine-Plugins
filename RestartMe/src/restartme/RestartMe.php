@@ -5,7 +5,7 @@ namespace restartme;
 use pocketmine\plugin\PluginBase;
 use restartme\command\RestartMeCommand;
 use restartme\task\AutoBroadcastTask;
-//use restartme\task\CheckMemoryTask;
+use restartme\task\CheckMemoryTask;
 use restartme\task\RestartServerTask;
 
 class RestartMe extends PluginBase{
@@ -39,7 +39,7 @@ class RestartMe extends PluginBase{
     	$this->timer = ($this->getConfig()->getNested("restart.restartInterval") * 60);
         $this->getServer()->getCommandMap()->register("restartme", new RestartMeCommand($this));
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoBroadcastTask($this), ($this->getConfig()->getNested("restart.broadcastInterval") * 20));
-        //if($this->getConfig()->getNested("restart.restartOnOverload") === true) $this->getServer()->getScheduler()->scheduleRepeatingTask(new CheckMemoryTask($this), 6000);
+        if($this->getConfig()->getNested("restart.restartOnOverload") === true) $this->getServer()->getScheduler()->scheduleRepeatingTask(new CheckMemoryTask($this), 6000);
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new RestartServerTask($this), 20);
     }
     /** 
