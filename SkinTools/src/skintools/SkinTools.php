@@ -9,12 +9,11 @@ use skintools\event\SkinToolsListener;
 
 class SkinTools extends PluginBase{
     /** @var array */
-    public $skintools;
+    public $skintools = [];
     public function onEnable(){
 	$this->registerAll();
     }
     private function registerAll(){
-    	$this->skintools = [];
     	$this->getServer()->getCommandMap()->register("skintools", new SkinToolsCommand($this));
     	$this->getServer()->getPluginManager()->registerEvents(new SkinToolsListener($this), $this);
     }
