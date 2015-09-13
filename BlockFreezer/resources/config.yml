@@ -5,7 +5,6 @@ plugin:
  autoUpdate: true
  #Set to true to enable automatic overwriting of this file when the plugin is updated
 level:
-#Make sure all world names are completely lowercase, or else it will not work properly
  world:
  #Format all block IDs like this: "id:damage"
  - "8:0"

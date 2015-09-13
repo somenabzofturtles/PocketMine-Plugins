@@ -10,7 +10,7 @@ use pocketmine\plugin\PluginBase;
 class BlockFreezer extends PluginBase implements Listener{
     public function onEnable(){
         $this->saveFiles();
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->registerAll();
     }
     private function saveFiles(){
         if(file_exists($this->getDataFolder()."config.yml")){
@@ -26,12 +26,16 @@ class BlockFreezer extends PluginBase implements Listener{
             $this->saveDefaultConfig();
         }
     }
+    private function registerAll(){
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+    }
     /**
      * @param Block $block
      * @return bool
      */
     private function isBlockSpecified(Block $block){
-    	if(is_array($this->getConfig()->getNested("level.".strtolower($block->getLevel()->getName())))) return in_array($block->getId().":".$block->getDamage(), $this->getConfig()->getNested("level.".strtolower($block->getLevel()->getName())));	
+        $key = array_change_key_case($this->getConfig()->getNested("level.".$block->getLevel()->getName()), CASE_LOWER);
+    	if(is_array($key)) return in_array($block->getId().":".$block->getDamage(), $key);	
     }
     /** 
      * @param BlockUpdateEvent $event 
