@@ -19,6 +19,7 @@ class AutoBroadcastTask extends PluginTask{
         return $this->plugin;
     }
     public function onRun($currentTick){
+        if(!$this->getPlugin()->isTimerPaused()) return;
         if($this->getPlugin()->getTime() >= $this->getPlugin()->getConfig()->getNested("restart.startCountdown")){
             $this->getPlugin()->broadcastTime($this->getPlugin()->getConfig()->getNested("restart.displayType"));
         }

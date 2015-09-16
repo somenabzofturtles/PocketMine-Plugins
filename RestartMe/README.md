@@ -9,10 +9,12 @@ Main command: **restartme**, **rm**
 
 |Sub-command|Description|
 |-----------|-----------|
-|add|Delays the server restart by n seconds|
+|add|Adds n seconds to the timer|
 |help|Shows all the sub-commands for RestartMe|
 |set|Sets the timer to n seconds|
-|subtract|Advances the server restart by n seconds|
+|start|Starts the timer|
+|stop|Stops the timer|
+|subtract|Subtracts n seconds from the timer|
 |time|Gets the remaining time until the server restarts|
 
 ###Permissions:

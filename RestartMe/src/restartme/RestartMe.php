@@ -13,6 +13,8 @@ class RestartMe extends PluginBase{
     const TYPE_OVERLOADED = 1;
     /** @var int */
     public $timer = 0;
+    /** @var bool */
+    public $paused = false;
     public function onEnable(){
         $this->saveFiles();
         $this->registerAll();
@@ -30,13 +32,13 @@ class RestartMe extends PluginBase{
         else{
             $this->saveDefaultConfig();
             $this->getServer()->getLogger()->warning("Remember to use a server restarting script.");
-            $this->getServer()->getLogger()->warning("If you aren't using one, find one at ".$this->getServer()->getDataPath()."\\plugins\\RestartMe.");
+            $this->getServer()->getLogger()->warning("If you aren't using one, find one at ".$this->getServer()->getDataPath()."plugins\\RestartMe.");
             $this->saveResource("start.cmd");
             $this->saveResource("start.sh");
         }
     }
     private function registerAll(){
-    	$this->timer = ($this->getConfig()->getNested("restart.restartInterval") * 60);
+    	$this->setTime($this->getConfig()->getNested("restart.restartInterval") * 60);
         $this->getServer()->getCommandMap()->register("restartme", new RestartMeCommand($this));
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoBroadcastTask($this), ($this->getConfig()->getNested("restart.broadcastInterval") * 20));
         if($this->getConfig()->getNested("restart.restartOnOverload") === true) $this->getServer()->getScheduler()->scheduleRepeatingTask(new CheckMemoryTask($this), 6000);
@@ -115,5 +117,17 @@ class RestartMe extends PluginBase{
                 break;
         }
         $this->getServer()->shutdown();
+    }
+    /**
+     * @return bool
+     */
+    public function isTimerPaused(){
+        return $this->paused === true;
+    }
+    /**
+     * @param bool $value
+     */
+    public function setPaused($value = true){
+        $this->paused = (bool) $value;
     }
 }

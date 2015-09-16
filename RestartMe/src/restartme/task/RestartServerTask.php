@@ -19,6 +19,7 @@ class RestartServerTask extends PluginTask{
         return $this->plugin;
     }
     public function onRun($currentTick){
+        if(!$this->getPlugin()->isTimerPaused()) return;
         $this->getPlugin()->subtractTime(1);
         if($this->getPlugin()->getTime() <= $this->getPlugin()->getConfig()->getNested("restart.startCountdown")){
             $this->getPlugin()->broadcastTime($this->getPlugin()->getConfig()->getNested("restart.displayType"));

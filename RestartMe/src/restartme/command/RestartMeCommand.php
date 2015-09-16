@@ -30,10 +30,12 @@ class RestartMeCommand extends Command implements PluginIdentifiableCommand{
      */
     private function sendCommandHelp(CommandSender $sender){
         $sender->sendMessage("RestartMe commands:");
-        $sender->sendMessage("/restartme add: Delays the server restart by n seconds");
+        $sender->sendMessage("/restartme add: Adds n seconds to the timer");
         $sender->sendMessage("/restartme help: Shows all the sub-commands for RestartMe");
         $sender->sendMessage("/restartme set: Sets the timer to n seconds");
-        $sender->sendMessage("/restartme subtract: Advances the server restart by n seconds");
+        $sender->sendMessage("/restartme start: Starts the timer");
+        $sender->sendMessage("/restartme stop: Stops the timer");
+        $sender->sendMessage("/restartme subtract: Subtracts n seconds from the timer");
         $sender->sendMessage("/restartme time: Gets the remaining time until the server restarts");
     }
     public function execute(CommandSender $sender, $label, array $args){
@@ -71,6 +73,24 @@ class RestartMeCommand extends Command implements PluginIdentifiableCommand{
                     }
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a time value.");
+                    }
+                    break;
+                case "start":
+                    if($this->getPlugin()->isTimerPaused()){
+                        $this->getPlugin()->setPaused(false);
+                        $sender->sendMessage(TextFormat::YELLOW."Timer is no longer paused.");
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Timer is not paused.");
+                    }
+                    break;
+                case "stop":
+                    if($this->getPlugin()->isTimerPaused()){
+                        $sender->sendMessage(TextFormat::RED."Timer is already paused.");
+                    }
+                    else{
+                        $this->getPlugin()->setPaused(true);
+                        $sender->sendMessage(TextFormat::YELLOW."Timer has been paused.");
                     }
                     break;
                 case "subtract":
