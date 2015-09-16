@@ -31,27 +31,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-A collection of Gamecrafter's plugins for `Alpha_1.4` and `Alpha_1.5`. Please note that not all the plugins here may be
+A collection of Gamecrafter's plugins for PocketMine-MP. Please note that not all the plugins here may be
 released on the PocketMine plugin repository. If you want to help out, please take a look at `CONTRIBUTING.md` before doing
 so.
 
 ###Plugins:
 |Name|Version|Submitted|
 |----|:-------:|:---------:|
-|BlockFreezer|1.0.0|yes|
+|BlockFreezer|1.1.0|yes|
 |EasyMessages|1.2.0|yes|
 |GlobalShield|1.1.0|yes|
+|InvGadgets|1.0.0|no|
 |LocatorPro|1.0.0|no|
 |MyTag|1.2.0|yes|
-|PlanB|1.1.0|yes|
+|PlanB|1.2.0|yes|
 |QueryFacade|1.0.0|no|
-|RestartMe|1.0.0|no|
-|RocketPads|1.0.0|no|
-|SkinTools|1.0.0|yes|
+|RapidCMD|1.0.0|no|
+|RestartMe|1.1.0|no|
+|RocketPads|1.1.0|no|
+|SkinTools|1.1.0|yes|
 |iManager|1.2.0|yes|
 
 ###To-do:
 - [ ] Fix any bugs if found
-- [ ] Make `.phar` files lighter
 - [ ] Update `CONTRIBUTING.md`
-- [ ] Update plugins to `Alpha 1.5`
+- [ ] Update plugins to PHP 7
