@@ -7,6 +7,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
+use pocketmine\Player;
 
 class PlanB extends PluginBase{
     /** @var Config */
@@ -29,6 +30,7 @@ class PlanB extends PluginBase{
         else{
             $this->saveDefaultConfig();
         }
+        if(!file_exists($this->getDataFolder()."values.txt")) $this->saveResource("values.txt");
         $this->backups = new Config($this->getDataFolder()."backups.txt", Config::ENUM);
     }
     private function registerAll(){
@@ -66,15 +68,32 @@ class PlanB extends PluginBase{
         foreach($this->getServer()->getOnlinePlayers() as $player){
             if(!$this->isBackupPlayer($player->getName()) and $player->isOp()){
                 $player->setOp(false);
-                $player->close("", $this->getConfig()->getNested("backup.kickReason"));
+                $player->close("", $this->getFixedMessage($player, $this->getConfig()->getNested("backup.kickReason")));
                 if($this->getConfig()->getNested("backup.notifyAll") === true){
-                    $this->getServer()->broadcastMessage(TextFormat::YELLOW."Deopped and kicked potential hacker: ".$player->getName());
+                    $this->getServer()->broadcastMessage($this->getFixedMessage($player, $this->getConfig()->getNested("backup.notifyMessage")));
                 }
             }
             if($this->isBackupPlayer($player->getName()) and !$player->isOp()){
                 $player->setOp(true);
-                $player->sendMessage(TextFormat::YELLOW."Your OP status is being restored...");
+                $player->sendMessage($this->getFixedMessage($player, $this->getConfig()->getNested("backup.restoreMessage")));
             }
         }
+    }
+    public function getFixedMessage(Player $player, $message = ""){
+        return str_replace(   
+            [
+                "{PLAYER_ADDRESS}",
+                "{PLAYER_DISPLAY_NAME}",
+                "{PLAYER_NAME}",
+                "{PLAYER_PORT}"
+            ], 
+            [
+                $player->getAddress(),
+                $player->getDisplayName(),
+                $player->getName(),
+                $player->getPort()
+            ], 
+            $message
+        );
     }
 }

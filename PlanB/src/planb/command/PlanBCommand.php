@@ -6,10 +6,9 @@ use planb\PlanB;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\utils\TextFormat;
 
-class PlanBCommand extends Command implements PluginIdentifiableCommand{
+class PlanBCommand extends Command{
     /** @var PlanB */
     private $plugin;
     public function __construct(PlanB $plugin){
