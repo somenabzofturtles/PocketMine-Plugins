@@ -79,6 +79,11 @@ class PlanB extends PluginBase{
             }
         }
     }
+    /**
+     * @param Player $player
+     * @param string $message
+     * @return string
+     */
     public function getFixedMessage(Player $player, $message = ""){
         return str_replace(   
             [
