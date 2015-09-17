@@ -5,7 +5,7 @@ netstat -o -n -a | findstr 0.0.0.0:19132>nul
 if %ERRORLEVEL% equ 0 (
     goto :loop
 ) ELSE (
-	echo "[!] Server started."
+    echo "Server started."
     goto :StartPM
 )
 :loop
@@ -14,7 +14,7 @@ netstat -o -n -a | findstr 0.0:19132>nul
 if %ERRORLEVEL% equ 0 (
     goto :loop
 ) ELSE (
-	echo "[!] Restarting server in 5 seconds..."
+    echo "Restarting in 5 seconds..."
     PING 127.0.0.1 -n 5 >NUL
     goto :StartPM
 )
