@@ -29,10 +29,18 @@ class SkinToolsListener implements Listener{
     public function onEntityDamage(EntityDamageEvent $event){
         if($event instanceof EntityDamageByEntityEvent){
             if($event->getDamager() instanceof Player and $event->getEntity() instanceof Player){
-                if($this->getPlugin()->hasTouchMode($event->getDamager())){
-                    $event->setCancelled(true);
-                    $this->getPlugin()->setStolenSkin($event->getDamager(), $event->getEntity());
-                    $event->getDamager()->sendMessage(TextFormat::GREEN."You got ".$event->getEntity()->getName()."'s skin.");
+                switch($this->getPlugin()->getTouchMode($event->getDamager())){
+                    case SkinTools::MODE_GIVE:
+                        $event->setCancelled(true);
+                        $this->getPlugin()->setStolenSkin($event->getEntity(), $event->getDamager());
+                        $event->getEntity()->sendMessage(TextFormat::GREEN.$event->getDamager()->getName()." gave you their skin!");
+                        $event->getDamager()->sendMessage(TextFormat::GREEN.$event->getEntity()->getName()." has your skin now!");
+                        break;
+                    case SkinTools::MODE_STEAL:
+                        $event->setCancelled(true);
+                        $this->getPlugin()->setStolenSkin($event->getDamager(), $event->getEntity());
+                        $event->getDamager()->sendMessage(TextFormat::GREEN."You got ".$event->getEntity()->getName()."'s skin.");
+                        break;
                 }
             }
         }
@@ -42,7 +50,7 @@ class SkinToolsListener implements Listener{
      */
     public function onPlayerLogin(PlayerLoginEvent $event){
         $this->getPlugin()->storeSkinData($event->getPlayer());
-        $this->getPlugin()->setTouchMode($event->getPlayer(), false);
+        $this->getPlugin()->setTouchMode($event->getPlayer());
     }
     /** 
      * @param PlayerQuitEvent $event 

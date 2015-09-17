@@ -4,12 +4,11 @@ namespace skintools\command;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\utils\TextFormat;
 use pocketmine\Player;
 use skintools\SkinTools;
 
-class SkinToolsCommand extends Command implements PluginIdentifiableCommand{
+class SkinToolsCommand extends Command{
     /** @var SkinTools */
     private $plugin;
     public function __construct(SkinTools $plugin){
@@ -77,18 +76,16 @@ class SkinToolsCommand extends Command implements PluginIdentifiableCommand{
                         
                     }
                     else{
-                        
+                        $sender->sendMessage(TextFormat::RED."Please run this command in-game.");
                     }
                     break;
                 case "touch":
                     if($sender instanceof Player){
-                        if($this->getPlugin()->hasTouchMode($sender)){
-                            $this->getPlugin()->setTouchMode($sender, false);
-                            $sender->sendMessage(TextFormat::RED."Skin-touch mode disabled.");
+                        if(isset($args[1])){
+                            
                         }
                         else{
-                            $this->getPlugin()->setTouchMode($sender, true);
-                            $sender->sendMessage(TextFormat::GREEN."Skin-touch mode enabled. Tap on a player to get their skin.");
+                            
                         }
                     }
                     else{

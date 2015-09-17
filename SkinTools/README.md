@@ -13,7 +13,7 @@ Main command: **skintools**, **st**
 |morph|Sets user's skin to that of the specified player's|
 |restore|Restores user's skin to the skin they joined with|
 |swap|Swaps skins with the specified player|
-|toggle|Toggles touch mode|
+|touch|Toggles touch mode|
 
 ###Permissions:
 |Node|Default|
@@ -23,5 +23,5 @@ Main command: **skintools**, **st**
 ###Releases:
 |Version|Release Date|Download|
 |:-------:|------------|:--------:|
-|1.0.0|August 8, 2015|[available](http://forums.pocketmine.net/plugins/skintools.1364/download?version=2607)|
+|1.0.0|August 13, 2015|[available](http://forums.pocketmine.net/plugins/skintools.1364/download?version=2607)|
 |1.1.0|?|unavailable|
