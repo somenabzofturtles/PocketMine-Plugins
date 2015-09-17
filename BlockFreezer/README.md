@@ -8,4 +8,4 @@ Control what blocks update in your worlds!
 |Version|Release Date|Download|
 |:-------:|------------|:--------:|
 |1.0.0|May 31, 2015|[available](http://forums.pocketmine.net/plugins/blockfreezer.1209/download?version=2282)|
-|1.1.0|?|unavailable|
+|1.1.0|September 15, 2015|[available](http://forums.pocketmine.net/plugins/blockfreezer.1209/download?version=2763)|
