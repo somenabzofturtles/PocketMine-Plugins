@@ -14,10 +14,15 @@ use easymessages\task\InfiniteTipTask;
 use easymessages\task\ScrollingPopupTask;
 use easymessages\task\ScrollingTipTask;
 use easymessages\task\UpdateMotdTask;
+use easymessages\utils\MessageScroller;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 
 class EasyMessages extends PluginBase{
+    /** @var string */
+    public $scrollingPopup = "";
+    /** @var string */
+    public $scrollingTip = "";
     public function onEnable(){
         $this->saveFiles();
         $this->registerAll();
@@ -161,5 +166,17 @@ class EasyMessages extends PluginBase{
     	else{
     	    return str_replace($newFormat, $defaultFormat, $message);
     	}
+    }
+    /**
+     * @return string
+     */
+    public function getScrollingPopup(){
+        return $this->scrollingPopup;
+    }
+    /**
+     * @return string
+     */
+    public function getScrollingTip(){
+        return $this->scrollingTip;
     }
 }

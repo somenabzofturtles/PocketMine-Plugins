@@ -5,9 +5,8 @@ namespace easymessages\command;
 use easymessages\EasyMessages;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 
-class EasyMessagesCommand extends Command implements PluginIdentifiableCommand{
+class EasyMessagesCommand extends Command{
     /** @var EasyMessages */
     private $plugin;
     public function __construct(EasyMessages $plugin){

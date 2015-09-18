@@ -42,7 +42,7 @@ popup:
  #Blinking popup will only be sent if displayType is set to "blinking"
  infiniteMessage: "§9This popup will never disappear."
  #Infinite popup will only be sent if displayType is set to "infinite"
- scrollingMessage: ""
+ scrollingMessage: "This is a scrolling popup."
  #Scrolling tip will only be sent if displayType is set to "scrolling"
 tip:
  displayType: "infinite"
@@ -58,5 +58,5 @@ tip:
  #Blinking tip will only be sent if displayType is set to "blinking"
  infiniteMessage: "§9This tip will never disappear."
  #Infinite tip will only be sent if displayType is set to "infinite"
- scrollingMessage: ""
+ scrollingMessage: "This is a scrolling tip."
  #Scrolling tip will only be sent if displayType is set to "scrolling"

@@ -7,7 +7,7 @@
 Main command: **easymessages**, **em**
 
 |Sub-command|Description|
-|----|-----------|
+|-----------|-----------|
 |broadcastmessage|Broadcasts a message to all players|
 |broadcastpopup|Broadcasts a popup to all players|
 |broadcasttip|Broadcasts a tip to all players|
