@@ -5,10 +5,9 @@ namespace restartme\command;
 use restartme\RestartMe;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\utils\TextFormat;
 
-class RestartMeCommand extends Command implements PluginIdentifiableCommand{
+class RestartMeCommand extends Command{
     /** @var RestartMe */
     private $plugin;
     public function __construct(RestartMe $plugin){
