@@ -41,7 +41,7 @@ class RocketPads extends PluginBase{
      * @return bool
      */
     public function isRocketPad(Block $block){
-        if(is_array($this->getConfig()->getNested("pad.blockId"))) return in_array($block->getId().":".$block->getDamage(), $this->getConfig()->getNested("pad.blockId")) === true;
+        if(is_array($this->getConfig()->getNested("pad.blockId"))) return in_array($block->getId().":".$block->getDamage(), $this->getConfig()->getNested("pad.blockId"));
     }
     /** 
      * @param Block $block 
@@ -55,6 +55,7 @@ class RocketPads extends PluginBase{
      */
     public function removeRocketPad(Block $block){
         $this->pads->remove($block->getFloorX().":".$block->getFloorY().":".$block->getFloorZ().":".strtolower($block->getLevel()->getName()));
+        $this->pads->save();
     }
     /** 
      * @return string 
