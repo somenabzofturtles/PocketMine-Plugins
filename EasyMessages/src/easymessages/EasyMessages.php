@@ -14,7 +14,7 @@ use easymessages\task\InfiniteTipTask;
 use easymessages\task\ScrollingPopupTask;
 use easymessages\task\ScrollingTipTask;
 use easymessages\task\UpdateMotdTask;
-use easymessages\utils\MessageScroller;
+use easymessages\utils\TextScroller;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 

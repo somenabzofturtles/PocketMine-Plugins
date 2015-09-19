@@ -2,7 +2,7 @@
 
 namespace easymessages\utils;
 
-class MessageScroller{
+class TextScroller{
     /**
      * @param string $message
      * @return string
