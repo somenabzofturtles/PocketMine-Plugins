@@ -5,6 +5,7 @@ namespace skintools;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Player;
 use skintools\command\SkinToolsCommand;
+use skintools\event\player\PlayerToggleTouchEvent;
 use skintools\event\SkinToolsListener;
 
 class SkinTools extends PluginBase{
@@ -34,7 +35,11 @@ class SkinTools extends PluginBase{
      * @param int $touchMode
      */
     public function setTouchMode(Player $player, $touchMode = self::MODE_NONE){
-    	if(is_int($touchMode)) $this->touchMode[strtolower($player->getName())] = (int) $touchMode;
+        $event = new PlayerToggleTouchEvent($player, $this->getTouchMode($player), $touchMode);
+        $this->getServer()->getPluginManager()->callEvent($event);
+        if(!$event->isCancelled()){
+            if(is_int($touchMode)) $this->touchMode[strtolower($player->getName())] = (int) $touchMode;
+        }
     }
     /**
      * @param Player $player

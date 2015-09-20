@@ -50,7 +50,7 @@ class SkinToolsListener implements Listener{
      */
     public function onPlayerLogin(PlayerLoginEvent $event){
         $this->getPlugin()->storeSkinData($event->getPlayer());
-        $this->getPlugin()->setTouchMode($event->getPlayer());
+        $this->getPlugin()->setTouchMode($event->getPlayer(), SkinTools::MODE_NONE);
     }
     /** 
      * @param PlayerQuitEvent $event 
