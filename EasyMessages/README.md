@@ -8,13 +8,10 @@ Main command: **easymessages**, **em**
 
 |Sub-command|Description|
 |-----------|-----------|
-|broadcastmessage|Broadcasts a message to all players|
-|broadcastpopup|Broadcasts a popup to all players|
-|broadcasttip|Broadcasts a tip to all players|
 |help|Shows all the sub-commands for EasyMessages|
-|sendmessage|Sends a message to the specified player|
-|sendpopup|Sends a popup to the specified player|
-|sendtip|Sends a tip to the specified player|
+|message|Sends a message|
+|popup|Sends a popup|
+|tip|Sends a tip|
 
 ###Permissions:
 |Node|Default|

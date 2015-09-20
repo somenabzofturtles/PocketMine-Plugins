@@ -8,6 +8,6 @@ class TextScroller{
      * @return string
      */
     public static function next($message = ""){
-        return implode("", array_push(str_split($message)));
+        if(is_string($message)) return implode("", array_push(str_split($message)));
     }
 }

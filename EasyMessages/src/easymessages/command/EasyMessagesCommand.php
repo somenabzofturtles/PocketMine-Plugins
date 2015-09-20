@@ -5,6 +5,7 @@ namespace easymessages\command;
 use easymessages\EasyMessages;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\utils\TextFormat;
 
 class EasyMessagesCommand extends Command{
     /** @var EasyMessages */
@@ -27,39 +28,81 @@ class EasyMessagesCommand extends Command{
      * @param CommandSender $sender 
      */
     private function sendCommandHelp(CommandSender $sender){
-        $sender->sendMessage("§6EasyMessages §bcommands:");
-        $sender->sendMessage("§dMain command: §9easymessages§d, §9em");
-        $sender->sendMessage("§abroadcastmessage§3/§abm: §fBroadcasts a message to all players");
-        $sender->sendMessage("§abroadcastpopup§3/§abp: §fBroadcasts a popup to all players");
-        $sender->sendMessage("§abroadcasttip§3/§abt: §fBroadcasts a tip to all players");
-        $sender->sendMessage("§ahelp: §fShows all the sub-commands for EasyMessages");
-        $sender->sendMessage("§asendmessage§3/§asm: §fSends a message to the specified player");
-        $sender->sendMessage("§asendpopup§3/§asp: §fSends a popup to the specified player");
-        $sender->sendMessage("§asendtip§3/§ast: §fSends a tip to the specified player");
+        $sender->sendMessage("EasyMessages commands:");
+        $sender->sendMessage("/easymessages help: Shows all the sub-commands for EasyMessages");
+        $sender->sendMessage("/easymessages message: Sends a message");
+        $sender->sendMessage("/easymessages popup: Sends a popup");
+        $sender->sendMessage("/easymessages tip: Sends a tip");
     }
     public function execute(CommandSender $sender, $label, array $args){
         if(isset($args[0])){
             switch(strtolower($args[0])){
-                case "bm":
-                case "broadcastmessage":
-                    break;
-                case "bp":
-                case "broadcastpopup":
-                    break;
-                case "bt":
-                case "broadcasttip":
-                    break;
                 case "?":
                 case "help":
+                    $this->sendCommandHelp($sender);
                     break;
-                case "sm":
-                case "sendmessage":
+                case "m":
+                case "message":
+                    if(isset($args[1])){
+                        $message = implode(" ", array_slice($args, 2));
+                        if(strtolower($args[1]) === "@all"){
+                            $sender->getServer()->broadcastMessage($message);
+                            $sender->sendMessage(TextFormat::GREEN."Sent message to @all.");
+                        }
+                        elseif($sender->getServer()->getPlayer($args[1]) !== null){
+                            $sender->getServer()->getPlayer($args[1])->sendMessage($message);
+                            $sender->sendMessage(TextFormat::GREEN."Sent message to ".$sender->getServer()->getPlayer($args[1])->getName().".");
+                        }
+                        else{
+                            $sender->sendMessage(TextFormat::RED."Failed to send message due to invalid recipient(s).");
+                        }
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Please specify a recipient.");
+                    }
                     break;
-                case "sp":
-                case "sendpopup":
+                case "p":
+                case "popup":
+                    if(isset($args[1])){
+                        $popup = implode(" ", array_slice($args, 2));
+                        if(strtolower($args[1]) === "@all"){
+                            $this->getPlugin()->broadcastPopup($popup);
+                            $sender->sendMessage(TextFormat::GREEN."Sent popup to @all.");
+                        }
+                        elseif($sender->getServer()->getPlayer($args[1]) !== null){
+                            $sender->getServer()->getPlayer($args[1])->sendPopup($popup);
+                            $sender->sendMessage(TextFormat::GREEN."Sent popup to ".$sender->getServer()->getPlayer($args[1])->getName().".");
+                        }
+                        else{
+                            $sender->sendMessage(TextFormat::RED."Failed to send message due to invalid recipient(s).");
+                        }
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Please specify a recipient.");
+                    }
                     break;
-                case "st":
-                case "sendtip":
+                case "t":
+                case "tip":
+                    if(isset($args[1])){
+                        $tip = implode(" ", array_slice($args, 2));
+                        if(strtolower($args[1]) === "@all"){
+                            $this->getPlugin()->broadcastTip($tip);
+                            $sender->sendMessage(TextFormat::GREEN."Sent tip to @all.");
+                        }
+                        elseif($sender->getServer()->getPlayer($args[1]) !== null){
+                            $sender->getServer()->getPlayer($args[1])->sendTip($tip);
+                            $sender->sendMessage(TextFormat::GREEN."Sent tip to ".$sender->getServer()->getPlayer($args[1])->getName().".");
+                        }
+                        else{
+                            $sender->sendMessage(TextFormat::RED."Failed to send message due to invalid recipient(s).");
+                        }
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Please specify a recipient.");
+                    }
+                    break;
+                default:
+                    $sender->sendMessage("Usage ".$this->getUsage());
                     break;
             }
         }

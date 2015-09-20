@@ -14,7 +14,6 @@ use easymessages\task\InfiniteTipTask;
 use easymessages\task\ScrollingPopupTask;
 use easymessages\task\ScrollingTipTask;
 use easymessages\task\UpdateMotdTask;
-use easymessages\utils\TextScroller;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 
@@ -59,6 +58,8 @@ class EasyMessages extends PluginBase{
                 $this->getServer()->getScheduler()->scheduleRepeatingTask(new InfinitePopupTask($this), 7);
                 break;
             case "scrolling":
+                $this->setScrollingTip($this->getConfig()->getNested("popup.scrollingMessage"));
+                $this->getServer()->getScheduler()->scheduleRepeatingTask(new ScrollingPopupTask($this), 7);
                 break;
         }
         switch(strtolower($this->getConfig()->getNested("tip.displayType"))){
@@ -70,7 +71,10 @@ class EasyMessages extends PluginBase{
                 break;
             case "infinite":
                 $this->getServer()->getScheduler()->scheduleRepeatingTask(new InfiniteTipTask($this), 7);
+                break;
             case "scrolling":
+                $this->setScrollingTip($this->getConfig()->getNested("tip.scrollingMessage"));
+                $this->getServer()->getScheduler()->scheduleRepeatingTask(new ScrollingTipTask($this), 7);
                 break;
         }
         switch(strtolower($this->getConfig()->getNested("motd.displayType"))){
@@ -88,7 +92,7 @@ class EasyMessages extends PluginBase{
      */
     public function broadcastPopup($message){
         foreach($this->getServer()->getOnlinePlayers() as $player){
-            $player->sendPopup($message);
+            $player->sendPopup((string) $message);
         }
     }
     /** 
@@ -96,7 +100,7 @@ class EasyMessages extends PluginBase{
      */
     public function broadcastTip($message){
     	foreach($this->getServer()->getOnlinePlayers() as $player){
-    	    $player->sendTip($message);
+    	    $player->sendTip((string) $message);
     	}
     }
     /** 
@@ -168,10 +172,22 @@ class EasyMessages extends PluginBase{
     	}
     }
     /**
+     * @param string $message
+     */
+    public function setScrollingPopup($message){
+        $this->scrollingPopup = (string) $message;
+    }
+    /**
      * @return string
      */
     public function getScrollingPopup(){
         return $this->scrollingPopup;
+    }
+    /**
+     * @param string $message
+     */
+    public function setScrollingTip($message){
+        $this->scrollingTip = (string) $message;
     }
     /**
      * @return string
