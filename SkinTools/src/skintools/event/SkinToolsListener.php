@@ -59,5 +59,6 @@ class SkinToolsListener implements Listener{
         if($this->getPlugin()->isSkinStored($event->getPlayer())){
             $this->getPlugin()->removeSkinData($event->getPlayer());
         }
+        $this->getPlugin()->clearTouchMode($event->getPlayer());
     }
 }

@@ -38,7 +38,7 @@ class SkinTools extends PluginBase{
         $event = new PlayerToggleTouchEvent($player, $this->getTouchMode($player), $touchMode);
         $this->getServer()->getPluginManager()->callEvent($event);
         if(!$event->isCancelled()){
-            if(is_int($touchMode)) $this->touchMode[strtolower($player->getName())] = (int) $touchMode;
+            $this->touchMode[strtolower($player->getName())] = (int) $touchMode;
         }
     }
     /**
@@ -46,7 +46,23 @@ class SkinTools extends PluginBase{
      * @return int
      */
     public function getTouchMode(Player $player){
-        return $this->touchMode[strtolower($player->getName())];
+        if($this->hasTouchMode($player)){
+            return $this->touchMode[strtolower($player->getName())];
+        }
+        return self::MODE_NONE;
+    }
+    /**
+     * @param Player $player
+     */
+    public function clearTouchMode(Player $player){
+        if($this->hasTouchMode($player)) unset($this->touchMode[strtolower($player->getName())]);
+    }
+    /**
+     * @param Player $player
+     * @return bool
+     */
+    public function hasTouchMode(Player $player){
+        return array_key_exists(strtolower($player->getName()), $this->touchMode);
     }
     /** 
      * @param Player $player 
