@@ -41,7 +41,13 @@ class RestartMe extends PluginBase{
     	$this->setTime($this->getConfig()->getNested("restart.restartInterval") * 60);
         $this->getServer()->getCommandMap()->register("restartme", new RestartMeCommand($this));
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoBroadcastTask($this), ($this->getConfig()->getNested("restart.broadcastInterval") * 20));
-        if($this->getConfig()->getNested("restart.restartOnOverload") === true) $this->getServer()->getScheduler()->scheduleRepeatingTask(new CheckMemoryTask($this), 6000);
+        if($this->getConfig()->getNested("restart.restartOnOverload") === true){
+            $this->getServer()->getScheduler()->scheduleRepeatingTask(new CheckMemoryTask($this), 6000);
+            $this->getServer()->getLogger()->notice("Memory overload restarts are enabled. If memory usage goes above ".$this->getMemoryLimit().", the server will restart.");
+        }
+        else{
+            $this->getServer()->getLogger()->notice("Memory overload restarts are disabled.");
+        }
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new RestartServerTask($this), 20);
     }
     /** 
@@ -129,5 +135,11 @@ class RestartMe extends PluginBase{
      */
     public function setPaused($value = true){
         $this->paused = (bool) $value;
+    }
+    /**
+     * @return string
+     */
+    public function getMemoryLimit(){
+        return strtoupper($this->getConfig()->getNested("restart.memoryLimit"));
     }
 }
