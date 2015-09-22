@@ -18,10 +18,10 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 
 class EasyMessages extends PluginBase{
-    /** @var string */
-    public $scrollingPopup = "";
-    /** @var string */
-    public $scrollingTip = "";
+    /** @var string|null */
+    public $scrollingPopup = null;
+    /** @var string|null */
+    public $scrollingTip = null;
     public function onEnable(){
         $this->saveFiles();
         $this->registerAll();
@@ -178,7 +178,7 @@ class EasyMessages extends PluginBase{
         $this->scrollingPopup = (string) $message;
     }
     /**
-     * @return string
+     * @return string|null
      */
     public function getScrollingPopup(){
         return $this->scrollingPopup;
@@ -190,7 +190,7 @@ class EasyMessages extends PluginBase{
         $this->scrollingTip = (string) $message;
     }
     /**
-     * @return string
+     * @return string|null
      */
     public function getScrollingTip(){
         return $this->scrollingTip;

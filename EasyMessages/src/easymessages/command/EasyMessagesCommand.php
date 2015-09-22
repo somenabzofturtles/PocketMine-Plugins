@@ -44,7 +44,7 @@ class EasyMessagesCommand extends Command{
                 case "m":
                 case "message":
                     if(isset($args[1])){
-                        $message = implode(" ", array_slice($args, 2));
+                        $message = $this->getPlugin()->replaceSymbols(implode(" ", array_slice($args, 2)));
                         if(strtolower($args[1]) === "@all"){
                             $sender->getServer()->broadcastMessage($message);
                             $sender->sendMessage(TextFormat::GREEN."Sent message to @all.");
@@ -64,7 +64,7 @@ class EasyMessagesCommand extends Command{
                 case "p":
                 case "popup":
                     if(isset($args[1])){
-                        $popup = implode(" ", array_slice($args, 2));
+                        $popup = $this->getPlugin()->replaceSymbols(implode(" ", array_slice($args, 2)));
                         if(strtolower($args[1]) === "@all"){
                             $this->getPlugin()->broadcastPopup($popup);
                             $sender->sendMessage(TextFormat::GREEN."Sent popup to @all.");
@@ -84,7 +84,7 @@ class EasyMessagesCommand extends Command{
                 case "t":
                 case "tip":
                     if(isset($args[1])){
-                        $tip = implode(" ", array_slice($args, 2));
+                        $tip = $this->getPlugin()->replaceSymbols(implode(" ", array_slice($args, 2)));
                         if(strtolower($args[1]) === "@all"){
                             $this->getPlugin()->broadcastTip($tip);
                             $sender->sendMessage(TextFormat::GREEN."Sent tip to @all.");
