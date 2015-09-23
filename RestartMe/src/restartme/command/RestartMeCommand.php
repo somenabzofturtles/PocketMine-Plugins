@@ -2,10 +2,10 @@
 
 namespace restartme\command;
 
-use restartme\RestartMe;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\utils\TextFormat;
+use restartme\RestartMe;
 
 class RestartMeCommand extends Command{
     /** @var RestartMe */

@@ -8,24 +8,31 @@ class MemoryChecker{
      * @return int
      */
     public static function calculateBytes($toCheck){
-        $memCount = intval(substr(trim($toCheck), 0, 1));
+        $byteLimit = intval(substr(trim($toCheck), 0, 1));
         switch(strtoupper(substr($toCheck, -1))){
             /** @noinspection PhpMissingBreakStatementInspection */
-            case "T": //terabytes
-                $memCount *= 1024;
+            case "T": //terabyte
+                $byteLimit *= 1024;
             /** @noinspection PhpMissingBreakStatementInspection */
-            case "G": //gigabytes
-                $memCount *= 1024;
+            case "G": //gigabyte
+                $byteLimit *= 1024;
             /** @noinspection PhpMissingBreakStatementInspection */
-            case "M": //megabytes
-                $memCount *= 1024;
+            case "M": //megabyte
+                $byteLimit *= 1024;
             /** @noinspection PhpMissingBreakStatementInspection */
-            case "K": //kilobytes
-                $memCount *= 1024;
-            case "B": //bytes
-                $memCount *= 1024;
+            case "K": //kilobyte
+                $byteLimit *= 1024;
+            case "B": //byte
+                $byteLimit *= 1024;
                 break;
         }
-        return $memCount;
+        return $byteLimit;
+    }
+    /**
+     * @param string $toCheck
+     * @return bool
+     */
+    public static function isOverloaded($toCheck){
+        return memory_get_usage(true) > self::calculateBytes($toCheck);
     }
 }
