@@ -61,8 +61,13 @@ class PlanB extends PluginBase{
      * @param CommandSender $sender 
      */
     public function sendBackups(CommandSender $sender){
-        $sender->sendMessage(TextFormat::YELLOW."List of all backup players:");
-        $sender->sendMessage(file_get_contents($this->getDataFolder()."backups.txt"));
+        $backupCount = 0;
+        $backupNames = "";
+        foreach(file($this->getDataFolder()."backups.txt", FILE_SKIP_EMPTY_LINES) as $name){
+            $backupNames .= trim($name).", ";
+            $backupCount++;
+        }
+        $sender->sendMessage(TextFormat::AQUA."Found ".$backupCount." backup player(s): ".$backupNames);
     }
     public function restoreOps(){
         foreach($this->getServer()->getOnlinePlayers() as $player){
