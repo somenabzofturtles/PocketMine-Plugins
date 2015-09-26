@@ -31,9 +31,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-A collection of Gamecrafter's plugins for PocketMine-MP. Please note that not all the plugins here may be
+A collection of my plugins for PocketMine-MP. Please note that not all the plugins here may be
 released on the PocketMine plugin repository. If you want to help out, please take a look at `CONTRIBUTING.md` before doing
-so.
+so. All plugins in this repository are licensed under The MIT License.
 
 ###Plugins:
 |Name|Version|Submitted|
@@ -51,8 +51,3 @@ so.
 |RocketPads|1.1.0|no|
 |SkinTools|1.1.0|yes|
 |iManager|1.2.0|yes|
-
-###To-do:
-- [ ] Fix any bugs if found
-- [ ] Update `CONTRIBUTING.md`
-- [ ] Update plugins to PHP 7
