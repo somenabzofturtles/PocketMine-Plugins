@@ -6,8 +6,15 @@ use globalshield\event\GlobalShieldListener;
 use pocketmine\item\Item;
 use pocketmine\level\Level;
 use pocketmine\plugin\PluginBase;
+use pocketmine\tile\Sign;
+use pocketmine\tile\Tile;
 
 class GlobalShield extends PluginBase{
+    const TYPE_BLOCK_BREAKING = 0;
+    const TYPE_BLOCK_INTERACTION = 1;
+    const TYPE_BLOCK_PLACING = 2;
+    const TYPE_BUCKET_EMPTYING = 3;
+    const TYPE_BUCKET_FILLING = 4;
     public function onEnable(){
         $this->saveFiles();
         $this->registerAll();
@@ -43,6 +50,29 @@ class GlobalShield extends PluginBase{
      * @param Level $level
      */
     public function isLevelProtected($type, Level $level){
-        
+        switch($type){
+            case self::TYPE_BLOCK_BREAKING:
+                break;
+            case self::TYPE_BLOCK_INTERACTION:
+                break;
+            case self::TYPE_BLOCK_PLACING:
+                break;
+            case self::TYPE_BUCKET_EMPTYING:
+                break;
+            case self::TYPE_BUCKET_FILLING:
+                break;
+        }
+    }
+    /**
+     * @param Tile $tile
+     * @return bool
+     */
+    public function isBadSign(Tile $tile){
+        if($tile instanceof Sign){
+            $text = "";
+            foreach($tile->getText() as $line){
+                $text .= strtolower(trim($line));
+            }
+        }
     }
 }

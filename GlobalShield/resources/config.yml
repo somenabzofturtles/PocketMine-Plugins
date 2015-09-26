@@ -7,11 +7,21 @@ plugin:
 level:
  world:
   breakBlocks: true
+  #Set to false to disable breaking blocks for regular players
   interactBlocks: true 
+  #Set to false to disable touching blocks for regular players
   placeBlocks: true
+  #Set to false to disable placing blocks for regular players
   emptyBuckets: true
+  #Set to false to disable emptying buckets for regular players
   fillBuckets: true
+  #Set to false to disable filling buckets for regular players
   bannedItems:
   - "46:0"
   - "259:0"
   - "327:0"
+badWords:
+- "word1"
+- "word2"
+- "word3"
+- "word4"
