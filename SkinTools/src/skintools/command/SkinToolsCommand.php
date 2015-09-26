@@ -82,7 +82,15 @@ class SkinToolsCommand extends Command{
                 case "touch":
                     if($sender instanceof Player){
                         if(isset($args[1])){
-                            
+                            switch($args[1]){
+                                case SkinTools::MODE_NONE:
+                                case SkinTools::MODE_GIVE:
+                                case SkinTools::MODE_STEAL:
+                                    break;
+                                default:
+                                    $sender->sendMessage(TextFormat::RED."Invalid touch mode entered.");
+                                    break;
+                            }
                         }
                         else{
                             
