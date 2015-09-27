@@ -12,6 +12,9 @@ use rocketpads\RocketPads;
 class RocketPadsListener implements Listener{
     /** @var RocketPads */
     private $plugin;
+    /**
+     * @param RocketPads $plugin
+     */
     public function __construct(RocketPads $plugin){
         $this->plugin = $plugin;
     }
