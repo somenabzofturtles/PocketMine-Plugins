@@ -11,6 +11,9 @@ use pocketmine\utils\TextFormat;
 class PlanBCommand extends Command{
     /** @var PlanB */
     private $plugin;
+    /**
+     * @param PlanB $plugin
+     */
     public function __construct(PlanB $plugin){
         parent::__construct("planb");
         $this->setDescription("Shows all the sub-commands for PlanB");
@@ -36,6 +39,11 @@ class PlanBCommand extends Command{
         $sender->sendMessage("/planb list: Lists all backup players");
         $sender->sendMessage("/planb restore: Restores OP status of all online players listed in backup.txt");
     }
+    /**
+     * @param CommandSender $sender
+     * @param string $label
+     * @param string[] $args
+     */
     public function execute(CommandSender $sender, $label, array $args){
         if(isset($args[0])){
             switch(strtolower($args[0])){
