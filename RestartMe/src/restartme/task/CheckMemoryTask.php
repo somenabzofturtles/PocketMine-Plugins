@@ -9,6 +9,9 @@ use restartme\RestartMe;
 class CheckMemoryTask extends PluginTask{
     /** @var RestartMe */
     private $plugin;
+    /**
+     * @param RestartMe $plugin
+     */
     public function __construct(RestartMe $plugin){
         parent::__construct($plugin);
         $this->plugin = $plugin;
@@ -19,10 +22,14 @@ class CheckMemoryTask extends PluginTask{
     public function getPlugin(){
         return $this->plugin;
     }
+    /**
+     * @param int $currentTick
+     */
     public function onRun($currentTick){
-        if(!$this->getPlugin()->isTimerPaused()) return;
-	if(MemoryChecker::isOverloaded($this->getPlugin()->getMemoryLimit())){
-            $this->getPlugin()->initiateRestart(RestartMe::TYPE_OVERLOADED);
-	}
+        if(!$this->getPlugin()->isTimerPaused()){
+            if(MemoryChecker::isOverloaded($this->getPlugin()->getMemoryLimit())){
+                $this->getPlugin()->initiateRestart(RestartMe::TYPE_OVERLOADED);
+            }
+        }
     }
 }

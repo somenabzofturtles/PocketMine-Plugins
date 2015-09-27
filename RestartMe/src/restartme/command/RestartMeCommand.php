@@ -10,6 +10,9 @@ use restartme\RestartMe;
 class RestartMeCommand extends Command{
     /** @var RestartMe */
     private $plugin;
+    /**
+     * @param RestartMe $plugin
+     */
     public function __construct(RestartMe $plugin){
         parent::__construct("restartme");
         $this->setDescription("Shows all the sub-commands for RestartMe");
@@ -37,6 +40,11 @@ class RestartMeCommand extends Command{
         $sender->sendMessage("/restartme subtract: Subtracts n seconds from the timer");
         $sender->sendMessage("/restartme time: Gets the remaining time until the server restarts");
     }
+    /**
+     * @param CommandSender $sender
+     * @param string $label
+     * @param string[] $args
+     */
     public function execute(CommandSender $sender, $label, array $args){
         if(isset($args[0])){
             switch(strtolower($args[0])){
