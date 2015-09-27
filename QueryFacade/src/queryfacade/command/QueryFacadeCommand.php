@@ -9,6 +9,9 @@ use queryfacade\QueryFacade;
 class QueryFacadeCommand extends Command{
     /** @var QueryFacade */
     private $plugin;
+    /**
+     * @param QueryFacade $plugin
+     */
     public function __construct(QueryFacade $plugin){
         parent::__construct("queryfacade");
         $this->setDescription("Shows all the sub-commands for QueryFacade");
@@ -30,6 +33,11 @@ class QueryFacadeCommand extends Command{
         $sender->sendMessage("QueryFacade commands:");
         $sender->sendMessage("/queryfacade help: Shows all the sub-commands for QueryFacade");
     }
+    /**
+     * @param CommandSender $sender
+     * @param string $label
+     * @param string[] $args
+     */
     public function execute(CommandSender $sender, $label, array $args){
         if(isset($args[0])){
             switch(strtolower($args[0])){

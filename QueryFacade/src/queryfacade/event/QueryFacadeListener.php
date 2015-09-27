@@ -9,6 +9,9 @@ use queryfacade\QueryFacade;
 class QueryFacadeListener implements Listener{
     /** @var QueryFacade */
     private $plugin;
+    /**
+     * @param QueryFacade $plugin
+     */
     public function __construct(QueryFacade $plugin){
         $this->plugin = $plugin;
     }
