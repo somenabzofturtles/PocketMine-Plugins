@@ -11,6 +11,9 @@ use skintools\SkinTools;
 class SkinToolsCommand extends Command{
     /** @var SkinTools */
     private $plugin;
+    /**
+     * @param SkinTools $plugin
+     */
     public function __construct(SkinTools $plugin){
         parent::__construct("skintools");
         $this->setDescription("Shows all the sub-commands for SkinTools");
@@ -36,6 +39,11 @@ class SkinToolsCommand extends Command{
         $sender->sendMessage("/skintools swap: Swaps skins with the specified player");
         $sender->sendMessage("/skintools touch: Toggles touch mode");
     }
+    /**
+     * @param CommandSender $sender
+     * @param string $label
+     * @param string[] $args
+     */
     public function execute(CommandSender $sender, $label, array $args){
         if(isset($args[0])){
             switch(strtolower($args[0])){

@@ -14,6 +14,11 @@ class PlayerToggleTouchEvent extends PlayerEvent implements Cancellable{
     public $oldMode;
     /** @var int */
     public $newMode;
+    /**
+     * @param Player $player
+     * @param int $oldMode
+     * @param int $newMode
+     */
     public function __construct(Player $player, $oldMode, $newMode){
         $this->player = $player;
         $this->oldMode = (int) $oldMode;

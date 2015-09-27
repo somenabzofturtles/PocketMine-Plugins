@@ -14,6 +14,9 @@ use skintools\SkinTools;
 class SkinToolsListener implements Listener{
     /** @var SkinTools */
     private $plugin;
+    /**
+     * @param SkinTools $plugin
+     */
     public function __construct(SkinTools $plugin){
         $this->plugin = $plugin;
     }
