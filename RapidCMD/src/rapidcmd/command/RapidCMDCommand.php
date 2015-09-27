@@ -9,6 +9,9 @@ use rapidcmd\RapidCMD;
 class RapidCMDCommand extends Command{
     /** @var RapidCMD */
     private $plugin;
+    /**
+     * @param RapidCMD $plugin
+     */
     public function __construct(RapidCMD $plugin){
         parent::__construct("rapidcmd");
         $this->setDescription("Shows all the sub-commands for RapidCMD");
@@ -36,6 +39,11 @@ class RapidCMDCommand extends Command{
         $sender->sendMessage("/rapidcmd help: Shows all the sub-commands for RapidCMD");
         $sender->sendMessage("/rapidcmd repeat: Runs the user's command, if they have one");
     }
+    /**
+     * @param CommandSender $sender
+     * @param string $label
+     * @param string[] $args
+     */
     public function execute(CommandSender $sender, $label, array $args) {
         if(isset($args[0])){
             switch(strtolower($args[0])){

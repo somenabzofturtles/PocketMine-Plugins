@@ -11,6 +11,9 @@ use rapidcmd\RapidCMD;
 class RapidCMDListener implements Listener{
     /** @var RapidCMD */
     private $plugin;
+    /**
+     * @param RapidCMD $plugin
+     */
     public function __construct(RapidCMD $plugin){
         $this->plugin = $plugin;
     }

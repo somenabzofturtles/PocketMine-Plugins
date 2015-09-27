@@ -13,6 +13,13 @@ class RCMD{
     public $permValue;
     /** @var string[] */
     public $actions;
+    /**
+     * @param string $name
+     * @param string $description
+     * @param string $permNode
+     * @param bool|string $permValue
+     * @param string[] $actions
+     */
     public function __construct($name = "", $description = "", $permNode = "", $permValue = false, array $actions = []){
         $this->name = $name;
         $this->description = $description;
@@ -57,13 +64,13 @@ class RCMD{
         return $this->permNode;
     }
     /**
-     * @param string $value
+     * @param bool|string $value
      */
     public function setPermValue($value){
         $this->permValue = $value;
     }
     /**
-     * @return string
+     * @return bool|string
      */
     public function getPermValue(){
         return $this->permValue;

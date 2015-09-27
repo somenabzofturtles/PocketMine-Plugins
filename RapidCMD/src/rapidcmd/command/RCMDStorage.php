@@ -11,6 +11,9 @@ class RCMDStorage{
     private $plugin;
     /** @var RCMD[] */
     private $commands = [];
+    /**
+     * @param RapidCMD $plugin
+     */
     public function __construct(RapidCMD $plugin){
         $this->plugin = $plugin;
     }
