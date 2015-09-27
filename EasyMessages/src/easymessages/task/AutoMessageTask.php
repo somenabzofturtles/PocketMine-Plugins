@@ -8,6 +8,9 @@ use pocketmine\scheduler\PluginTask;
 class AutoMessageTask extends PluginTask{
     /** @var EasyMessages */
     private $plugin;
+    /**
+     * @param EasyMessages $plugin
+     */
     public function __construct(EasyMessages $plugin){
         parent::__construct($plugin);
         $this->plugin = $plugin;
@@ -18,6 +21,9 @@ class AutoMessageTask extends PluginTask{
     public function getPlugin(){
         return $this->plugin;
     }
+    /**
+     * @param int $currentTick
+     */
     public function onRun($currentTick){
         $this->getPlugin()->getServer()->broadcastMessage($this->getPlugin()->getRandomMessage($this->getPlugin()->getConfig()->getNested("message.messages")));
     }

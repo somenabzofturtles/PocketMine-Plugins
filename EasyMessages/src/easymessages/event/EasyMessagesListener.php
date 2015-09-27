@@ -9,6 +9,9 @@ use pocketmine\event\Listener;
 class EasyMessagesListener implements Listener{
     /** @var EasyMessages */
     private $plugin;
+    /**
+     * @param EasyMessages $plugin
+     */
     public function __construct(EasyMessages $plugin){
         $this->plugin = $plugin;
     }

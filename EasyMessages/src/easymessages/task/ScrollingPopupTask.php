@@ -9,6 +9,9 @@ use pocketmine\scheduler\PluginTask;
 class ScrollingPopupTask extends PluginTask{
     /** @var EasyMessages */
     private $plugin;
+    /**
+     * @param EasyMessages $plugin
+     */
     public function __construct(EasyMessages $plugin){
         parent::__construct($plugin);
         $this->plugin = $plugin;
@@ -19,6 +22,9 @@ class ScrollingPopupTask extends PluginTask{
     public function getPlugin(){
         return $this->plugin;
     }
+    /**
+     * @param int $currentTick
+     */
     public function onRun($currentTick){
         $popup = $this->getPlugin()->getScrollingPopup();
         $this->getPlugin()->broadcastPopup($popup);

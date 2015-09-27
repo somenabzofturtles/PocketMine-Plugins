@@ -10,6 +10,9 @@ use pocketmine\utils\TextFormat;
 class EasyMessagesCommand extends Command{
     /** @var EasyMessages */
     private $plugin;
+    /**
+     * @param EasyMessages $plugin
+     */
     public function __construct(EasyMessages $plugin){
         parent::__construct("easymessages");
         $this->setDescription("Shows all the sub-commands for EasyMessages");
@@ -34,6 +37,11 @@ class EasyMessagesCommand extends Command{
         $sender->sendMessage("/easymessages popup: Sends a popup");
         $sender->sendMessage("/easymessages tip: Sends a tip");
     }
+    /**
+     * @param CommandSender $sender
+     * @param string $label
+     * @param string[] $args
+     */
     public function execute(CommandSender $sender, $label, array $args){
         if(isset($args[0])){
             switch(strtolower($args[0])){

@@ -8,6 +8,9 @@ use pocketmine\scheduler\PluginTask;
 class BlinkingPopupTask extends PluginTask{
     /** @var EasyMessages */
     private $plugin;
+    /**
+     * @param EasyMessages $plugin
+     */
     public function __construct(EasyMessages $plugin){
         parent::__construct($plugin);
         $this->plugin = $plugin;
@@ -18,6 +21,9 @@ class BlinkingPopupTask extends PluginTask{
     public function getPlugin(){
         return $this->plugin;
     }
+    /**
+     * @param int $currentTick
+     */
     public function onRun($currentTick){
         $this->getPlugin()->broadcastPopup($this->getPlugin()->getConfig()->getNested("popup.blinkingMessage"));
     }
