@@ -30,20 +30,29 @@ class BlockFreezer extends PluginBase implements Listener{
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
     /**
+     * @param int $id
+     * @param int $meta
+     * @param int $levelName
+     */
+    public function addBlockType($id, $meta, $levelName){
+        
+    }
+    /**
+     * 
+     * @param int $id
+     * @param int $meta
+     * @param int $levelName
+     */
+    public function removeBlockType($id, $meta, $levelName){
+        
+    }
+    /**
      * @param Block $block
      * @return bool
      */
-    private function isBlockSpecified(Block $block){
+    public function isBlockSpecified(Block $block){
         $key = array_change_key_case($this->getConfig()->get("level"), CASE_LOWER);
         $levelKey = $key[strtolower($block->getLevel()->getName())];
     	if(is_array($levelKey)) return in_array($block->getId().":".$block->getDamage(), $levelKey);	
-    }
-    /** 
-     * @param BlockUpdateEvent $event 
-     */
-    public function onBlockUpdate(BlockUpdateEvent $event){
-	if($this->isBlockSpecified($event->getBlock())){
-	    $event->setCancelled(true);
-	}
     }
 }
