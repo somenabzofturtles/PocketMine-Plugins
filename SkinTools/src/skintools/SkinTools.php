@@ -9,8 +9,11 @@ use skintools\event\player\PlayerToggleTouchEvent;
 use skintools\event\SkinToolsListener;
 
 class SkinTools extends PluginBase{
+    /** @const int */
     const MODE_NONE = 0;
+    /** @const int */
     const MODE_GIVE = 1;
+    /** @const int */
     const MODE_STEAL = 2;
     /** @var array */
     public $skinData = [];

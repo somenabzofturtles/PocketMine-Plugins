@@ -16,7 +16,7 @@ class SkinToolsCommand extends Command{
      */
     public function __construct(SkinTools $plugin){
         parent::__construct("skintools");
-        $this->setDescription("Shows all the sub-commands for SkinTools");
+        $this->setDescription("Shows all SkinTools commands");
         $this->setUsage("/skintools <sub-command> [parameters]");
         $this->setPermission("skintools.command.skintools");
         $this->setAliases(["st"]);
@@ -33,7 +33,7 @@ class SkinToolsCommand extends Command{
      */
     private function sendCommandHelp(CommandSender $sender){
         $sender->sendMessage("SkinTools commands:");
-        $sender->sendMessage("/skintools help: Shows all the sub-commands for SkinTools");
+        $sender->sendMessage("/skintools help: Shows all SkinTools commands");
         $sender->sendMessage("/skintools morph: Sets user's skin to that of the specified player's");
         $sender->sendMessage("/skintools restore: Restores user's skin to the skin they joined with");
         $sender->sendMessage("/skintools swap: Swaps skins with the specified player");

@@ -9,11 +9,11 @@ use pocketmine\Player;
 class PlayerToggleTouchEvent extends PlayerEvent implements Cancellable{
     public static $handlerList = null;
     /** @var Player */
-    public $player;
+    protected $player;
     /** @var int */
-    public $oldMode;
+    protected $oldMode;
     /** @var int */
-    public $newMode;
+    protected $newMode;
     /**
      * @param Player $player
      * @param int $oldMode
