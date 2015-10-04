@@ -2,7 +2,7 @@
 
 namespace domath\command;
 
-use domath\utils\Calculator;
+use domath\utils\BasicCalculator;
 use domath\DoMath;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -35,8 +35,10 @@ class DoMathCommand extends Command{
         $sender->sendMessage("DoMath commands:");
         $sender->sendMessage("/domath add:");
         $sender->sendMessage("/domath divide:");
+        $sender->sendMessage("/domath exponent:");
         $sender->sendMessage("/domath help: Shows all DoMath commands");
         $sender->sendMessage("/domath multiply:");
+        $sender->sendMessage("/domath percent:");
         $sender->sendMessage("/domath square:");
         $sender->sendMessage("/domath subtract:");
     }
@@ -51,14 +53,31 @@ class DoMathCommand extends Command{
                 case "a":
                 case "add":
                     if(count(array_slice($args, 1)) > 1){
-                        $sender->sendMessage($this->getPlugin()->getCalculator()->toString(array_slice($args, 1), Calculator::ADD));
+                        $sender->sendMessage(BasicCalculator::toString(array_slice($args, 1), BasicCalculator::ADD));
                     }
                     else{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
                     break;
+                /*
                 case "d":
                 case "divide":
+                    if(count(array_slice($args, 1)) > 1){
+                        $sender->sendMessage(BasicCalculator::toString(array_slice($args, 1), BasicCalculator::DIVIDE));
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");  
+                    }
+                    break;
+                 */
+                case "e":
+                case "exponent":
+                    if(count(array_slice($args, 1)) === 2){
+                        $sender->sendMessage(BasicCalculator::toString(array_slice($args, 1), BasicCalculator::EXPONENT));
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
+                    }
                     break;
                 case "?":
                 case "help":
@@ -67,16 +86,25 @@ class DoMathCommand extends Command{
                 case "m":
                 case "multiply":
                     if(count(array_slice($args, 1)) > 1){
-                        $sender->sendMessage($this->getPlugin()->getCalculator()->toString(array_slice($args, 1), Calculator::MULTIPLY));
+                        $sender->sendMessage(BasicCalculator::toString(array_slice($args, 1), BasicCalculator::MULTIPLY));
                     }
                     else{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
                     break;
+                case "p":
+                case "percent":
+                    if(count(array_slice($args, 1)) === 2){
+                        $sender->sendMessage(BasicCalculator::toString(array_slice($args, 1), BasicCalculator::PERCENT));
+                    }
+                    else{
+                        $sender->sendMessage("Failed");
+                    }
+                    break;
                 case "sq":
                 case "square":
                     if(isset($args[1])){
-                        $sender->sendMessage($this->getPlugin()->getCalculator()->toString($args[1], Calculator::SQUARE));
+                        $sender->sendMessage(BasicCalculator::toString($args[1], BasicCalculator::SQUARE));
                     }
                     else{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
@@ -85,10 +113,10 @@ class DoMathCommand extends Command{
                 case "s":
                 case "subtract":
                     if(count(array_slice($args, 1)) > 1){
-                        $sender->sendMessage($this->getPlugin()->getCalculator()->toString(array_slice($args, 1), Calculator::SUBTRACT));
+                        $sender->sendMessage(BasicCalculator::toString(array_slice($args, 1), BasicCalculator::SUBTRACT));
                     }
                     else{
-                        $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameteres.");
+                        $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
                     break;
                 default:
