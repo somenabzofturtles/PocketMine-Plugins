@@ -3,6 +3,7 @@
 namespace domath\command;
 
 use domath\utils\BasicCalculator;
+//use domath\utils\SimpleStorage;
 use domath\DoMath;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -59,7 +60,6 @@ class DoMathCommand extends Command{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
                     break;
-                /*
                 case "d":
                 case "divide":
                     if(count(array_slice($args, 1)) > 1){
@@ -69,7 +69,6 @@ class DoMathCommand extends Command{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");  
                     }
                     break;
-                 */
                 case "e":
                 case "exponent":
                     if(count(array_slice($args, 1)) === 2){
@@ -98,7 +97,7 @@ class DoMathCommand extends Command{
                         $sender->sendMessage(BasicCalculator::toString(array_slice($args, 1), BasicCalculator::PERCENT));
                     }
                     else{
-                        $sender->sendMessage("Failed");
+                        $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
                     break;
                 case "sq":

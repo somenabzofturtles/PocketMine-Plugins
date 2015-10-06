@@ -39,12 +39,10 @@ class BasicCalculator{
                 $symbol = "*";
                 if(is_array($input)) $answer = self::multiply($input);
                 break;
-            /*
             case self::DIVIDE:
                 $symbol = "/";
                 if(is_array($input)) $answer = self::divide($input);
                 break;
-             */
             case self::PERCENT:
                 $symbol = "%";
                 if(is_array($input)) $answer = self::percent($input[0], $input[1]);
@@ -55,7 +53,7 @@ class BasicCalculator{
                 break;
             case self::EXPONENT:
                 $symbol = "^";
-                if(is_array($input)) $answer = self::exponent ($input[0], $input[1]);
+                if(is_array($input)) $answer = self::exponent($input[0], $input[1]);
                 break;
         }
         if(is_array($input)){
@@ -74,8 +72,8 @@ class BasicCalculator{
      */
     public static function add(array $inputs){
         if(is_array($inputs)){
-            $output = 0;
-            foreach($inputs as $input){
+            $output = $inputs[0];
+            foreach(array_slice($inputs, 1) as $input){
                 $output += $input;
             }
             return $output;
@@ -109,15 +107,20 @@ class BasicCalculator{
     }
     /**
      * @param int[] $inputs
-     * @return int
+     * @return int|string
      */
     public static function divide(array $inputs){
         if(is_array($inputs)){
             $output = $inputs[0];
             foreach(array_slice($inputs, 1) as $input){
-                $output /= $input; //TODO: Handle division by zero
+                if($input != 0) $output /= $input; //if the value is 0, it won't perform the calculation
             }
-            return $output;
+            if(in_array(0, array_slice($inputs, 1), 0)){
+                return "ERROR"; //returned if there was one or more zeros
+            }
+            else{
+                return $output; //returned if there were no zeros
+            }
         }
     }
     /**
