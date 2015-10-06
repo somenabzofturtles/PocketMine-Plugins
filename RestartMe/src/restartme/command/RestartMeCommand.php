@@ -15,7 +15,7 @@ class RestartMeCommand extends Command{
      */
     public function __construct(RestartMe $plugin){
         parent::__construct("restartme");
-        $this->setDescription("Shows all the sub-commands for RestartMe");
+        $this->setDescription("Shows all RestartMe commands");
         $this->setUsage("/restartme <sub-command> [parameters]");
         $this->setPermission("restartme.command.restartme");
         $this->setAliases(["rm"]);
@@ -33,7 +33,7 @@ class RestartMeCommand extends Command{
     private function sendCommandHelp(CommandSender $sender){
         $sender->sendMessage("RestartMe commands:");
         $sender->sendMessage("/restartme add: Adds n seconds to the timer");
-        $sender->sendMessage("/restartme help: Shows all the sub-commands for RestartMe");
+        $sender->sendMessage("/restartme help: Shows all RestartMe commands");
         $sender->sendMessage("/restartme set: Sets the timer to n seconds");
         $sender->sendMessage("/restartme start: Starts the timer");
         $sender->sendMessage("/restartme stop: Stops the timer");

@@ -9,7 +9,9 @@ use restartme\task\CheckMemoryTask;
 use restartme\task\RestartServerTask;
 
 class RestartMe extends PluginBase{
+    /** @const int */
     const TYPE_NORMAL = 0;
+    /** @const int */
     const TYPE_OVERLOADED = 1;
     /** @var int */
     public $timer = 0;

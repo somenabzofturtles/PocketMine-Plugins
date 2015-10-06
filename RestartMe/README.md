@@ -10,7 +10,7 @@ Main command: **restartme**, **rm**
 |Sub-command|Description|
 |-----------|-----------|
 |add|Adds n seconds to the timer|
-|help|Shows all the sub-commands for RestartMe|
+|help|Shows all RestartMe commands|
 |set|Sets the timer to n seconds|
 |start|Starts the timer|
 |stop|Stops the timer|
