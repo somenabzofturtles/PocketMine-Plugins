@@ -8,7 +8,7 @@ class MemoryChecker{
      * @return int
      */
     public static function calculateBytes($toCheck){
-        $byteLimit = intval(substr(trim($toCheck), 0, 1));
+        $byteLimit = (int) substr(trim($toCheck), 0, 1);
         switch(strtoupper(substr($toCheck, -1))){
             /** @noinspection PhpMissingBreakStatementInspection */
             case "T": //terabyte

@@ -116,7 +116,7 @@ class RestartMeCommand extends Command{
                     }
                     break;
                 case "time":
-                    $sender->sendMessage(TextFormat::YELLOW."Time left: ".$this->getPlugin()->getFormattedTime());
+                    $sender->sendMessage(TextFormat::YELLOW."Time remaining: ".$this->getPlugin()->getFormattedTime());
                     break;
                 default:
                     $sender->sendMessage("Usage: ".$this->getUsage());

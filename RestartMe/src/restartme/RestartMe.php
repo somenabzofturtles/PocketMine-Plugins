@@ -62,28 +62,28 @@ class RestartMe extends PluginBase{
      * @return string
      */
     public function getFormattedTime(){
-        $hour = floor($this->getTime() / 3600);
-        $minute = floor(($this->getTime() / 60) - ($hour * 60));
-        $second = floor($this->getTime() % 60);
+        $hour = (int) $this->getTime() / 3600;
+        $minute = (int) ($this->getTime() / 60) - ($hour * 60);
+        $second = (int) $this->getTime() % 60;
         return $hour." hr ".$minute." min ".$second." sec";
     }
     /** 
      * @param int $seconds 
      */
     public function setTime($seconds){
-    	$this->timer = floor($seconds);
+    	$this->timer = (int) $seconds;
     }
     /** 
      * @param int $seconds 
      */
     public function addTime($seconds){
-    	if(is_numeric($seconds)) $this->timer += floor($seconds);
+    	if(is_numeric($seconds)) $this->timer += (int) $seconds;
     }
     /** 
      * @param int $seconds 
      */
     public function subtractTime($seconds){
-    	if(is_numeric($seconds)) $this->timer -= floor($seconds);
+    	if(is_numeric($seconds)) $this->timer -= (int) $seconds;
     }
     /** 
      * @param string $messageType 
