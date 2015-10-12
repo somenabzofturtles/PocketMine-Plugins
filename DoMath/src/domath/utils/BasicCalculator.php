@@ -18,6 +18,7 @@ class BasicCalculator{
     /** @const int */
     const EXPONENT = 6;
     /**
+     * Returns a formatted string with input and answers.
      * @param mixed $input
      * @param int $mode
      * @return string
@@ -67,6 +68,7 @@ class BasicCalculator{
         }
     }
     /**
+     * Calculates the sum of all the values in $inputs.
      * @param int[] $inputs
      * @return int
      */
@@ -80,6 +82,7 @@ class BasicCalculator{
         }
     }
     /**
+     * Calculates the difference of all the values in $inputs.
      * @param int[] $inputs
      * @return int
      */
@@ -93,6 +96,7 @@ class BasicCalculator{
         }
     }
     /**
+     * Calculates the total value, multiplying all the values by each other.
      * @param int[] $inputs
      * @return int
      */
@@ -106,6 +110,7 @@ class BasicCalculator{
         }
     }
     /**
+     * Calculates the quotient of all the values in $inputs.
      * @param int[] $inputs
      * @return int|string
      */
@@ -124,6 +129,7 @@ class BasicCalculator{
         }
     }
     /**
+     * Calculates the difference between $input1 and $input2, returns percentage.
      * @param int $input1
      * @param int $input2
      * @return int
@@ -132,6 +138,7 @@ class BasicCalculator{
         return ($input1 / $input2) * 100;
     }
     /**
+     * Calculates the squared value of $input.
      * @param int $input
      * @return int
      */
@@ -139,6 +146,7 @@ class BasicCalculator{
         return sqrt($input);
     }
     /**
+     * Calculates the value of $input to the power of $exponent.
      * @param int $input
      * @param int $exponent
      * @return int

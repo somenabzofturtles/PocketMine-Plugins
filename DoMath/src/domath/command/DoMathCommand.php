@@ -3,6 +3,8 @@
 namespace domath\command;
 
 use domath\utils\BasicCalculator;
+//use domath\utils\ScientificCalculator;
+//use domath\utils\ShapeCalculator;
 //use domath\utils\SimpleStorage;
 use domath\DoMath;
 use pocketmine\command\Command;
