@@ -11,6 +11,7 @@ Main command: **restartme**, **rm**
 |-----------|-----------|
 |add|Adds n seconds to the timer|
 |help|Shows all RestartMe commands|
+|memory|Shows memory usage information|
 |set|Sets the timer to n seconds|
 |start|Starts the timer|
 |stop|Stops the timer|

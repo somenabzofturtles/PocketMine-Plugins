@@ -33,10 +33,7 @@ class RestartMe extends PluginBase{
         }
         else{
             $this->saveDefaultConfig();
-            $this->getServer()->getLogger()->warning("Remember to use a server restarting script.");
-            $this->getServer()->getLogger()->warning("If you aren't using one, find one at ".$this->getServer()->getDataPath()."plugins\\RestartMe.");
-            $this->saveResource("start.cmd");
-            $this->saveResource("start.sh");
+            $this->getServer()->getLogger()->warning("Remember to use a server restarter script, or else this plugin won't work properly.");
         }
     }
     private function registerAll(){
@@ -62,9 +59,9 @@ class RestartMe extends PluginBase{
      * @return string
      */
     public function getFormattedTime(){
-        $hour = (int) $this->getTime() / 3600;
-        $minute = (int) ($this->getTime() / 60) - ($hour * 60);
-        $second = (int) $this->getTime() % 60;
+        $hour = floor($this->getTime() / 3600);
+        $minute = floor(($this->getTime() / 60) - ($hour * 60));
+        $second = floor($this->getTime() % 60);
         return $hour." hr ".$minute." min ".$second." sec";
     }
     /** 
