@@ -1,7 +1,5 @@
 #PocketMine-Plugins
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Gamecrafter/PocketMine-Plugins?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Forks](https://img.shields.io/github/forks/Gamecrafter/PocketMine-Plugins.svg)](https://github.com/Gamecrafter/PocketMine-Plugins/network)
 [![Issues](http://img.shields.io/github/issues-raw/Gamecrafter/PocketMine-Plugins.svg)](https://github.com/Gamecrafter/PocketMine-Plugins/issues)
 ![License](https://img.shields.io/badge/license-MIT-red.svg)
@@ -41,8 +39,6 @@ so. All plugins in this repository are licensed under The MIT License.
 |BlockFreezer|1.1.0|yes|
 |EasyMessages|1.2.0|yes|
 |GlobalShield|1.1.0|yes|
-|InvGadgets|1.0.0|no|
-|LocatorPro|1.0.0|no|
 |MyTag|1.2.0|yes|
 |PlanB|1.2.0|yes|
 |QueryFacade|1.0.0|no|
