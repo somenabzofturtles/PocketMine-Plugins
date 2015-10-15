@@ -1,5 +1,5 @@
-#Configuration file for RestartMe v1.1.0
-version: 1.1.0
+#Configuration file for RestartMe v1.2.0
+version: 1.2.0
 #Do not edit the version string, it is used for internal purposes
 plugin:
  autoUpdate: true
