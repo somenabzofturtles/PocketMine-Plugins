@@ -14,7 +14,7 @@ class RapidCMDCommand extends Command{
      */
     public function __construct(RapidCMD $plugin){
         parent::__construct("rapidcmd");
-        $this->setDescription("Shows all the sub-commands for RapidCMD");
+        $this->setDescription("Shows all RapidCMD commands");
         $this->setUsage("/rapidcmd <sub-command> [parameters]");
         $this->setPermission("rapidcmd.command.rapidcmd");
         $this->setAliases(["rc"]);
@@ -36,8 +36,8 @@ class RapidCMDCommand extends Command{
         $sender->sendMessage("/rapidcmd as: Runs a command as a player");
         $sender->sendMessage("/rapidcmd cmd: Sends information about a command");
         $sender->sendMessage("/rapidcmd delcmd: Deletes a RCMD, if it exists");
-        $sender->sendMessage("/rapidcmd help: Shows all the sub-commands for RapidCMD");
-        $sender->sendMessage("/rapidcmd repeat: Runs the user's command, if they have one");
+        $sender->sendMessage("/rapidcmd help: Shows all RapidCMD commands");
+        $sender->sendMessage("/rapidcmd repeat: Runs the user's last command, if they have one");
     }
     /**
      * @param CommandSender $sender

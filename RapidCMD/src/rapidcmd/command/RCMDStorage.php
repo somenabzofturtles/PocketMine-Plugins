@@ -24,19 +24,20 @@ class RCMDStorage{
         return $this->plugin;
     }
     public function registerDefaults(){
+        $successCount = 0;
+        $failCount = 0;
         $commands = $this->getPlugin()->getConfig()->get("commands");
         if(is_array($commands)){
             $count = 0;
             foreach($commands as $command){
                 if(!$this->isCommandStored($command["name"])){
-                    $rcmd = new RCMD();
-                    $rcmd->name = strtolower($command["name"]);
-                    $rcmd->description = $command["description"];
-                    $rcmd->permNode = $command["permission"];
-                    $rcmd->permValue = strtolower($command["value"]);
-                    $rcmd->actions = $command["actions"];
+                    $rcmd = new RCMD(strtolower($command["name"]));
+                    $rcmd->setDescription($command["description"]);
+                    $rcmd->setPermNode(strtolower($command["permission"]));
+                    $rcmd->setPermValue(strtolower($command["value"]));
+                    $rcmd->setActions($command["actions"]);
                     $this->addCommand($rcmd);
-                    $permission = new Permission($rcmd->permNode, $rcmd->description, $rcmd->permValue);
+                    $permission = new Permission($rcmd->getPermNode(), $rcmd->getDescription(), $rcmd->getPermValue());
                     $this->getPlugin()->getServer()->getPluginManager()->addPermission($permission);
                     $count++;
                 }

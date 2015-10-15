@@ -4,20 +4,20 @@ namespace rapidcmd\command;
 
 class RCMD{
     /** @var string */
-    public $name;
+    protected $name;
     /** @var string */
-    public $description;
+    protected $description;
     /** @var string */
-    public $permNode;
-    /** @var string */
-    public $permValue;
+    protected $permNode;
+    /** @var mixed */
+    protected $permValue;
     /** @var string[] */
-    public $actions;
+    protected $actions;
     /**
      * @param string $name
      * @param string $description
      * @param string $permNode
-     * @param bool|string $permValue
+     * @param mixed $permValue
      * @param string[] $actions
      */
     public function __construct($name = "", $description = "", $permNode = "", $permValue = false, array $actions = []){
@@ -64,7 +64,7 @@ class RCMD{
         return $this->permNode;
     }
     /**
-     * @param bool|string $value
+     * @param mixed $value
      */
     public function setPermValue($value){
         $this->permValue = $value;
@@ -74,5 +74,17 @@ class RCMD{
      */
     public function getPermValue(){
         return $this->permValue;
+    }
+    /**
+     * @param string[] $actions
+     */
+    public function setActions(array $actions){
+        $this->actions = $actions;
+    }
+    /**
+     * @return string[]
+     */
+    public function getActions(){
+        return $this->actions;
     }
 }

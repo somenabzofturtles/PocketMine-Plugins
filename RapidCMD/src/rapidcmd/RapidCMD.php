@@ -10,7 +10,9 @@ use rapidcmd\event\RapidCMDListener;
 class RapidCMD extends PluginBase{
     public function onEnable(){
         $this->saveFiles();
-	$this->registerAll();
+        $this->getServer()->getCommandMap()->register("rapidcmd", new RapidCMDCommand($this));
+    	$this->getServer()->getPluginManager()->registerEvents(new RapidCMDListener($this), $this);
+        $this->getCommandStorage()->registerDefaults();
     }
     private function saveFiles(){
         if(!is_dir($this->getDataFolder())) mkdir($this->getDataFolder());
@@ -26,11 +28,6 @@ class RapidCMD extends PluginBase{
         else{
             $this->saveDefaultConfig();
         }
-    }
-    private function registerAll(){
-        $this->getServer()->getCommandMap()->register("rapidcmd", new RapidCMDCommand($this));
-    	$this->getServer()->getPluginManager()->registerEvents(new RapidCMDListener($this), $this);
-        $this->getCommandStorage()->registerDefaults();
     }
     /**
      * @return RCMDStorage

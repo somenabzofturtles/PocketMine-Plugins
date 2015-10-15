@@ -13,8 +13,8 @@ Main command: **rapidcmd**, **rc**
 |as|Runs a command as a player|
 |cmd|Sends information about a command|
 |delcmd|Deletes a RCMD, if it exists|
-|help|Shows all the sub-commands for RapidCMD|
-|repeat|Runs the user's command, if they have one|
+|help|Shows all RapidCMD commands|
+|repeat|Runs the user's last command, if they have one|
 
 ###Permissions:
 |Node|Default|
