@@ -14,7 +14,7 @@ class QueryFacadeCommand extends Command{
      */
     public function __construct(QueryFacade $plugin){
         parent::__construct("queryfacade");
-        $this->setDescription("Shows all the sub-commands for QueryFacade");
+        $this->setDescription("Shows all QueryFacade commands");
         $this->setUsage("/queryfacade <sub-commands> [parameters]");
         $this->setPermission("queryfacade.command.queryfacade");
         $this->setAliases(["qf"]);
@@ -31,7 +31,7 @@ class QueryFacadeCommand extends Command{
      */
     private function sendCommandHelp(CommandSender $sender){
         $sender->sendMessage("QueryFacade commands:");
-        $sender->sendMessage("/queryfacade help: Shows all the sub-commands for QueryFacade");
+        $sender->sendMessage("/queryfacade help: Shows all QueryFacade commands");
     }
     /**
      * @param CommandSender $sender
