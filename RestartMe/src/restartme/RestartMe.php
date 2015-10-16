@@ -59,10 +59,18 @@ class RestartMe extends PluginBase{
      * @return string
      */
     public function getFormattedTime(){
-        $hour = floor($this->getTime() / 3600);
-        $minute = floor(($this->getTime() / 60) - ($hour * 60));
-        $second = floor($this->getTime() % 60);
-        return $hour." hr ".$minute." min ".$second." sec";
+        $time = $this->toArray();
+        return $time[0]." hr ".$time[1]." min ".$time[2]." sec";
+    }
+    /**
+     * @return array
+     */
+    public function toArray(){
+        return [
+            floor($this->getTime() / 3600), //hour
+            floor(($this->getTime() / 60) - (floor($this->getTime() / 3600) * 60)), //minute
+            floor($this->getTime() % 60) //second
+        ];
     }
     /** 
      * @param int $seconds 
