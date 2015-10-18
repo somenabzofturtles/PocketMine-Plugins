@@ -10,8 +10,12 @@ Main command: **queryfacade**, **qr**
 |Sub-command|Description|
 |-----------|-----------|
 |help|Shows all QueryFacade commands|
+|info|Sends server's query information|
 
 ###Permissions:
+|Node|Default|
+|----|:-------:|
+|queryfacade.command.queryfacade|op|
 
 ###Releases:
 |Version|Release Date|Download|

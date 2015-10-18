@@ -9,10 +9,10 @@ use queryfacade\utils\QueryModifier;
 
 class QueryFacade extends PluginBase{
     /** @var QueryModifier */
-    private $queryModifier;
+    private $modifier;
     public function onEnable(){
         $this->saveFiles();
-        $this->queryModifier = new QueryModifier($this);
+        $this->modifier = new QueryModifier($this);
     	$this->getServer()->getCommandMap()->register("queryfacade", new QueryFacadeCommand($this));
     	$this->getServer()->getPluginManager()->registerEvents(new QueryFacadeListener($this), $this);
         $this->getModifier()->setPlayerCount($this->getConfig()->getNested("query.playerCount"));
@@ -37,6 +37,6 @@ class QueryFacade extends PluginBase{
      * @return QueryModifier
      */
     public function getModifier(){
-        return $this->queryModifier;
+        return $this->modifier;
     }
 }
