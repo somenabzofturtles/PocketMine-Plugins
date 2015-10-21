@@ -24,8 +24,6 @@ class RCMDStorage{
         return $this->plugin;
     }
     public function registerDefaults(){
-        $successCount = 0;
-        $failCount = 0;
         $commands = $this->getPlugin()->getConfig()->get("commands");
         if(is_array($commands)){
             $count = 0;
