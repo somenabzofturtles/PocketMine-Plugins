@@ -10,9 +10,9 @@ pad:
  launchDistance: 10
  #Sets how far a player is launched when they step on a rocket pad
  blockId:
- - "22:0" #Lapis Lazuli Block
- - "41:0" #Gold Block
- - "42:0" #Iron Block
- - "57:0" #Diamond Block
- - "133:0" #Emerald Block
- - "152:0" #Redstone Block
+ - "22:0"
+ - "41:0"
+ - "42:0"
+ - "57:0"
+ - "133:0"
+ - "152:0"

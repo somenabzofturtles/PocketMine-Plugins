@@ -6,7 +6,7 @@ use pocketmine\block\Block;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use pocketmine\Player;
-use rocketpads\command\RocketPadsCommand;
+//use rocketpads\command\RocketPadsCommand;
 use rocketpads\event\RocketPadsListener;
 
 class RocketPads extends PluginBase{
@@ -14,7 +14,8 @@ class RocketPads extends PluginBase{
     public $pads;
     public function onEnable(){
         $this->saveFiles();
-	$this->registerAll();
+        //$this->getServer()->getCommandMap()->register("rocketpads", new RocketPadsCommand($this));
+    	$this->getServer()->getPluginManager()->registerEvents(new RocketPadsListener($this), $this);
     }
     private function saveFiles(){
         if(!is_dir($this->getDataFolder())) mkdir($this->getDataFolder());
@@ -31,10 +32,6 @@ class RocketPads extends PluginBase{
             $this->saveDefaultConfig();
         }
         $this->pads = new Config($this->getDataFolder()."pads.txt", Config::ENUM);
-    }
-    private function registerAll(){
-        $this->getServer()->getCommandMap()->register("rocketpads", new RocketPadsCommand($this));
-    	$this->getServer()->getPluginManager()->registerEvents(new RocketPadsListener($this), $this);
     }
     /**
      * @param Block $block
