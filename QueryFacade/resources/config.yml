@@ -1,23 +1,28 @@
 #Configuration file for QueryFacade v1.0.0
-version: 1.0.0
-#Do not edit the version string, it is used for internal purposes
-plugin:
- autoUpdate: true
- #Set to true to enable automatic overwriting of this file when the plugin is updated
-query:
- level: "world"
- #Sets the world name sent in a query
- maxPlayerCount: 20
- #Sets the max player count sent in a query
- playerCount: 20
- #Sets the player count sent in a query, please do not to abuse this, or there will be social consequences
- playerList:
- - "Gamecrafter"
- - "shoghicp"
- - "Steve"
- plugins:
- - "CorePro"
- - "iUpdater"
- - "PocketAuth"
- - "QueryFacade"
- - "ServerTools"
+timeout: 3
+#Sets the timeout in seconds, if it takes longer than the timeout to query a server, the plugin will assume the server is offline
+combine: false
+#Set to true to allow query data to be combined with other servers
+level: "world"
+#Sets the world name sent in a query
+maxPlayerCount: 20
+#Sets the max player count sent in a query
+playerCount: 20
+#Sets the player count sent in a query, please do not to abuse this, or there will be social consequences
+playerList:
+#Sets the players that will be "online", NOT IMPLEMENTED YET
+- "Gamecrafter"
+- "shoghicp"
+- "Steve"
+plugins:
+#Sets the plugins that will be "enabled", NOT IMPLEMENTED YET
+- "CorePro"
+- "iUpdater"
+- "PocketAuth"
+- "QueryFacade"
+- "ServerTools"
+servers:
+#Fetchs data from all the servers below, if they are valid and the have query turned on, and combine is set to true
+- "hg1.frostbite.net:19132"
+- "hg2.frostbite.net:19132"
+- "beta.frostbite.net:19132"
