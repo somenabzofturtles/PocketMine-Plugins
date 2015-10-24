@@ -45,6 +45,5 @@ so. All plugins in this repository are licensed under The MIT License.
 |QueryFacade|1.0.0|no|
 |RapidCMD|1.0.0|no|
 |RestartMe|1.1.0|no|
-|RocketPads|1.1.0|no|
 |SkinTools|1.1.0|yes|
 |iManager|1.2.0|yes|
