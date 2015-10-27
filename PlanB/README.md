@@ -11,7 +11,7 @@ Main command: **planb**, **pb**
 |-----------|-----------|
 |addbackup|Adds a player to backups.txt|
 |delbackup|Removes a player from backups.txt|
-|help|Shows all the sub-commands for PlanB|
+|help|Shows all PlanB commands|
 |list|Lists all backup players|
 |restore|Restores OP status of all online players listed in backup.txt|
 

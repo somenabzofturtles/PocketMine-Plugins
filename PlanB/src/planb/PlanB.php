@@ -13,27 +13,10 @@ class PlanB extends PluginBase{
     /** @var Config */
     public $backups;
     public function onEnable(){
-        $this->saveFiles();
-        $this->registerAll();
-    }
-    private function saveFiles(){
-    	if(!is_dir($this->getDataFolder())) mkdir($this->getDataFolder());
-        if(file_exists($this->getDataFolder()."config.yml")){
-            if($this->getConfig()->get("version") !== $this->getDescription()->getVersion() or !$this->getConfig()->exists("version")){
-		$this->getServer()->getLogger()->warning("An invalid configuration file for ".$this->getDescription()->getName()." was detected.");
-		if($this->getConfig()->getNested("plugin.autoUpdate") === true){
-		    $this->saveResource("config.yml", true);
-                    $this->getServer()->getLogger()->warning("Successfully updated the configuration file for ".$this->getDescription()->getName()." to v".$this->getDescription()->getVersion().".");
-		}
-	    }  
-        }
-        else{
-            $this->saveDefaultConfig();
-        }
-        if(!file_exists($this->getDataFolder()."values.txt")) $this->saveResource("values.txt");
+        $this->saveDefaultConfig();
+        $this->saveResource("values.txt");
+        @mkdir($this->getDataFolder());
         $this->backups = new Config($this->getDataFolder()."backups.txt", Config::ENUM);
-    }
-    private function registerAll(){
         $this->getServer()->getCommandMap()->register("planb", new PlanBCommand($this));
     }
     /**
@@ -67,20 +50,20 @@ class PlanB extends PluginBase{
             $backupNames .= trim($name).", ";
             $backupCount++;
         }
-        $sender->sendMessage(TextFormat::AQUA."Found ".$backupCount." backup player(s): ".$backupNames);
+        $sender->sendMessage(TextFormat::AQUA."Found ".$backupCount." backup player(s): ".substr($backupNames, 0, -2));
     }
     public function restoreOps(){
         foreach($this->getServer()->getOnlinePlayers() as $player){
             if(!$this->isBackupPlayer($player->getName()) and $player->isOp()){
                 $player->setOp(false);
-                $player->close("", $this->getFixedMessage($player, $this->getConfig()->getNested("backup.kickReason")));
-                if($this->getConfig()->getNested("backup.notifyAll") === true){
-                    $this->getServer()->broadcastMessage($this->getFixedMessage($player, $this->getConfig()->getNested("backup.notifyMessage")));
+                $player->close("", $this->getFixedMessage($player, $this->getConfig()->get("kickReason")));
+                if($this->getConfig()->get("notifyAll") === true){
+                    $this->getServer()->broadcastMessage($this->getFixedMessage($player, $this->getConfig()->get("notifyMessage")));
                 }
             }
             if($this->isBackupPlayer($player->getName()) and !$player->isOp()){
                 $player->setOp(true);
-                $player->sendMessage($this->getFixedMessage($player, $this->getConfig()->getNested("backup.restoreMessage")));
+                $player->sendMessage($this->getFixedMessage($player, $this->getConfig()->get("restoreMessage")));
             }
         }
     }

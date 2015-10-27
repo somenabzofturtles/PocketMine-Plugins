@@ -16,7 +16,7 @@ class PlanBCommand extends Command{
      */
     public function __construct(PlanB $plugin){
         parent::__construct("planb");
-        $this->setDescription("Shows all the sub-commands for PlanB");
+        $this->setDescription("Shows all PlanB commands");
         $this->setUsage("/planb <sub-command> [parameters]");
         $this->setPermission("planb.command.planb");
         $this->setAliases(["pb"]);
@@ -35,7 +35,7 @@ class PlanBCommand extends Command{
         $sender->sendMessage("PlanB commands:");
         $sender->sendMessage("/planb addbackup: Adds a player to backups.txt");
         $sender->sendMessage("/planb delbackup: Removes a player from backups.txt");
-        $sender->sendMessage("/planb help: Shows all the sub-commands for PlanB");
+        $sender->sendMessage("/planb help: Shows all PlanB commands");
         $sender->sendMessage("/planb list: Lists all backup players");
         $sender->sendMessage("/planb restore: Restores OP status of all online players listed in backup.txt");
     }
@@ -87,7 +87,6 @@ class PlanBCommand extends Command{
                         $sender->sendMessage(TextFormat::RED."Please specify a valid player.");
                     }
                     break;
-                case "?":
                 case "help":
                     $this->sendCommandHelp($sender);
                     break;
