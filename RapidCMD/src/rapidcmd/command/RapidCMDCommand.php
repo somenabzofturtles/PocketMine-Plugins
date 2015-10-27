@@ -59,7 +59,6 @@ class RapidCMDCommand extends Command{
                 case "dc":
                 case "delcmd":
                     break;
-                case "?":
                 case "help":
                     $this->sendCommandHelp($sender);
                     break;

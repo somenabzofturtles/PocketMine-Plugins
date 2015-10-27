@@ -9,6 +9,8 @@ use rapidcmd\RapidCMD;
 class RunCommandTask extends PluginTask{
     /** @var RapidCMD */
     private $plugin;
+    /** @var string */
+    private $command;
     public function __construct(RapidCMD $plugin, $command){
         parent::__construct($plugin);
         $this->plugin = $plugin;
@@ -20,13 +22,7 @@ class RunCommandTask extends PluginTask{
     public function getPlugin(){
         return $this->plugin;
     }
-    /**
-     * @return string
-     */
-    public function getCommand(){
-        return $this->command;
-    }
     public function onRun($currentTick){
-        $this->getPlugin()->getServer()->dispatchCommand(new ConsoleCommandSender(), $this->getCommand());
+        $this->getPlugin()->getServer()->dispatchCommand(new ConsoleCommandSender(), $this->command);
     }
 }
