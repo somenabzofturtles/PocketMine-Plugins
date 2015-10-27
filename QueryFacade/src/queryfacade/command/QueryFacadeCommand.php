@@ -41,7 +41,6 @@ class QueryFacadeCommand extends Command{
     public function execute(CommandSender $sender, $label, array $args){
         if(isset($args[0])){
             switch(strtolower($args[0])){
-                case "?":
                 case "help":
                     $this->sendCommandHelp($sender);
                     break;

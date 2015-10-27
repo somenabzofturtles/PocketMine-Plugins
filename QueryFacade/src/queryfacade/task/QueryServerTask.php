@@ -28,7 +28,7 @@ class QueryServerTask extends AsyncTask{
     /**
      * @param Server $server
      */
-    public function onCompletion(Server $server) {
+    public function onCompletion(Server $server){
         //TODO: Find a way to store the server data back in the main thread
     }
 }

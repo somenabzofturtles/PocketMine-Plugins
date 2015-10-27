@@ -33,7 +33,7 @@ class MinecraftQuery{
 	$this->socket = @fsockopen("udp://".$ip, (int) $port, $errNo, $errStr, $timeout);
 	if($errNo or $this->socket === false){
             throw new MinecraftQueryException("Could not create socket: ".$errStr);
-	}
+        }
 	stream_set_timeout($this->socket, $timeout);
 	stream_set_blocking($this->socket, true);
 	try{
@@ -66,7 +66,7 @@ class MinecraftQuery{
 	if($data === false){
             throw new MinecraftQueryException("Failed to receive challenge.");
 	}
-	return pack("N", $data);
+        return pack("N", $data);
     }
     /**
      * @param string $challenge
@@ -77,11 +77,11 @@ class MinecraftQuery{
 	if(!$data){
             throw new MinecraftQueryException("Failed to receive status.");
 	}
-	$last = "";
-	$info = [];
+        $last = "";
+        $info = [];
 	$data = substr($data, 11);
 	$data = explode("\x00\x00\x01player_\x00\x00", $data);
-	if(count($data) !== 2){
+        if(count($data) !== 2){
             throw new MinecraftQueryException("Failed to parse server's response.");
 	}
 	$players = substr($data[1], 0, -2);
@@ -103,7 +103,7 @@ class MinecraftQuery{
 		if(!array_key_exists($value, $keys)){
                     $last = false;
                     continue;
-		}
+                }
 		$last = $keys[$value];
 		$info[$last] = "";
             }
@@ -117,7 +117,7 @@ class MinecraftQuery{
 	if($info["plugins"]){
             $data = explode(": ", $info["plugins"], 2);
             $info["rawPlugins"] = $info["plugins"];
-            $info["software"]   = $data[0];
+            $info["software"] = $data[0];
             if(count($data) == 2){
 		$info["plugins"] = explode("; ", $data[1]);
             }
@@ -125,7 +125,7 @@ class MinecraftQuery{
 	else{
             $info["software"] = "Vanilla";
 	}
-        $this->info = $info;
+	$this->info = $info;
 	if(empty($players)){
             $this->players = null;
 	}
@@ -140,7 +140,7 @@ class MinecraftQuery{
      * @throws MinecraftQueryException
      */
     private function writeData($command, $append = ""){
-	$command = pack("c*", 0xFE, 0xFD, $command, 0x01, 0x02, 0x03, 0x04).$append;
+	$command = pack("c*", 0xfe, 0xfd, $command, 0x01, 0x02, 0x03, 0x04).$append;
 	$length = strlen($command);
 	if($length !== fwrite($this->socket, $command, $length)){
             throw new MinecraftQueryException("Failed to write on socket.");
