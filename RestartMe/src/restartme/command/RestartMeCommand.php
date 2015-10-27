@@ -66,7 +66,6 @@ class RestartMeCommand extends Command{
                         $sender->sendMessage(TextFormat::RED."Please specify a time value.");
                     }
                     break;
-                case "?":
                 case "help":
                     $this->sendCommandHelp($sender);
                     break;
