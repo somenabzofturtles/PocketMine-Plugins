@@ -37,7 +37,6 @@ class BlockFreezerCommand extends Command{
                 case "db":
                 case "delblock":
                     break;
-                case "?":
                 case "help":
                     $this->sendCommandHelp($sender);
                     break;
