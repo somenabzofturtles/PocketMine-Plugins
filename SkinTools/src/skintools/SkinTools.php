@@ -7,22 +7,17 @@ use pocketmine\Player;
 use skintools\command\SkinToolsCommand;
 use skintools\event\player\PlayerToggleTouchEvent;
 use skintools\event\SkinToolsListener;
+use skintools\utils\SkinConverter;
 
 class SkinTools extends PluginBase{
-    /** @const int */
     const MODE_NONE = 0;
-    /** @const int */
     const MODE_GIVE = 1;
-    /** @const int */
     const MODE_STEAL = 2;
     /** @var array */
     public $skinData = [];
     /** @var array */
     public $touchMode = [];
     public function onEnable(){
-	$this->registerAll();
-    }
-    private function registerAll(){
     	$this->getServer()->getCommandMap()->register("skintools", new SkinToolsCommand($this));
     	$this->getServer()->getPluginManager()->registerEvents(new SkinToolsListener($this), $this);
     }
@@ -71,14 +66,14 @@ class SkinTools extends PluginBase{
      * @param Player $player 
      */
     public function storeSkinData(Player $player){
-        $this->skinData[strtolower($player->getName())] = $player->getSkinData();
+        $this->skinData[strtolower($player->getName())] = SkinConverter::compress($player->getSkinData());
     }
     /**
      * @param Player $player
      * @return string
      */
     public function getSkinData(Player $player){
-        return $this->skinData[strtolower($player->getName())];
+        return SkinConverter::uncompress($this->skinData[strtolower($player->getName())]);
     }
     /** 
      * @param Player $player 
