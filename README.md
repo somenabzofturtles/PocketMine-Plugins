@@ -37,14 +37,14 @@ so. All plugins in this repository are licensed under The MIT License.
 ###Plugins:
 |Name|Version|Submitted|
 |----|:-------:|:---------:|
-|BlockFreezer|1.1.0|yes|
+|BlockFreezer|1.2.0|yes|
 |EasyMessages|1.2.0|yes|
 |GlobalShield|1.1.0|yes|
 |MyTag|1.2.0|yes|
 |PHPUtils|1.0.0|no|
-|PlanB|1.2.0|yes|
+|PlanB|1.3.0|yes|
 |QueryFacade|1.0.0|no|
 |RapidCMD|1.0.0|no|
-|RestartMe|1.1.0|no|
+|RestartMe|1.2.0|yes|
 |SkinTools|1.1.0|yes|
 |iManager|1.2.0|yes|
