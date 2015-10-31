@@ -36,7 +36,7 @@ class SkinTools extends PluginBase{
         $event = new PlayerToggleTouchEvent($player, $this->getTouchMode($player), $touchMode);
         $this->getServer()->getPluginManager()->callEvent($event);
         if(!$event->isCancelled()){
-            $this->touchMode[strtolower($player->getName())] = $event->getTouchMode();
+            $this->touchMode[strtolower($player->getName())] = $event->getNewMode();
         }
     }
     /**

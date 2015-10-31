@@ -100,7 +100,7 @@ class SkinToolsCommand extends Command{
                             }
                         }
                         else{
-                            
+                            $sender->sendMessage(TextFormat::RED."Please specify a touch mode.");
                         }
                     }
                     else{
