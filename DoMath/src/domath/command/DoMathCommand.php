@@ -80,7 +80,6 @@ class DoMathCommand extends Command{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
                     break;
-                case "?":
                 case "help":
                     $this->sendCommandHelp($sender);
                     break;

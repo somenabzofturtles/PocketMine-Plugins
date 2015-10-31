@@ -3,22 +3,15 @@
 namespace domath\utils;
 
 class BasicCalculator{
-    /** @const int */
     const ADD = 0;
-    /** @const int */
     const SUBTRACT = 1;
-    /** @const int */
     const MULTIPLY = 2;
-    /** @const int */
     const DIVIDE = 3;
-    /** @const int */
     const PERCENT = 4;
-    /** @const int */
     const SQUARE = 5;
-    /** @const int */
     const EXPONENT = 6;
     /**
-     * Returns a formatted string with input and answers.
+     * Returns a formatted string with input and answers
      * @param mixed $input
      * @param int $mode
      * @return string
@@ -68,7 +61,7 @@ class BasicCalculator{
         }
     }
     /**
-     * Calculates the sum of all the values in $inputs.
+     * Calculates the sum of all the values in $inputs
      * @param int[] $inputs
      * @return int
      */
@@ -82,7 +75,7 @@ class BasicCalculator{
         }
     }
     /**
-     * Calculates the difference of all the values in $inputs.
+     * Calculates the difference of all the values in $inputs
      * @param int[] $inputs
      * @return int
      */
@@ -96,7 +89,7 @@ class BasicCalculator{
         }
     }
     /**
-     * Calculates the total value, multiplying all the values by each other.
+     * Calculates the total value, multiplying all the values by each other
      * @param int[] $inputs
      * @return int
      */
@@ -110,7 +103,7 @@ class BasicCalculator{
         }
     }
     /**
-     * Calculates the quotient of all the values in $inputs.
+     * Calculates the quotient of all the values in $inputs
      * @param int[] $inputs
      * @return int|string
      */
@@ -129,7 +122,7 @@ class BasicCalculator{
         }
     }
     /**
-     * Calculates the difference between $input1 and $input2, returns percentage.
+     * Calculates the difference between $input1 and $input2, returns percentage
      * @param int $input1
      * @param int $input2
      * @return int
@@ -146,7 +139,7 @@ class BasicCalculator{
         return sqrt($input);
     }
     /**
-     * Calculates the value of $input to the power of $exponent.
+     * Calculates the value of $input to the power of $exponent
      * @param int $input
      * @param int $exponent
      * @return int
