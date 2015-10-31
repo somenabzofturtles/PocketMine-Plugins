@@ -8,7 +8,7 @@ Main command: **easymessages**, **em**
 
 |Sub-command|Description|
 |-----------|-----------|
-|help|Shows all the sub-commands for EasyMessages|
+|help|Shows all EasyMessages commands|
 |message|Sends a message|
 |popup|Sends a popup|
 |tip|Sends a tip|

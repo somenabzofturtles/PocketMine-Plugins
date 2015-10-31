@@ -1,9 +1,4 @@
 #Configuration file for EasyMessages v1.2.0
-version: 1.2.0
-#Do not edit the version string, it is used for internal purposes
-plugin:
- autoUpdate: true
- #Set to true to enable automatic overwriting of this file when the plugin is updated
 chat:
  colorChat: true
  #Set to true to allow color chat

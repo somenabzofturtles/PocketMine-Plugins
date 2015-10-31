@@ -15,7 +15,7 @@ class EasyMessagesCommand extends Command{
      */
     public function __construct(EasyMessages $plugin){
         parent::__construct("easymessages");
-        $this->setDescription("Shows all the sub-commands for EasyMessages");
+        $this->setDescription("Shows all EasyMessages commands");
         $this->setUsage("/easymessages <sub-command> [parameters]");
         $this->setPermission("easymessages.command.easymessages");
         $this->setAliases(["em"]);
@@ -32,7 +32,7 @@ class EasyMessagesCommand extends Command{
      */
     private function sendCommandHelp(CommandSender $sender){
         $sender->sendMessage("EasyMessages commands:");
-        $sender->sendMessage("/easymessages help: Shows all the sub-commands for EasyMessages");
+        $sender->sendMessage("/easymessages help: Shows all EasyMessages commands");
         $sender->sendMessage("/easymessages message: Sends a message");
         $sender->sendMessage("/easymessages popup: Sends a popup");
         $sender->sendMessage("/easymessages tip: Sends a tip");
@@ -45,7 +45,6 @@ class EasyMessagesCommand extends Command{
     public function execute(CommandSender $sender, $label, array $args){
         if(isset($args[0])){
             switch(strtolower($args[0])){
-                case "?":
                 case "help":
                     $this->sendCommandHelp($sender);
                     break;

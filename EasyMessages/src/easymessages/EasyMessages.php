@@ -23,27 +23,10 @@ class EasyMessages extends PluginBase{
     /** @var string|null */
     public $scrollingTip = null;
     public function onEnable(){
-        $this->saveFiles();
-        $this->registerAll();
-    }
-    private function saveFiles(){
-        if(!file_exists($this->getDataFolder())) mkdir($this->getDataFolder());
-        if(file_exists($this->getDataFolder()."config.yml")){
-            if($this->getConfig()->get("version") !== $this->getDescription()->getVersion() or !$this->getConfig()->exists("version")){
-		$this->getServer()->getLogger()->warning("An invalid configuration file for ".$this->getDescription()->getName()." was detected.");
-		if($this->getConfig()->getNested("plugin.autoUpdate") === true){
-		    $this->saveResource("config.yml", true);
-                    $this->getServer()->getLogger()->warning("Successfully updated the configuration file for ".$this->getDescription()->getName()." to v".$this->getDescription()->getVersion().".");
-		}
-	    }	
-        }
-        else{
-            $this->saveDefaultConfig();
-        }
-        if(!file_exists($this->getDataFolder()."values.txt")) $this->saveResource("values.txt");
-    }
-    private function registerAll(){
+        $this->saveDefaultConfig();
+        $this->saveResource("values.txt");
     	$this->getServer()->getCommandMap()->register("easymessages", new EasyMessagesCommand($this));
+    	$this->getServer()->getPluginManager()->registerEvents(new EasyMessagesListener($this), $this);
     	if($this->getConfig()->getNested("message.autoBroadcast") === true){
     	    $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoMessageTask($this), ($this->getConfig()->getNested("message.interval") * 20));
     	}
@@ -85,14 +68,13 @@ class EasyMessages extends PluginBase{
                 $this->getServer()->getNetwork()->setName($this->getConfig()->getNested("motd.staticMotd"));
                 break;
         }
-    	$this->getServer()->getPluginManager()->registerEvents(new EasyMessagesListener($this), $this);
     }
     /** 
      * @param string $message 
      */
     public function broadcastPopup($message){
         foreach($this->getServer()->getOnlinePlayers() as $player){
-            $player->sendPopup((string) $message);
+            $player->sendPopup($message);
         }
     }
     /** 
@@ -100,7 +82,7 @@ class EasyMessages extends PluginBase{
      */
     public function broadcastTip($message){
     	foreach($this->getServer()->getOnlinePlayers() as $player){
-    	    $player->sendTip((string) $message);
+    	    $player->sendTip($message);
     	}
     }
     /** 
