@@ -41,6 +41,7 @@ so. All plugins in this repository are licensed under The MIT License.
 |EasyMessages|1.2.0|yes|
 |GlobalShield|1.1.0|yes|
 |MyTag|1.2.0|yes|
+|PHPUtils|1.0.0|no|
 |PlanB|1.2.0|yes|
 |QueryFacade|1.0.0|no|
 |RapidCMD|1.0.0|no|
