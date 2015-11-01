@@ -16,7 +16,7 @@ class iManagerCommand extends Command{
      */
     public function __construct(iManager $plugin){
         parent::__construct("imanager");
-        $this->setDescription("Shows all the sub-commands for iManager");
+        $this->setDescription("Shows all iManager commands");
         $this->setUsage("/imanager <sub-command> [parameters]");
         $this->setPermission("imanager.command.imanager");
         $this->setAliases(["im"]);
@@ -45,7 +45,7 @@ class iManagerCommand extends Command{
         $sender->sendMessage("/imanager entity: Gets info about an entity");
     	$sender->sendMessage("/imanager giveall: Gives the specified item to all players in the server");
     	$sender->sendMessage("/imanager heal: Heals a players");
-    	$sender->sendMessage("/imanager help: Shows all the sub-commands for iManager");
+    	$sender->sendMessage("/imanager help: Shows all iManager commands");
     	$sender->sendMessage("/imanager info: Gets all the information about a player");
     	$sender->sendMessage("/imanager kickall: Kicks all the players without EXEMPT status from the server");
     	$sender->sendMessage("/imanager killall: Kills all the players without EXEMPT status in the server");
@@ -65,7 +65,6 @@ class iManagerCommand extends Command{
     public function execute(CommandSender $sender, $label, array $args){
     	if(isset($args[0])){
     	    switch(strtolower($args[0])){
-                case "?":
                 case "help":
                     $this->sendCommandHelp($sender);
                     break;
