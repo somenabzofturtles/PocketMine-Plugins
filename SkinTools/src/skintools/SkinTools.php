@@ -13,13 +13,22 @@ class SkinTools extends PluginBase{
     const MODE_NONE = 0;
     const MODE_GIVE = 1;
     const MODE_STEAL = 2;
+    /** @var SkinTools|null */
+    private static $object = null;
     /** @var array */
     public $skinData = [];
     /** @var array */
     public $touchMode = [];
     public function onEnable(){
+        self::$object = $this;
     	$this->getServer()->getCommandMap()->register("skintools", new SkinToolsCommand($this));
     	$this->getServer()->getPluginManager()->registerEvents(new SkinToolsListener($this), $this);
+    }
+    /**
+     * @return SkinTools
+     */
+    public static function getInstance(){
+        return self::$object;
     }
     /**
      * @param Player $player1
@@ -72,7 +81,7 @@ class SkinTools extends PluginBase{
      * @param Player $player
      * @return string
      */
-    public function getSkinData(Player $player){
+    public function retrieveSkinData(Player $player){
         return SkinConverter::uncompress($this->skinData[strtolower($player->getName())]);
     }
     /** 

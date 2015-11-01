@@ -32,12 +32,19 @@ class SkinToolsCommand extends Command{
      * @param CommandSender $sender 
      */
     private function sendCommandHelp(CommandSender $sender){
+        $commands = [
+            "file" => "Saves the specified player's skin as a data file",
+            "help" => "Shows all SkinTools commands",
+            "image" => "Saves the specified player's skin as an image",
+            "morph" => "Sets user's skin to that of the specified player's",
+            "restore" => "Restores user's skin to the skin they joined with",
+            "swap" => "Swaps skins with the specified player",
+            "touch" => "Toggles touch mode"
+        ];
         $sender->sendMessage("SkinTools commands:");
-        $sender->sendMessage("/skintools help: Shows all SkinTools commands");
-        $sender->sendMessage("/skintools morph: Sets user's skin to that of the specified player's");
-        $sender->sendMessage("/skintools restore: Restores user's skin to the skin they joined with");
-        $sender->sendMessage("/skintools swap: Swaps skins with the specified player");
-        $sender->sendMessage("/skintools touch: Toggles touch mode");
+        foreach($commands as $name => $description){
+            $sender->sendMessage("/skintools ".$name.": ".$description);
+        }
     }
     /**
      * @param CommandSender $sender
@@ -47,8 +54,14 @@ class SkinToolsCommand extends Command{
     public function execute(CommandSender $sender, $label, array $args){
         if(isset($args[0])){
             switch(strtolower($args[0])){
+                case "file":
+                    //TODO: Fully implement command
+                    break;
                 case "help":
                     $this->sendCommandHelp($sender);
+                    break;
+                case "image":
+                    //TODO: Fully implement command
                     break;
                 case "morph":
                     if($sender instanceof Player){
@@ -71,7 +84,7 @@ class SkinToolsCommand extends Command{
                     break;
                 case "restore":
                     if($sender instanceof Player){
-                        $sender->setSkin($this->getPlugin()->getSkinData($sender));
+                        $sender->setSkin($this->getPlugin()->retrieveSkinData($sender));
                         $sender->sendMessage(TextFormat::GREEN."Your original skin has been restored.");
                     }
                     else{
@@ -80,7 +93,7 @@ class SkinToolsCommand extends Command{
                     break;
                 case "swap":
                     if($sender instanceof Player){
-                        
+                        //TODO: Fully implement command
                     }
                     else{
                         $sender->sendMessage(TextFormat::RED."Please run this command in-game.");
@@ -93,6 +106,7 @@ class SkinToolsCommand extends Command{
                                 case SkinTools::MODE_NONE:
                                 case SkinTools::MODE_GIVE:
                                 case SkinTools::MODE_STEAL:
+                                    //TODO: Fully implement command
                                     break;
                                 default:
                                     $sender->sendMessage(TextFormat::RED."Invalid touch mode entered.");

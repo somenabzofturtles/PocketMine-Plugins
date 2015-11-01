@@ -9,7 +9,9 @@ Main command: **skintools**, **st**
 
 |Sub-command|Description|
 |-----------|-----------|
+|file|Saves the specified player's skin as a data file|
 |help|Shows all SkinTools commands|
+|image|Saves the specified player's skin as an image|
 |morph|Sets user's skin to that of the specified player's|
 |restore|Restores user's skin to the skin they joined with|
 |swap|Swaps skins with the specified player|

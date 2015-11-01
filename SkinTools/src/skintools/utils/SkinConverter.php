@@ -2,16 +2,17 @@
 
 namespace skintools\utils;
 
-use pocketmine\Server;
+use skintools\SkinTools;
 
 class SkinConverter{
     /**
-     * Compresses skin data, for more effective storing
+     * Compresses skin data, for efficient storage
      * @param string $data
+     * @param int $level
      * @return string
      */
-    public static function compress($data){
-        return zlib_encode($data, ZLIB_ENCODING_DEFLATE, 9);
+    public static function compress($data, $level = 9){
+        return zlib_encode($data, ZLIB_ENCODING_DEFLATE, $level);
     }
     /**
      * Uncompresses skin data, prepares it for usage in the plugin
@@ -20,6 +21,14 @@ class SkinConverter{
      */
     public static function uncompress($data){
         return zlib_decode($data);
+    }
+    /**
+     * @param string $data
+     * @param string $filename
+     */
+    public static function toFile($data, $filename){
+        @mkdir(SkinTools::getInstance()->getDataFolder()."data/");
+        file_put_contents(SkinTools::getInstance()->getDataFolder()."data/".strtolower($filename).".dat", self::compress($data));
     }
     /**
      * Converts skin data into an image file
@@ -57,7 +66,7 @@ class SkinConverter{
             }
         }
         else{
-            Server::getInstance()->getLogger()->critical("Failed to create image from skin data, PHP extension \"GD\" wasn't found.");
+            SkinTools::getInstance()->getServer()->getLogger()->critical("Failed to create image from skin data, PHP extension \"GD\" wasn't found.");
         }
     }
 }
