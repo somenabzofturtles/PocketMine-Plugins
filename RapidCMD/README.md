@@ -14,6 +14,7 @@ Main command: **rapidcmd**, **rc**
 |cmd|Sends information about a command|
 |delcmd|Deletes a RCMD, if it exists|
 |help|Shows all RapidCMD commands|
+|list|Returns a list of names of loaded RCMDs|
 |repeat|Runs the user's last command, if they have one|
 
 ###Permissions:

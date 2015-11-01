@@ -47,20 +47,32 @@ class RCMDStorage{
         }
     }
     /**
+     * @return RCMD[]
+     */
+    public function getCommands(){
+        return $this->commands;
+    }
+    /**
      * @param RCMD $command
+     * @return bool
      */
     public function addCommand(RCMD $command){
         if(!$this->isCommandStored($command->getName())){
             $this->commands[strtolower($command->getName())] = $command;
+            return true;
         }
+        return false;
     }
     /**
      * @param RCMD $command
+     * @return bool
      */
-    public function removeCommand(RCMD $command){
-        if($this->isCommandStored($command->getName())){
-            unset($this->commands[strtolower($command->getName())]);
+    public function removeCommand($command){
+        if($this->isCommandStored($command)){
+            unset($this->commands[strtolower($command)]);
+            return true;
         }
+        return false;
     }
     /**
      * @param string $name

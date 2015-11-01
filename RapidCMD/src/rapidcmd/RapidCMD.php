@@ -6,6 +6,7 @@ use pocketmine\plugin\PluginBase;
 use rapidcmd\command\RCMDStorage;
 use rapidcmd\command\RapidCMDCommand;
 use rapidcmd\event\RapidCMDListener;
+use rapidcmd\task\RunCommandTask;
 
 class RapidCMD extends PluginBase{
     /** @var RCMDStorage */
@@ -22,5 +23,12 @@ class RapidCMD extends PluginBase{
      */
     public function getCommandStorage(){
         return $this->storage;
+    }
+    /**
+     * @param string $command
+     * @param int $delay
+     */
+    public function runLater($command, $delay = 3){
+        $this->getServer()->getScheduler()->scheduleDelayedTask(new RunCommandTask($this, $command), $delay);
     }
 }
