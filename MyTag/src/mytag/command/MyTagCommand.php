@@ -15,7 +15,7 @@ class MyTagCommand extends Command{
      */
     public function __construct(MyTag $plugin){
         parent::__construct("mytag");
-        $this->setDescription("Shows all the sub-commands for MyTag");
+        $this->setDescription("Shows all MyTag commands");
         $this->setUsage("/mytag <sub-command> [parameters]");
         $this->setPermission("mytag.command.mytag");
         $this->setAliases(["mt"]);
@@ -35,7 +35,7 @@ class MyTagCommand extends Command{
     	$sender->sendMessage("/mytag address: Shows IP address and port number on the name tag");
     	$sender->sendMessage("/mytag chat: Shows the last message spoken on the name tag");
     	$sender->sendMessage("/mytag health: Shows health on the name tag");
-    	$sender->sendMessage("/mytag help: Shows all the sub-commands for MyTag");
+    	$sender->sendMessage("/mytag help: Shows all MyTag commands");
     	$sender->sendMessage("/mytag hide: Hides the name tag");
     	$sender->sendMessage("/mytag restore: Restores current name tag to the default name tag");
     	$sender->sendMessage("/mytag set: Sets the name tag to whatever is specified");
@@ -55,7 +55,6 @@ class MyTagCommand extends Command{
 	    	    break;
 	    	case "health":
 	    	    break;
-	    	case "?":
 	    	case "help":
 	    	    break;
 	    	case "hide":

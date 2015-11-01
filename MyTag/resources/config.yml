@@ -1,7 +1,3 @@
 #Configuration file for MyTag v1.2.0
-version: 1.2.0
-#Do not edit the version string, it is used for internal purposes
-plugin:
- autoSet: true
- autoUpdate: true
- #Set to true to enable automatic overwriting of this file when the plugin is updated
+autoSet: true
+#Set to true to enable automatic restoring of the player's last saved nametag
