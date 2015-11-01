@@ -16,6 +16,9 @@ use pocketmine\event\Listener;
 class GlobalShieldListener implements Listener{
     /** @var GlobalShield */
     private $plugin;
+    /**
+     * @param GlobalShield $plugin
+     */
     public function __construct(GlobalShield $plugin){
         parent::__construct($plugin);
         $this->plugin = $plugin;

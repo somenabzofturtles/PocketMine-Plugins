@@ -10,31 +10,13 @@ use pocketmine\tile\Sign;
 use pocketmine\tile\Tile;
 
 class GlobalShield extends PluginBase{
-    const TYPE_BLOCK_BREAKING = 0;
-    const TYPE_BLOCK_INTERACTION = 1;
-    const TYPE_BLOCK_PLACING = 2;
-    const TYPE_BUCKET_EMPTYING = 3;
-    const TYPE_BUCKET_FILLING = 4;
+    const ACTION_BLOCK_BREAKING = 0;
+    const ACTION_BLOCK_INTERACTION = 1;
+    const ACTION_BLOCK_PLACING = 2;
+    const ACTION_BUCKET_EMPTYING = 3;
+    const ACTION_BUCKET_FILLING = 4;
     public function onEnable(){
-        $this->saveFiles();
-        $this->registerAll();
-    }
-    private function saveFiles(){
-        if(!is_dir($this->getDataFolder())) mkdir($this->getDataFolder());
-        if(file_exists($this->getDataFolder()."config.yml")){
-            if($this->getConfig()->get("version") !== $this->getDescription()->getVersion() or !$this->getConfig()->exists("version")){
-		$this->getServer()->getLogger()->warning("An invalid configuration file for ".$this->getDescription()->getName()." was detected.");
-		if($this->getConfig()->getNested("plugin.autoUpdate") === true){
-		    $this->saveResource("config.yml", true);
-                    $this->getServer()->getLogger()->warning("Successfully updated the configuration file for ".$this->getDescription()->getName()." to v".$this->getDescription()->getVersion().".");
-		}
-	    }  
-        }
-        else{
-            $this->saveDefaultConfig();
-        }
-    }
-    private function registerAll(){
+        $this->saveDefaultConfig();
     	$this->getServer()->getPluginManager()->registerEvents(new GlobalShieldListener($this), $this);
     }
     /**
@@ -51,15 +33,15 @@ class GlobalShield extends PluginBase{
      */
     public function isLevelProtected($type, Level $level){
         switch($type){
-            case self::TYPE_BLOCK_BREAKING:
+            case self::ACTION_BLOCK_BREAKING:
                 break;
-            case self::TYPE_BLOCK_INTERACTION:
+            case self::ACTION_BLOCK_INTERACTION:
                 break;
-            case self::TYPE_BLOCK_PLACING:
+            case self::ACTION_BLOCK_PLACING:
                 break;
-            case self::TYPE_BUCKET_EMPTYING:
+            case self::ACTION_BUCKET_EMPTYING:
                 break;
-            case self::TYPE_BUCKET_FILLING:
+            case self::ACTION_BUCKET_FILLING:
                 break;
         }
     }
