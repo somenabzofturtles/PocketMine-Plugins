@@ -2,7 +2,7 @@
 
 namespace easymessages\task;
 
-use easymessages\utils\TextScroller;
+use easymessages\utils\TextUtils;
 use easymessages\EasyMessages;
 use pocketmine\scheduler\PluginTask;
 
@@ -28,6 +28,6 @@ class ScrollingTipTask extends PluginTask{
     public function onRun($currentTick){
         $tip = $this->getPlugin()->getScrollingTip();
         $this->getPlugin()->broadcastTip($tip);
-        $this->getPlugin()->setScrollingPopup(TextScroller::next($tip));
+        $this->getPlugin()->setScrollingPopup(TextUtils::next($tip));
     }
 }

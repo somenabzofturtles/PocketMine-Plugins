@@ -19,9 +19,9 @@ use pocketmine\utils\TextFormat;
 
 class EasyMessages extends PluginBase{
     /** @var string|null */
-    public $scrollingPopup = null;
+    private $scrollingPopup = null;
     /** @var string|null */
-    public $scrollingTip = null;
+    private $scrollingTip = null;
     public function onEnable(){
         $this->saveDefaultConfig();
         $this->saveResource("values.txt");
