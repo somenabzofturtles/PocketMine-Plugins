@@ -32,12 +32,17 @@ class PlanBCommand extends Command{
      * @param CommandSender $sender 
      */
     private function sendCommandHelp(CommandSender $sender){
+        $commands = [
+            "addbackup" => "Adds a player to backups.txt",
+            "delbackup" => "Removes a player from backups.txt",
+            "help" => "Shows all PlanB commands",
+            "list" => "Lists all backup players",
+            "restore" => "Restores OP status of all online players listed in backup.txt"
+        ];
         $sender->sendMessage("PlanB commands:");
-        $sender->sendMessage("/planb addbackup: Adds a player to backups.txt");
-        $sender->sendMessage("/planb delbackup: Removes a player from backups.txt");
-        $sender->sendMessage("/planb help: Shows all PlanB commands");
-        $sender->sendMessage("/planb list: Lists all backup players");
-        $sender->sendMessage("/planb restore: Restores OP status of all online players listed in backup.txt");
+        foreach($commands as $name => $description){
+            $sender->sendMessage("/planb ".$name.": ".$description);
+        }
     }
     /**
      * @param CommandSender $sender

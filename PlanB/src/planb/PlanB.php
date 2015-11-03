@@ -11,7 +11,7 @@ use pocketmine\Player;
 
 class PlanB extends PluginBase{
     /** @var Config */
-    public $backups;
+    private $backups;
     public function onEnable(){
         $this->saveDefaultConfig();
         $this->saveResource("values.txt");
