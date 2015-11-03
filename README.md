@@ -38,6 +38,7 @@ so. All plugins in this repository are licensed under The MIT License.
 |Name|Version|Submitted|
 |----|:-------:|:---------:|
 |BlockFreezer|1.2.0|yes|
+|DoMath|1.0.0|no|
 |EasyMessages|1.2.0|yes|
 |GlobalShield|1.1.0|yes|
 |MyTag|1.2.0|yes|
