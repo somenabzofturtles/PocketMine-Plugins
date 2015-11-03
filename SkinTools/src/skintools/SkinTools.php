@@ -16,9 +16,9 @@ class SkinTools extends PluginBase{
     /** @var SkinTools|null */
     private static $object = null;
     /** @var array */
-    public $skinData = [];
+    private $skinData = [];
     /** @var array */
-    public $touchMode = [];
+    private $touchMode = [];
     public function onEnable(){
         self::$object = $this;
     	$this->getServer()->getCommandMap()->register("skintools", new SkinToolsCommand($this));
