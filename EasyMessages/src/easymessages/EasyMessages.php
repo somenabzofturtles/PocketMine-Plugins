@@ -18,10 +18,10 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 
 class EasyMessages extends PluginBase{
-    /** @var string|null */
-    private $scrollingPopup = null;
-    /** @var string|null */
-    private $scrollingTip = null;
+    /** @var string */
+    private $scrollingPopup = "";
+    /** @var string */
+    private $scrollingTip = "";
     public function onEnable(){
         $this->saveDefaultConfig();
         $this->saveResource("values.txt");
