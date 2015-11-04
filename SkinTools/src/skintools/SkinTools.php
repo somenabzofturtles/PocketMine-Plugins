@@ -82,7 +82,7 @@ class SkinTools extends PluginBase{
      * @return string
      */
     public function retrieveSkinData(Player $player){
-        return SkinConverter::uncompress($this->skinData[strtolower($player->getName())]);
+        return SkinConverter::decompress($this->skinData[strtolower($player->getName())]);
     }
     /** 
      * @param Player $player 

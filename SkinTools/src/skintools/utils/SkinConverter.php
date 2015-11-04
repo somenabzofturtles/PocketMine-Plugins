@@ -15,14 +15,15 @@ class SkinConverter{
         return zlib_encode($data, ZLIB_ENCODING_DEFLATE, $level);
     }
     /**
-     * Uncompresses skin data, prepares it for usage in the plugin
+     * Decompresses skin data, prepares it for usage in the plugin
      * @param string $data
      * @return string
      */
-    public static function uncompress($data){
+    public static function decompress($data){
         return zlib_decode($data);
     }
     /**
+     * Creates a new file containing skin data
      * @param string $data
      * @param string $filename
      */

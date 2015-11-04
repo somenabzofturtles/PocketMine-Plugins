@@ -6,6 +6,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\utils\TextFormat;
 use pocketmine\Player;
+use skintools\utils\SkinConverter;
 use skintools\SkinTools;
 
 class SkinToolsCommand extends Command{
@@ -55,7 +56,18 @@ class SkinToolsCommand extends Command{
         if(isset($args[0])){
             switch(strtolower($args[0])){
                 case "file":
-                    //TODO: Fully implement command
+                    if(isset($args[1])){
+                        if(($player = $sender->getServer()->getPlayer($args[1])) !== null){
+                            SkinConverter::toFile($player->getSkinData(), $player->getName());
+                            $sender->sendMessage(TextFormat::GREEN."Saved ".$player->getName()."'s skin as a data file.");
+                        }
+                        else{
+                            $sender->sendMessage(TextFormat::RED."That player could not be found.");
+                        }
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Please specify a valid player.");
+                    }
                     break;
                 case "help":
                     $this->sendCommandHelp($sender);
