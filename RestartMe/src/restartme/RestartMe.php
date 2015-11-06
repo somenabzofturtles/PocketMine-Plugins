@@ -12,13 +12,13 @@ class RestartMe extends PluginBase{
     const TYPE_NORMAL = 0;
     const TYPE_OVERLOADED = 1;
     /** @var int */
-    public $timer = 0;
+    private $timer = 0;
     /** @var bool */
-    public $paused = false;
+    private $paused = false;
     public function onEnable(){
         $this->saveDefaultConfig();
         $this->getServer()->getCommandMap()->register("restartme", new RestartMeCommand($this));
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoBroadcastTask($this), ($this->getConfig()->getNested("restart.broadcastInterval") * 20));
+        $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoBroadcastTask($this), ($this->getConfig()->get("broadcastInterval") * 20));
         if($this->getConfig()->get("restartOnOverload") === true){
             $this->getServer()->getScheduler()->scheduleRepeatingTask(new CheckMemoryTask($this), 6000);
             $this->getServer()->getLogger()->notice("Memory overload restarts are enabled. If memory usage goes above ".$this->getMemoryLimit().", the server will restart.");
@@ -71,22 +71,39 @@ class RestartMe extends PluginBase{
     	if(is_numeric($seconds)) $this->timer -= (int) $seconds;
     }
     /** 
-     * @param string $messageType 
+     * @param string $message
+     * @param string $messageType
      */
-    public function broadcastTime($messageType){
-        $message = str_replace("{RESTART_TIME}", $this->getTime(), $this->getConfig()->get("countdownMessage"));
+    public function broadcastTime($message, $messageType){
+        $outMessage = str_replace(
+            [
+                "{RESTART_FORMAT_TIME}",
+                "{RESTART_HOUR}",
+                "{RESTART_MINUTE}",
+                "{RESTART_SECOND}",
+                "{RESTART_TIME}"
+            ], 
+            [
+                $this->getFormattedTime(),
+                $this->toArray()[0],
+                $this->toArray()[1],
+                $this->toArray()[2],
+                $this->getTime()
+            ], 
+            $message
+        );
         switch(strtolower($messageType)){
             case "chat":
-                $this->getServer()->broadcastMessage($message);
+                $this->getServer()->broadcastMessage($outMessage);
                 break;
             case "popup":
                 foreach($this->getServer()->getOnlinePlayers() as $player){
-                    $player->sendPopup($message);
+                    $player->sendPopup($outMessage);
                 }
                 break;
             case "tip":
                 foreach($this->getServer()->getOnlinePlayers() as $player){
-                    $player->sendTip($message);
+                    $player->sendTip($outMessage);
                 }
                 break;
         }

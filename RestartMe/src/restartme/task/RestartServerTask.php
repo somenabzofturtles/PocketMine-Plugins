@@ -28,7 +28,7 @@ class RestartServerTask extends PluginTask{
         if(!$this->getPlugin()->isTimerPaused()){
             $this->getPlugin()->subtractTime(1);
             if($this->getPlugin()->getTime() <= $this->getPlugin()->getConfig()->get("startCountdown")){
-                $this->getPlugin()->broadcastTime($this->getPlugin()->getConfig()->get("displayType"));
+                $this->getPlugin()->broadcastTime($this->getPlugin()->getConfig()->get("countdownMessage"), $this->getPlugin()->getConfig()->get("displayType"));
             }
             if($this->getPlugin()->getTime() < 1){
                 $this->getPlugin()->initiateRestart(RestartMe::TYPE_NORMAL);
