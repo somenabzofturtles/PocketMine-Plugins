@@ -48,8 +48,10 @@ class PlanBCommand extends Command{
      * @param CommandSender $sender
      * @param string $label
      * @param string[] $args
+     * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
+        if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
             switch(strtolower($args[0])){
                 case "ab":
@@ -71,7 +73,7 @@ class PlanBCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a valid player."); 
                     }
-                    break;
+                    return true;
                 case "db":
                 case "delbackup":
                     if(isset($args[1])){
@@ -91,13 +93,13 @@ class PlanBCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a valid player.");
                     }
-                    break;
+                    return true;
                 case "help":
                     $this->sendCommandHelp($sender);
-                    break;
+                    return true;
                 case "list":
                     $this->getPlugin()->sendBackups($sender);
-                    break;
+                    return true;
                 case "restore":
                     if($this->getPlugin()->isBackupPlayer($sender->getName()) or $sender instanceof ConsoleCommandSender){
                         $this->getPlugin()->restoreOps();
@@ -106,14 +108,15 @@ class PlanBCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."You do not not have permissions to restore OPs.");
                     }
-                    break;
+                    return true;
                 default:
                     $sender->sendMessage("Usage: ".$this->getUsage());
-                    break;
+                    return false;
             }
         }
         else{
             $this->sendCommandHelp($sender);
+            return false;
         }
     }
 }
