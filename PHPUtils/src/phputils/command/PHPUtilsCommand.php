@@ -33,7 +33,6 @@ class PHPUtilsCommand extends Command{
     private function sendCommandHelp(CommandSender $sender){
         $commands = [
             "algos" => "Lists all the registered hashing algorithms",
-            "class" => "Checks if the specified class exists",
             "cwd" => "Returns the name of the current working directory",
             "extens" => "Lists all the loaded PHP extensions",
             "func" => "Checks if the specified function exists",
@@ -41,7 +40,6 @@ class PHPUtilsCommand extends Command{
             "help" => "Shows all PHPUtils commands",
             "php" => "Gets info about the PHP software the system is using",
             "shell" => "Executes a command in the command shell",
-            "sys" => "Gets info about the system",
             "zend" => "Gets info about the Zend engine the system is using"
         ];
         $sender->sendMessage("PHPUtils commands:");
@@ -66,14 +64,6 @@ class PHPUtilsCommand extends Command{
                 case "algos":
                     $algo = $this->getPlugin()->getAlgorithms();
                     $sender->sendMessage("Algorithms (".$algo[0]."): ".$algo[1]);
-                    return true;
-                case "class":
-                    if(isset($args[1])){
-                        $this->getPlugin()->findClass($sender, $args[1]);
-                    }
-                    else{
-                        $sender->sendMessage(TextFormat::RED."Please specify a class path.");
-                    }
                     return true;
                 case "cwd":
                     $sender->sendMessage("CWD: ".getcwd());
@@ -118,9 +108,6 @@ class PHPUtilsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a command.");
                     }
-                    return true;
-                case "sys":
-                    $this->getPlugin()->sendSystemInfo($sender);
                     return true;
                 case "zend":
                     $this->getPlugin()->sendZendInfo($sender);

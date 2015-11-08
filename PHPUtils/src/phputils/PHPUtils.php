@@ -34,13 +34,6 @@ class PHPUtils extends PluginBase{
         return [$algoCount, $algoNames];
     }
     /**
-     * @param CommandSender $sender
-     * @param string $classPath
-     */
-    public function findClass(CommandSender $sender, $classPath){
-        //TODO: Work on handling the exception caused by looking for a nonexistent class
-    }
-    /**
      * @return array
      */
     public function getExtensions(){
@@ -56,18 +49,29 @@ class PHPUtils extends PluginBase{
      * @param CommandSender $sender
      */
     public function sendPHPInfo(CommandSender $sender){
-        //TODO: Work on sending PHP info
-    }
-    /**
-     * @param CommandSender $sender
-     */
-    public function sendSystemInfo(CommandSender $sender){
-        //TODO: Work on sending system info
+        $info = [
+            "GID" => getmygid(),
+            "PID" => getmypid(),
+            "UID" => getmyuid(),
+            "Memory-usage" => memory_get_usage(true),
+            "Memory-peak-usage" => memory_get_peak_usage(true),
+            "Version" => phpversion()
+        ];
+        $sender->sendMessage("PHP information:");
+        foreach($info as $key => $value){
+            $sender->sendMessage($key.": ".$value);
+        }
     }
     /**
      * @param CommandSender $sender
      */
     public function sendZendInfo(CommandSender $sender){
-        //TODO: Work on sending Zend info
+        $info = [
+            "Version" => zend_version()
+        ];
+        $sender->sendMessage("Zend information:");
+        foreach($info as $key => $value){
+            $sender->sendMessage($key.": ".$value);
+        }
     }
 }
