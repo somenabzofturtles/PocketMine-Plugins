@@ -41,13 +41,15 @@ class EasyMessagesCommand extends Command{
      * @param CommandSender $sender
      * @param string $label
      * @param string[] $args
+     * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
+        if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
             switch(strtolower($args[0])){
                 case "help":
                     $this->sendCommandHelp($sender);
-                    break;
+                    return true;
                 case "m":
                 case "message":
                     if(isset($args[1])){
@@ -56,9 +58,9 @@ class EasyMessagesCommand extends Command{
                             $sender->getServer()->broadcastMessage($message);
                             $sender->sendMessage(TextFormat::GREEN."Sent message to @all.");
                         }
-                        elseif($sender->getServer()->getPlayer($args[1]) !== null){
-                            $sender->getServer()->getPlayer($args[1])->sendMessage($message);
-                            $sender->sendMessage(TextFormat::GREEN."Sent message to ".$sender->getServer()->getPlayer($args[1])->getName().".");
+                        elseif($player = $sender->getServer()->getPlayer($args[1])){
+                            $player->sendMessage($message);
+                            $sender->sendMessage(TextFormat::GREEN."Sent message to ".$player->getName().".");
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."Failed to send message due to invalid recipient(s).");
@@ -67,7 +69,7 @@ class EasyMessagesCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a recipient.");
                     }
-                    break;
+                    return true;
                 case "p":
                 case "popup":
                     if(isset($args[1])){
@@ -76,9 +78,9 @@ class EasyMessagesCommand extends Command{
                             $this->getPlugin()->broadcastPopup($popup);
                             $sender->sendMessage(TextFormat::GREEN."Sent popup to @all.");
                         }
-                        elseif($sender->getServer()->getPlayer($args[1]) !== null){
-                            $sender->getServer()->getPlayer($args[1])->sendPopup($popup);
-                            $sender->sendMessage(TextFormat::GREEN."Sent popup to ".$sender->getServer()->getPlayer($args[1])->getName().".");
+                        elseif($player = $sender->getServer()->getPlayer($args[1])){
+                            $player->sendPopup($popup);
+                            $sender->sendMessage(TextFormat::GREEN."Sent popup to ".$player->getName().".");
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."Failed to send message due to invalid recipient(s).");
@@ -87,7 +89,7 @@ class EasyMessagesCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a recipient.");
                     }
-                    break;
+                    return true;
                 case "t":
                 case "tip":
                     if(isset($args[1])){
@@ -96,9 +98,9 @@ class EasyMessagesCommand extends Command{
                             $this->getPlugin()->broadcastTip($tip);
                             $sender->sendMessage(TextFormat::GREEN."Sent tip to @all.");
                         }
-                        elseif($sender->getServer()->getPlayer($args[1]) !== null){
-                            $sender->getServer()->getPlayer($args[1])->sendTip($tip);
-                            $sender->sendMessage(TextFormat::GREEN."Sent tip to ".$sender->getServer()->getPlayer($args[1])->getName().".");
+                        elseif($player = $sender->getServer()->getPlayer($args[1])){
+                            $player->sendTip($tip);
+                            $sender->sendMessage(TextFormat::GREEN."Sent tip to ".$player->getName().".");
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."Failed to send message due to invalid recipient(s).");
@@ -107,14 +109,15 @@ class EasyMessagesCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a recipient.");
                     }
-                    break;
+                    return true;
                 default:
                     $sender->sendMessage("Usage ".$this->getUsage());
-                    break;
+                    return false;
             }
         }
         else{
             $this->sendCommandHelp($sender);
+            return false;
         }
     }
 }
