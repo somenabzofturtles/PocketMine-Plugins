@@ -46,27 +46,27 @@ class PHPUtilsCommand extends Command{
         ];
         $sender->sendMessage("PHPUtils commands:");
         foreach($commands as $name => $description){
-            if($this->getPlugin()->isCommandEnabled($name)){
-                $sender->sendMessage(TextFormat::GREEN."/phputils ".$name.": ".$description);
-            }
-            else{
-                $sender->sendMessage(TextFormat::RED."/phputils ".$name.": ".$description);
-            }
+            $sender->sendMessage(($this->getPlugin()->isCommandEnabled($name) ? TextFormat::GREEN : TextFormat::RED)."/phputils ".$name.": ".$description);
         }
     }
     /**
      * @param CommandSender $sender
      * @param string $label
      * @param string[] $args
+     * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
-        //TODO: Fully implement command controlling
+        if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
+            if(!$this->getPlugin()->isCommandEnabled($args[0])){
+                $sender->sendMessage(TextFormat::RED."That command is disabled.");
+                return false;
+            }
             switch(strtolower($args[0])){
                 case "algos":
                     $algo = $this->getPlugin()->getAlgorithms();
                     $sender->sendMessage("Algorithms (".$algo[0]."): ".$algo[1]);
-                    break;
+                    return true;
                 case "class":
                     if(isset($args[1])){
                         $this->getPlugin()->findClass($sender, $args[1]);
@@ -74,14 +74,14 @@ class PHPUtilsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a class path.");
                     }
-                    break;
+                    return true;
                 case "cwd":
                     $sender->sendMessage("CWD: ".getcwd());
-                    break;
+                    return true;
                 case "extens":
                     $ext = $this->getPlugin()->getExtensions();
                     $sender->sendMessage("Extensions (".$ext[0]."): ".$ext[1]);
-                    break;
+                    return true;
                 case "func":
                     if(isset($args[1])){
                         $sender->sendMessage($args[1]." ".(function_exists($args[1]) ? "was" : "was not")." found.");
@@ -89,7 +89,7 @@ class PHPUtilsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a function name.");
                     }
-                    break;
+                    return true;
                 case "hash":
                     if(isset($args[1])){
                         if(isset($args[2])){
@@ -102,13 +102,13 @@ class PHPUtilsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a algorithm name.");
                     }
-                    break;
+                    return true;
                 case "help":
                     $this->sendCommandHelp($sender);
-                    break;
+                    return true;
                 case "php":
                     $this->getPlugin()->sendPHPInfo($sender);
-                    break;
+                    return true;
                 case "shell":
                     if(isset($args[1])){
                         $command = implode(" ", array_slice($args, 1));
@@ -118,20 +118,21 @@ class PHPUtilsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a command.");
                     }
-                    break;
+                    return true;
                 case "sys":
                     $this->getPlugin()->sendSystemInfo($sender);
-                    break;
+                    return true;
                 case "zend":
                     $this->getPlugin()->sendZendInfo($sender);
-                    break;
+                    return true;
                 default:
                     $this->sendCommandHelp($sender);
-                    break;
+                    return false;
             }
         }
         else{
             $this->sendCommandHelp($sender);
+            return false;
         }
     }
 }
