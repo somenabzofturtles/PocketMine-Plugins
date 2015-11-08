@@ -46,8 +46,10 @@ class RestartMeCommand extends Command{
      * @param CommandSender $sender
      * @param string $label
      * @param string[] $args
+     * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
+        if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
             switch(strtolower($args[0])){
                 case "a":
@@ -65,17 +67,17 @@ class RestartMeCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a time value.");
                     }
-                    break;
+                    return true;
                 case "help":
                     $this->sendCommandHelp($sender);
-                    break;
+                    return true;
                 case "m":
                 case "memory":
                     $memLimit = $this->getPlugin()->getMemoryLimit();
                     $sender->sendMessage("Bytes: ".memory_get_usage(true)."/".MemoryChecker::calculateBytes($memLimit));
                     $sender->sendMessage("Memory-limit: ".$memLimit);
                     $sender->sendMessage("Overloaded: ".(MemoryChecker::isOverloaded($memLimit) ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
-                    break;
+                    return true;
                 case "set":
                     if(isset($args[1])){
                         if(is_numeric($args[1])){
@@ -90,7 +92,7 @@ class RestartMeCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a time value.");
                     }
-                    break;
+                    return true;
                 case "start":
                     if($this->getPlugin()->isTimerPaused()){
                         $this->getPlugin()->setPaused(false);
@@ -99,7 +101,7 @@ class RestartMeCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Timer is not paused.");
                     }
-                    break;
+                    return true;
                 case "stop":
                     if($this->getPlugin()->isTimerPaused()){
                         $sender->sendMessage(TextFormat::RED."Timer is already paused.");
@@ -108,7 +110,7 @@ class RestartMeCommand extends Command{
                         $this->getPlugin()->setPaused(true);
                         $sender->sendMessage(TextFormat::YELLOW."Timer has been paused.");
                     }
-                    break;
+                    return true;
                 case "s":
                 case "subtract":
                     if(isset($args[1])){
@@ -124,17 +126,18 @@ class RestartMeCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a time value.");
                     }
-                    break;
+                    return true;
                 case "time":
                     $sender->sendMessage(TextFormat::YELLOW."Time remaining: ".$this->getPlugin()->getFormattedTime());
-                    break;
+                    return true;
                 default:
                     $sender->sendMessage("Usage: ".$this->getUsage());
-                    break;
+                    return false;
             }
         }
         else{
             $this->sendCommandHelp($sender);
+            return false;
         }
     }
 }
