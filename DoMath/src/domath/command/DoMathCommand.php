@@ -49,8 +49,10 @@ class DoMathCommand extends Command{
      * @param CommandSender $sender
      * @param string $label
      * @param string[] $args
+     * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
+        if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
             switch(strtolower($args[0])){
                 case "a":
@@ -61,7 +63,7 @@ class DoMathCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
-                    break;
+                    return true;
                 case "d":
                 case "divide":
                     if(count(array_slice($args, 1)) > 1){
@@ -70,7 +72,7 @@ class DoMathCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");  
                     }
-                    break;
+                    return true;
                 case "e":
                 case "exponent":
                     if(count(array_slice($args, 1)) === 2){
@@ -79,7 +81,7 @@ class DoMathCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
-                    break;
+                    return true;
                 case "help":
                     $this->sendCommandHelp($sender);
                     break;
@@ -91,7 +93,7 @@ class DoMathCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
-                    break;
+                    return true;
                 case "p":
                 case "percent":
                     if(count(array_slice($args, 1)) === 2){
@@ -100,7 +102,7 @@ class DoMathCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
-                    break;
+                    return true;
                 case "sq":
                 case "square":
                     if(isset($args[1])){
@@ -109,7 +111,7 @@ class DoMathCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
-                    break;
+                    return true;
                 case "s":
                 case "subtract":
                     if(count(array_slice($args, 1)) > 1){
@@ -118,14 +120,15 @@ class DoMathCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Failed to calculate due to insufficient parameters.");
                     }
-                    break;
+                    return true;
                 default:
                     $this->sendCommandHelp($sender);
-                    break;
+                    return false;
             }
         }
         else{
             $this->sendCommandHelp($sender);
+            return false;
         }
     }
 }
