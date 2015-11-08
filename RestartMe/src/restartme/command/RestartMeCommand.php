@@ -32,15 +32,20 @@ class RestartMeCommand extends Command{
      * @param CommandSender $sender 
      */
     private function sendCommandHelp(CommandSender $sender){
+        $commands = [
+            "add" => "Adds n seconds to the timer",
+            "help" => "Shows all RestartMe commands",
+            "memory" => "Shows memory usage information",
+            "set" => "Sets the timer to n seconds",
+            "start" => "Starts the timer",
+            "stop" => "Stops the timer",
+            "subtract" => "Subtracts n seconds from the timer",
+            "time" => "Gets the remaining time until the server restarts"
+        ];
         $sender->sendMessage("RestartMe commands:");
-        $sender->sendMessage("/restartme add: Adds n seconds to the timer");
-        $sender->sendMessage("/restartme help: Shows all RestartMe commands");
-        $sender->sendMessage("/restartme memory: Shows memory usage information");
-        $sender->sendMessage("/restartme set: Sets the timer to n seconds");
-        $sender->sendMessage("/restartme start: Starts the timer");
-        $sender->sendMessage("/restartme stop: Stops the timer");
-        $sender->sendMessage("/restartme subtract: Subtracts n seconds from the timer");
-        $sender->sendMessage("/restartme time: Gets the remaining time until the server restarts");
+        foreach($commands as $name => $description){
+            $sender->sendMessage("/restartme ".$name.": ".$description);
+        }
     }
     /**
      * @param CommandSender $sender

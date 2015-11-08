@@ -17,6 +17,7 @@ class RestartMe extends PluginBase{
     private $paused = false;
     public function onEnable(){
         $this->saveDefaultConfig();
+        $this->saveResource("values.txt");
         $this->getServer()->getCommandMap()->register("restartme", new RestartMeCommand($this));
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoBroadcastTask($this), ($this->getConfig()->get("broadcastInterval") * 20));
         if($this->getConfig()->get("restartOnOverload") === true){
