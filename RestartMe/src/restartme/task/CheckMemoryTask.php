@@ -28,7 +28,7 @@ class CheckMemoryTask extends PluginTask{
     public function onRun($currentTick){
         if(!$this->getPlugin()->isTimerPaused()){
             if(MemoryChecker::isOverloaded($this->getPlugin()->getMemoryLimit())){
-                $this->getPlugin()->initiateRestart(RestartMe::TYPE_OVERLOADED);
+                $this->getPlugin()->initiateRestart(RestartMe::OVERLOADED);
             }
         }
     }

@@ -9,8 +9,8 @@ use restartme\task\CheckMemoryTask;
 use restartme\task\RestartServerTask;
 
 class RestartMe extends PluginBase{
-    const TYPE_NORMAL = 0;
-    const TYPE_OVERLOADED = 1;
+    const NORMAL = 0;
+    const OVERLOADED = 1;
     /** @var int */
     private $timer = 0;
     /** @var bool */
@@ -113,15 +113,15 @@ class RestartMe extends PluginBase{
      */
     public function initiateRestart($mode){
         switch($mode){
-            case self::TYPE_NORMAL:
+            case self::NORMAL:
                 foreach($this->getServer()->getOnlinePlayers() as $player){
-                    $player->close("", $this->getConfig()->get("quitMessage"));
+                    $player->kick($this->getConfig()->get("quitMessage"), false);
                 }
                 $this->getServer()->getLogger()->info($this->getConfig()->get("quitMessage"));
                 break;
-            case self::TYPE_OVERLOADED:
+            case self::OVERLOADED:
                 foreach($this->getServer()->getOnlinePlayers() as $player){
-                    $player->close("", $this->getConfig()->get("overloadQuitMessage"));
+                    $player->kick($this->getConfig()->get("overloadQuitMessage"), false);
                 }
                 $this->getServer()->getLogger()->info($this->getConfig()->get("overloadQuitMessage"));
                 break;
