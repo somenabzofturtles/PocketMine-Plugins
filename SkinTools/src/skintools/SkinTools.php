@@ -10,9 +10,9 @@ use skintools\event\SkinToolsListener;
 use skintools\utils\SkinConverter;
 
 class SkinTools extends PluginBase{
-    const MODE_NONE = 0;
-    const MODE_GIVE = 1;
-    const MODE_STEAL = 2;
+    const NONE = 0;
+    const GIVE = 1;
+    const STEAL = 2;
     /** @var SkinTools|null */
     private static $object = null;
     /** @var array */
@@ -41,7 +41,7 @@ class SkinTools extends PluginBase{
      * @param Player $player
      * @param int $touchMode
      */
-    public function setTouchMode(Player $player, $touchMode = self::MODE_NONE){
+    public function setTouchMode(Player $player, $touchMode = self::NONE){
         $event = new PlayerToggleTouchEvent($player, $this->getTouchMode($player), $touchMode);
         $this->getServer()->getPluginManager()->callEvent($event);
         if(!$event->isCancelled()){
@@ -56,7 +56,7 @@ class SkinTools extends PluginBase{
         if($this->hasTouchMode($player)){
             return $this->touchMode[strtolower($player->getName())];
         }
-        return self::MODE_NONE;
+        return self::NONE;
     }
     /**
      * @param Player $player

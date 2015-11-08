@@ -33,13 +33,13 @@ class SkinToolsListener implements Listener{
         if($event instanceof EntityDamageByEntityEvent){
             if($event->getDamager() instanceof Player and $event->getEntity() instanceof Player){
                 switch($this->getPlugin()->getTouchMode($event->getDamager())){
-                    case SkinTools::MODE_GIVE:
+                    case SkinTools::GIVE:
                         $event->setCancelled(true);
                         $this->getPlugin()->setStolenSkin($event->getEntity(), $event->getDamager());
                         $event->getEntity()->sendMessage(TextFormat::GREEN.$event->getDamager()->getName()." gave you their skin!");
                         $event->getDamager()->sendMessage(TextFormat::GREEN.$event->getEntity()->getName()." has your skin now!");
                         break;
-                    case SkinTools::MODE_STEAL:
+                    case SkinTools::STEAL:
                         $event->setCancelled(true);
                         $this->getPlugin()->setStolenSkin($event->getDamager(), $event->getEntity());
                         $event->getDamager()->sendMessage(TextFormat::GREEN."You got ".$event->getEntity()->getName()."'s skin.");
@@ -53,7 +53,7 @@ class SkinToolsListener implements Listener{
      */
     public function onPlayerLogin(PlayerLoginEvent $event){
         $this->getPlugin()->storeSkinData($event->getPlayer());
-        $this->getPlugin()->setTouchMode($event->getPlayer(), SkinTools::MODE_NONE);
+        $this->getPlugin()->setTouchMode($event->getPlayer(), SkinTools::NONE);
     }
     /** 
      * @param PlayerQuitEvent $event 

@@ -51,14 +51,16 @@ class SkinToolsCommand extends Command{
      * @param CommandSender $sender
      * @param string $label
      * @param string[] $args
+     * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
+        if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
             switch(strtolower($args[0])){
                 case "file":
                     if(isset($args[1])){
-                        if(($player = $sender->getServer()->getPlayer($args[1])) !== null){
-                            SkinConverter::toFile($player->getSkinData(), $player->getName());
+                        if($player = $sender->getServer()->getPlayer($args[1])){
+                            SkinConverter::toFile($player);
                             $sender->sendMessage(TextFormat::GREEN."Saved ".$player->getName()."'s skin as a data file.");
                         }
                         else{
@@ -68,19 +70,19 @@ class SkinToolsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a valid player.");
                     }
-                    break;
+                    return true;
                 case "help":
                     $this->sendCommandHelp($sender);
-                    break;
+                    return true;
                 case "image":
                     //TODO: Fully implement command
-                    break;
+                    return true;
                 case "morph":
                     if($sender instanceof Player){
                         if(isset($args[1])){
-                            if($sender->getServer()->getPlayer($args[1]) !== null){
-                                $this->getPlugin()->setStolenSkin($sender, $sender->getServer()->getPlayer($args[1]));
-                                $sender->sendMessage(TextFormat::GREEN."You got ".$sender->getServer()->getPlayer($args[1])->getName()."'s skin.");
+                            if($player = $sender->getServer()->getPlayer($args[1])){
+                                $this->getPlugin()->setStolenSkin($sender, $player);
+                                $sender->sendMessage(TextFormat::GREEN."You got ".$player->getName()."'s skin.");
                             }
                             else{
                                 $sender->sendMessage(TextFormat::RED."That player could not be found.");
@@ -93,7 +95,7 @@ class SkinToolsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please run this command in-game.");
                     }
-                    break;
+                    return true;
                 case "restore":
                     if($sender instanceof Player){
                         $sender->setSkin($this->getPlugin()->retrieveSkinData($sender));
@@ -102,7 +104,7 @@ class SkinToolsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please run this command in-game.");
                     }
-                    break;
+                    return true;
                 case "swap":
                     if($sender instanceof Player){
                         //TODO: Fully implement command
@@ -110,20 +112,11 @@ class SkinToolsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please run this command in-game.");
                     }
-                    break;
+                    return true;
                 case "touch":
                     if($sender instanceof Player){
                         if(isset($args[1])){
-                            switch($args[1]){
-                                case SkinTools::MODE_NONE:
-                                case SkinTools::MODE_GIVE:
-                                case SkinTools::MODE_STEAL:
-                                    //TODO: Fully implement command
-                                    break;
-                                default:
-                                    $sender->sendMessage(TextFormat::RED."Invalid touch mode entered.");
-                                    break;
-                            }
+                            //TODO: Fully implement command
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."Please specify a touch mode.");
@@ -132,14 +125,15 @@ class SkinToolsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please run this command in-game.");
                     }
-                    break;
+                    return true;
                 default:
                     $sender->sendMessage("Usage: ".$this->getUsage());
-                    break;
+                    return false;
             }
         }
         else{
             $this->sendCommandHelp($sender);
+            return false;
         }
     }
 }
