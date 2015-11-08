@@ -61,17 +61,19 @@ class iManagerCommand extends Command{
      * @param CommandSender $sender
      * @param string $label
      * @param string[] $args
+     * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
+        if(!$this->testPermission($sender)) return false;
     	if(isset($args[0])){
     	    switch(strtolower($args[0])){
                 case "help":
                     $this->sendCommandHelp($sender);
-                    break;
+                    return true;
                 case "level":
                     if(isset($args[1])){
-                        if($sender->getServer()->getLevelByName($args[1]) !== null){
-                            $this->getPlugin()->getInfoFetcher()->sendLevelInfo($sender, $sender->getServer()->getLevelByName($args[1]));
+                        if($level = $sender->getServer()->getLevelByName($args[1])){
+                            $this->getPlugin()->getInfoFetcher()->sendLevelInfo($sender, $level);
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."Failed to get information due to invalid level name.");
@@ -80,11 +82,11 @@ class iManagerCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a level name.");
                     }
-                    break;
+                    return true;
                 case "player":
                     if(isset($args[1])){
-                        if($sender->getServer()->getPlayer($args[1]) !== null){
-                            $this->getPlugin()->getInfoFetcher()->sendPlayerInfo($sender, $sender->getServer()->getPlayer($args[1]));
+                        if($player = $sender->getServer()->getPlayer($args[1])){
+                            $this->getPlugin()->getInfoFetcher()->sendPlayerInfo($sender, $player);
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."Failed to get information due to invalid recipient.");
@@ -93,13 +95,15 @@ class iManagerCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a recipient.");
                     }
-                    break;
+                    return true;
                 default:
                     $sender->sendMessage("Usage: ".$this->getUsage());
+                    return false;
     	    }
     	}
     	else{
 	    $this->sendCommandHelp($sender);
+            return false;
     	}
     }
 }
