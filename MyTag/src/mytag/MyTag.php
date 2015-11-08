@@ -10,7 +10,7 @@ use pocketmine\Player;
 
 class MyTag extends PluginBase{
     /** @var Config */
-    public $nametags;
+    private $nametags;
     public function onEnable(){
         $this->saveDefaultConfig();
         @mkdir($this->getDataFolder());

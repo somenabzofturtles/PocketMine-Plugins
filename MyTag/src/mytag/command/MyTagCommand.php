@@ -45,30 +45,36 @@ class MyTagCommand extends Command{
      * @param CommandSender $sender
      * @param string $label
      * @param string[] $args
+     * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
+        if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
 	    switch(strtolower($args[0])){
 	    	case "address":
-	    	    break;
+                    return true;
 	    	case "chat":
-	    	    break;
+                    return true;
 	    	case "health":
-	    	    break;
+                    return true;
 	    	case "help":
-	    	    break;
+                    return true;
 	    	case "hide":
-	      	    break;
+                    return true;
 	      	case "restore":
-	            break;
+                    return true;
 	        case "set":
-	            break;
+                    return true;
 	        case "view":
-	            break;
+                    return true;
+                default:
+                    $this->sendCommandHelp($sender);
+                    return false;
 	    }
     	}
     	else{
 	    $this->sendCommandHelp($sender);
+            return false;
     	}
     }
 }
