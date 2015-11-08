@@ -28,25 +28,33 @@ class BlockFreezerCommand extends Command{
     public function sendCommandHelp(CommandSender $sender){
         $sender->sendMessage("BlockFreezer commands:");
     }
+    /**
+     * @param CommandSender $sender
+     * @param string $label
+     * @param string[] $args
+     * @return bool
+     */
     public function execute(CommandSender $sender, $label, array $args){
+        if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
             switch(strtolower($args[0])){
                 case "ab";
                 case "addblock":
-                    break;
+                    return true;
                 case "db":
                 case "delblock":
-                    break;
+                    return true;
                 case "help":
                     $this->sendCommandHelp($sender);
-                    break;
+                    return true;
                 default:
                     $this->sendCommandHelp($sender);
-                    break;
+                    return false;
             }
         }
         else{
             $this->sendCommandHelp($sender);
+            return false;
         }
     }
 }
