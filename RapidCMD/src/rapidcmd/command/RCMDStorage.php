@@ -35,8 +35,7 @@ class RCMDStorage{
                     $rcmd->setPermValue(strtolower($command["value"]));
                     $rcmd->setActions($command["actions"]);
                     $this->addCommand($rcmd);
-                    $permission = new Permission($rcmd->getPermNode(), $rcmd->getDescription(), $rcmd->getPermValue());
-                    $this->getPlugin()->getServer()->getPluginManager()->addPermission($permission);
+                    $this->getPlugin()->getServer()->getPluginManager()->addPermission(new Permission($rcmd->getPermNode(), $rcmd->getDescription(), $rcmd->getPermValue()));
                     $count++;
                 }
             }

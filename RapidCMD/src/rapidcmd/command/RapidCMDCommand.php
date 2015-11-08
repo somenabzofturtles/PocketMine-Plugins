@@ -45,13 +45,15 @@ class RapidCMDCommand extends Command{
      * @param CommandSender $sender
      * @param string $label
      * @param string[] $args
+     * @return bool
      */
-    public function execute(CommandSender $sender, $label, array $args) {
+    public function execute(CommandSender $sender, $label, array $args){
+        if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
             switch(strtolower($args[0])){
                 case "ac":
                 case "addcmd":
-                    break;
+                    return true;
                 case "after":
                     if(isset($args[1]) and isset($args[2])){
                         if(is_numeric($args[1])){
@@ -66,11 +68,11 @@ class RapidCMDCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Insufficient parameters given, this command requires a time value and a command to execute.");
                     }
-                    break;
+                    return true;
                 case "as":
-                    break;
+                    return true;
                 case "cmd":
-                    break;
+                    return true;
                 case "dc":
                 case "delcmd":
                     if(isset($args[1])){
@@ -84,10 +86,10 @@ class RapidCMDCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a command name.");
                     }
-                    break;
+                    return true;
                 case "help":
                     $this->sendCommandHelp($sender);
-                    break;
+                    return true;
                 case "list":
                     $count = 0;
                     $names = "";
@@ -96,16 +98,17 @@ class RapidCMDCommand extends Command{
                         $count++;
                     }
                     $sender->sendMessage("RCMDs (".$count."): ".substr($names, 0, -2));
-                    break;
+                    return true;
                 case "repeat":
-                    break;
+                    return true;
                 default:
                     $sender->sendMessage("Usage: ".$this->getUsage());
-                    break;
+                    return false;
             }
         }
         else{
             $this->sendCommandHelp($sender);
+            return false;
         }
     }
 }
