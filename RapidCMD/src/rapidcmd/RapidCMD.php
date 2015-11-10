@@ -29,6 +29,6 @@ class RapidCMD extends PluginBase{
      * @param int $delay
      */
     public function runLater($command, $delay = 3){
-        $this->getServer()->getScheduler()->scheduleDelayedTask(new RunCommandTask($this, $command), $delay);
+        $this->getServer()->getScheduler()->scheduleDelayedTask(new RunCommandTask($this, $command), ($delay * 20));
     }
 }
