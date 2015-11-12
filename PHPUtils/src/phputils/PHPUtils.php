@@ -7,19 +7,25 @@ use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;
 
 class PHPUtils extends PluginBase{
+    const NOT_FOUND = -1;
+    const DISABLED = 0;
+    const ENABLED = 1;
     public function onEnable(){
         $this->saveDefaultConfig();
         $this->getServer()->getCommandMap()->register("phputils", new PHPUtilsCommand($this));
     }
     /**
      * @param string $name
-     * @return bool
+     * @return int
      */
     public function isCommandEnabled($name){
         if($this->getConfig()->exists($name, true)){
-            return $this->getConfig()->get(strtolower($name)) === true;
+            if($this->getConfig()->get(strtolower($name)) === true){
+                return self::ENABLED; //Command found, and is enabled
+            }
+            return self::DISABLED; //Command found, and is disabled
         }
-        return false;
+        return self::NOT_FOUND; //Command not found
     }
     /**
      * @return array
@@ -50,6 +56,7 @@ class PHPUtils extends PluginBase{
      */
     public function sendPHPInfo(CommandSender $sender){
         $info = [
+            "CWD" => getcwd(),
             "GID" => getmygid(),
             "PID" => getmypid(),
             "UID" => getmyuid(),

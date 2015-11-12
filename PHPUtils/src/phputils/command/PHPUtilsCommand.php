@@ -33,7 +33,6 @@ class PHPUtilsCommand extends Command{
     private function sendCommandHelp(CommandSender $sender){
         $commands = [
             "algos" => "Lists all the registered hashing algorithms",
-            "cwd" => "Returns the name of the current working directory",
             "extens" => "Lists all the loaded PHP extensions",
             "func" => "Checks if the specified function exists",
             "hash" => "Returns a hash the specified string using the specified hashing algorithm",
@@ -56,7 +55,11 @@ class PHPUtilsCommand extends Command{
     public function execute(CommandSender $sender, $label, array $args){
         if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
-            if(!$this->getPlugin()->isCommandEnabled($args[0])){
+            if($this->getPlugin()->isCommandEnabled($args[0]) === PHPUtils::NOT_FOUND){
+                $sender->sendMessage(TextFormat::RED."Invalid sub-command specified, please use \"/phputils help\".");
+                return false;
+            }
+            if($this->getPlugin()->isCommandEnabled($args[0]) === PHPUtils::DISABLED){
                 $sender->sendMessage(TextFormat::RED."That command is disabled.");
                 return false;
             }
@@ -64,9 +67,6 @@ class PHPUtilsCommand extends Command{
                 case "algos":
                     $algo = $this->getPlugin()->getAlgorithms();
                     $sender->sendMessage("Algorithms (".$algo[0]."): ".$algo[1]);
-                    return true;
-                case "cwd":
-                    $sender->sendMessage("CWD: ".getcwd());
                     return true;
                 case "extens":
                     $ext = $this->getPlugin()->getExtensions();
