@@ -7,6 +7,7 @@ use pocketmine\event\Cancellable;
 use pocketmine\Player;
 
 class PlayerToggleTouchEvent extends PlayerEvent implements Cancellable{
+    /** @var \pocketmine\event\HandlerList|null */
     public static $handlerList = null;
     /** @var Player */
     protected $player;

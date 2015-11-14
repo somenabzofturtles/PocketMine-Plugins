@@ -19,8 +19,10 @@ class SkinTools extends PluginBase{
     private $skinData = [];
     /** @var array */
     private $touchMode = [];
-    public function onEnable(){
+    public function onLoad(){
         self::$object = $this;
+    }
+    public function onEnable(){
     	$this->getServer()->getCommandMap()->register("skintools", new SkinToolsCommand($this));
     	$this->getServer()->getPluginManager()->registerEvents(new SkinToolsListener($this), $this);
     }
@@ -42,8 +44,7 @@ class SkinTools extends PluginBase{
      * @param int $touchMode
      */
     public function setTouchMode(Player $player, $touchMode = self::NONE){
-        $event = new PlayerToggleTouchEvent($player, $this->getTouchMode($player), $touchMode);
-        $this->getServer()->getPluginManager()->callEvent($event);
+        $this->getServer()->getPluginManager()->callEvent($event = new PlayerToggleTouchEvent($player, $this->getTouchMode($player), $touchMode));
         if(!$event->isCancelled()){
             $this->touchMode[strtolower($player->getName())] = $event->getNewMode();
         }
