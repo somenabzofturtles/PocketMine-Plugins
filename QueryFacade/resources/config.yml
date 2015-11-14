@@ -1,6 +1,4 @@
 #Configuration file for QueryFacade v1.0.0
-timeout: 3
-#Sets the timeout in seconds, if it takes longer than the timeout to query a server, the plugin will assume the server is offline
 combine: false
 #Set to true to allow query data to be combined with other servers
 level: "world"
@@ -22,7 +20,10 @@ plugins:
 - "QueryFacade"
 - "ServerTools"
 servers:
-#Fetchs data from all the servers below, if they are valid and the have query turned on, and combine is set to true
-- "hg1.frostbite.net:19132"
-- "hg2.frostbite.net:19132"
-- "beta.frostbite.net:19132"
+#Fetchs data from all the servers specified, if they are valid and the have query turned on, and combine is set to true
+- "example.com:19132"
+- "example.com:19133"
+- "example.com:19134"
+- "example.com:19135"
+timeout: 3
+#Sets the timeout in seconds, if it takes longer than the timeout to query a server, the plugin will assume the server is offline

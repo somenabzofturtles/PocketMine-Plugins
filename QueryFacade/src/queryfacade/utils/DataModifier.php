@@ -5,7 +5,7 @@ namespace queryfacade\utils;
 //use queryfacade\event\server\QueryInformationChangeEvent;
 use queryfacade\QueryFacade;
 
-//TODO: Fire QueryInformationChangeEvent when query data is modified
+//TODO: Fire QueryInformationChangeEvent when query data is modified, fully implement events
 class DataModifier{
     /** @var QueryFacade */
     private $plugin;

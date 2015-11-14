@@ -11,6 +11,9 @@ Main command: **queryfacade**, **qr**
 |-----------|-----------|
 |help|Shows all QueryFacade commands|
 |info|Sends server's query information|
+|level|Changes the server's current default level|
+|maxplayercount|Changes the server's max player count|
+|playercount|Changes the server's player count|
 
 ###Permissions:
 |Node|Default|

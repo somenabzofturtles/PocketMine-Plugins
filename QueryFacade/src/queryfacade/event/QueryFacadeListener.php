@@ -25,8 +25,8 @@ class QueryFacadeListener implements Listener{
      * @param QueryRegenerateEvent $event 
      */
     public function onQueryRegenerate(QueryRegenerateEvent $event){
-        //$event->setPlugins($this->getPlugin()->getModifier());
-        //$event->setPlayerList($this->getPlugin()->getModifier());
+        //$event->setPlugins($this->getPlugin()->getModifier()->getPlugins());
+        //$event->setPlayerList($this->getPlugin()->getModifier()->getPlayers());
         $event->setPlayerCount($this->getPlugin()->getModifier()->getPlayerCount());
         $event->setMaxPlayerCount($this->getPlugin()->getModifier()->getMaxPlayerCount());
         $event->setWorld($this->getPlugin()->getModifier()->getLevelName());
