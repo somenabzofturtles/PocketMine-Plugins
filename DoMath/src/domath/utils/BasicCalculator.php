@@ -111,13 +111,13 @@ class BasicCalculator{
         if(is_array($inputs)){
             $output = $inputs[0];
             foreach(array_slice($inputs, 1) as $input){
-                if($input != 0) $output /= $input; //if the value is 0, it won't perform the calculation
+                if($input != 0) $output /= $input; //If the value is 0, it won't perform the calculation
             }
             if(in_array(0, array_slice($inputs, 1), 0)){
-                return "ERROR"; //returned if there was one or more zeros
+                return "ERROR"; //There was one or more zeros encountered
             }
             else{
-                return $output; //returned if there were no zeros
+                return $output; //There were no zeros encountered
             }
         }
     }
