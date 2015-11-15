@@ -33,13 +33,13 @@ class PHPUtilsCommand extends Command{
     private function sendCommandHelp(CommandSender $sender){
         $commands = [
             "algos" => "Lists all the registered hashing algorithms",
+            "class" => "Checks if the specified class exists",
             "extens" => "Lists all the loaded PHP extensions",
             "func" => "Checks if the specified function exists",
             "hash" => "Returns a hash the specified string using the specified hashing algorithm",
             "help" => "Shows all PHPUtils commands",
             "php" => "Gets info about the PHP software the system is using",
             "shell" => "Executes a command in the command shell",
-            "zend" => "Gets info about the Zend engine the system is using"
         ];
         $sender->sendMessage("PHPUtils commands:");
         foreach($commands as $name => $description){
@@ -68,6 +68,15 @@ class PHPUtilsCommand extends Command{
                     $algo = $this->getPlugin()->getAlgorithms();
                     $sender->sendMessage("Algorithms (".$algo[0]."): ".$algo[1]);
                     return true;
+                case "class":
+                    if(isset($args[1])){
+                        $classPath = str_replace(["/", "\\\\", "//"], "\\", $args[1]);
+                        $sender->sendMessage($classPath." ".(class_exists($classPath, false) ? "was" : "was not")." found.");
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Please specify a class path.");
+                    }
+                    return true;
                 case "extens":
                     $ext = $this->getPlugin()->getExtensions();
                     $sender->sendMessage("Extensions (".$ext[0]."): ".$ext[1]);
@@ -83,7 +92,12 @@ class PHPUtilsCommand extends Command{
                 case "hash":
                     if(isset($args[1])){
                         if(isset($args[2])){
-                            $sender->sendMessage("Hashed using the ".$args[1]." algorithm: ".hash($args[1], implode(" ", array_slice($args, 2))));
+                            try{
+                                $sender->sendMessage("Hashed using the ".$args[1]." algorithm: ".hash($args[1], implode(" ", array_slice($args, 2))));
+                            }
+                            catch(\RuntimeException $exception){
+                                $sender->sendMessage(TextFormat::RED."Failed to hash, \"".$args[1]."\" isn't a registered hashing algorithm.");
+                            }
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."Failed to hash due to insufficient parameters given.");
@@ -108,9 +122,6 @@ class PHPUtilsCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a command.");
                     }
-                    return true;
-                case "zend":
-                    $this->getPlugin()->sendZendInfo($sender);
                     return true;
                 default:
                     $this->sendCommandHelp($sender);

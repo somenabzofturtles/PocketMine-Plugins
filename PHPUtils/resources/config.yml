@@ -1,10 +1,9 @@
 #Configuration file for PHPUtils v1.0.0
 algos: false
-cwd: false
+class: false
 extens: false
 func: false
 hash: false
 help: true
 php: false
 shell: false
-zend: false

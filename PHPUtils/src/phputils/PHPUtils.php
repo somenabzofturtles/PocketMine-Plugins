@@ -62,21 +62,10 @@ class PHPUtils extends PluginBase{
             "UID" => getmyuid(),
             "Memory-usage" => memory_get_usage(true),
             "Memory-peak-usage" => memory_get_peak_usage(true),
-            "Version" => phpversion()
+            "PHP-version" => phpversion(),
+            "Zend-version" => zend_version()
         ];
         $sender->sendMessage("PHP information:");
-        foreach($info as $key => $value){
-            $sender->sendMessage($key.": ".$value);
-        }
-    }
-    /**
-     * @param CommandSender $sender
-     */
-    public function sendZendInfo(CommandSender $sender){
-        $info = [
-            "Version" => zend_version()
-        ];
-        $sender->sendMessage("Zend information:");
         foreach($info as $key => $value){
             $sender->sendMessage($key.": ".$value);
         }
