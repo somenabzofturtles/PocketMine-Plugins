@@ -8,17 +8,17 @@ maxPlayerCount: 20
 playerCount: 20
 #Sets the player count sent in a query, please do not to abuse this, or there will be social consequences
 playerList:
-#Sets the players that will be "online", NOT IMPLEMENTED YET
+#Sets the players that will be "online"
 - "Gamecrafter"
+- "notch"
 - "shoghicp"
 - "Steve"
 plugins:
-#Sets the plugins that will be "enabled", NOT IMPLEMENTED YET
-- "CorePro"
-- "iUpdater"
-- "PocketAuth"
-- "QueryFacade"
-- "ServerTools"
+#Sets the plugins that will be "enabled"
+- "DoMath:1.0.0"
+- "PHPUtils:1.0.0"
+- "QueryFacade:1.0.0"
+- "RestartMe:1.2.0"
 servers:
 #Fetchs data from all the servers specified, if they are valid and the have query turned on, and combine is set to true
 - "example.com:19132"

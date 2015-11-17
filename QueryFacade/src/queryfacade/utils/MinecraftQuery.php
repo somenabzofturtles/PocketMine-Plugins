@@ -30,9 +30,9 @@ class MinecraftQuery{
 	if(!is_int($timeout) or $timeout < 0){
             throw new \InvalidArgumentException("Timeout must be an integer.");
 	}
-	$this->socket = @fsockopen("udp://".$ip, (int) $port, $errNo, $errStr, $timeout);
-	if($errNo or $this->socket === false){
-            throw new MinecraftQueryException("Could not create socket: ".$errStr);
+	$this->socket = @fsockopen("udp://".$ip, (int) $port, $errno, $errstr, $timeout);
+	if($errno or $this->socket === false){
+            throw new MinecraftQueryException("Could not create socket: ".$errstr);
         }
 	stream_set_timeout($this->socket, $timeout);
 	stream_set_blocking($this->socket, true);

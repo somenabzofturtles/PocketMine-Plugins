@@ -3,12 +3,9 @@
 namespace queryfacade\utils;
 
 //use queryfacade\event\server\QueryInformationChangeEvent;
-use queryfacade\QueryFacade;
 
 //TODO: Fire QueryInformationChangeEvent when query data is modified, fully implement events
 class DataModifier{
-    /** @var QueryFacade */
-    private $plugin;
     /** @var \pocketmine\plugin\Plugin[] */
     private $plugins = [];
     /** @var \pocketmine\Player[] */
@@ -19,18 +16,6 @@ class DataModifier{
     private $maxPlayerCount = 0;
     /** @var string */
     private $level = "world";
-    /**
-     * @param QueryFacade $plugin
-     */
-    public function __construct(QueryFacade $plugin){
-        $this->plugin = $plugin;
-    }
-    /**
-     * @return QueryFacade
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /**
      * @return \pocketmine\plugin\Plugin[]
      */
