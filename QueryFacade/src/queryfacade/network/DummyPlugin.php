@@ -7,7 +7,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginDescription;
 
-class FakePlugin implements Plugin{
+class DummyPlugin implements Plugin{
     /** @var PluginDescription */
     protected $description;
     /**
@@ -21,11 +21,19 @@ class FakePlugin implements Plugin{
     }
     public function onEnable(){
     }
+    /**
+     * @return bool
+     */
     public function isEnabled(){
+        return true;
     }
     public function onDisable(){
     }
+    /**
+     * @return bool
+     */
     public function isDisabled(){
+        return false;
     }
     public function getDataFolder(){
     }
@@ -68,7 +76,11 @@ class FakePlugin implements Plugin{
     }
     public function getServer(){
     }
+    /**
+     * @return string
+     */
     public function getName(){
+        return $this->getDescription()->getName();
     }
     public function getLogger(){
     }
