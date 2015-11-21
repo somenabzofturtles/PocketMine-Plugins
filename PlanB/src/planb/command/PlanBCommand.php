@@ -15,11 +15,8 @@ class PlanBCommand extends Command{
      * @param PlanB $plugin
      */
     public function __construct(PlanB $plugin){
-        parent::__construct("planb");
-        $this->setDescription("Shows all PlanB commands");
-        $this->setUsage("/planb <sub-command> [parameters]");
+        parent::__construct("planb", "Shows all PlanB commands", null, ["pb"]);
         $this->setPermission("planb.command.planb");
-        $this->setAliases(["pb"]);
         $this->plugin = $plugin;
     }
     /**  
@@ -110,7 +107,7 @@ class PlanBCommand extends Command{
                     }
                     return true;
                 default:
-                    $sender->sendMessage("Usage: ".$this->getUsage());
+                    $sender->sendMessage("Usage: /planb <sub-command> [parameters]");
                     return false;
             }
         }
