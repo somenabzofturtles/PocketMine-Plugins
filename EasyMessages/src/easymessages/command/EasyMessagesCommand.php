@@ -14,11 +14,8 @@ class EasyMessagesCommand extends Command{
      * @param EasyMessages $plugin
      */
     public function __construct(EasyMessages $plugin){
-        parent::__construct("easymessages");
-        $this->setDescription("Shows all EasyMessages commands");
-        $this->setUsage("/easymessages <sub-command> [parameters]");
+        parent::__construct("easymessages", "Shows all EasyMessages commands", null, ["em"]);
         $this->setPermission("easymessages.command.easymessages");
-        $this->setAliases(["em"]);
         $this->plugin = $plugin;
     }
     /** 
@@ -31,11 +28,16 @@ class EasyMessagesCommand extends Command{
      * @param CommandSender $sender 
      */
     private function sendCommandHelp(CommandSender $sender){
+        $commands = [
+            "help" => "Shows all EasyMessages commands",
+            "message" => "Sends a message",
+            "popup" => "Sends a popup",
+            "tip" => "Sends a tip"
+        ];
         $sender->sendMessage("EasyMessages commands:");
-        $sender->sendMessage("/easymessages help: Shows all EasyMessages commands");
-        $sender->sendMessage("/easymessages message: Sends a message");
-        $sender->sendMessage("/easymessages popup: Sends a popup");
-        $sender->sendMessage("/easymessages tip: Sends a tip");
+        foreach($commands as $name => $description){
+            $sender->sendMessage("/easymessages ".$name.": ".$description);
+        }
     }
     /**
      * @param CommandSender $sender
@@ -111,7 +113,7 @@ class EasyMessagesCommand extends Command{
                     }
                     return true;
                 default:
-                    $sender->sendMessage("Usage ".$this->getUsage());
+                    $sender->sendMessage("Usage: /easymessages <sub-command> [parameters]");
                     return false;
             }
         }
