@@ -15,11 +15,8 @@ class iManagerCommand extends Command{
      * @param iManager $plugin
      */
     public function __construct(iManager $plugin){
-        parent::__construct("imanager");
-        $this->setDescription("Shows all iManager commands");
-        $this->setUsage("/imanager <sub-command> [parameters]");
+        parent::__construct("imanager", "Shows all iManager commands", null, ["im"]);
         $this->setPermission("imanager.command.imanager");
-        $this->setAliases(["im"]);
     	$this->plugin = $plugin;
     }
     /**
@@ -97,7 +94,7 @@ class iManagerCommand extends Command{
                     }
                     return true;
                 default:
-                    $sender->sendMessage("Usage: ".$this->getUsage());
+                    $sender->sendMessage("Usage: /imanager <sub-command> [parameters]");
                     return false;
     	    }
     	}
