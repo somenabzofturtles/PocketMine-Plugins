@@ -14,11 +14,8 @@ class PHPUtilsCommand extends Command{
      * @param PHPUtils $plugin
      */
     public function __construct(PHPUtils $plugin){
-        parent::__construct("phputils");
-        $this->setDescription("Shows all PHPUtils commands");
-        $this->setUsage("/phputils <sub-command> [parameters]");
+        parent::__construct("phputils", "Shows all PHPUtils commands", null, ["pt"]);
         $this->setPermission("phputils.command.phputils");
-        $this->setAliases(["pu"]);
         $this->plugin = $plugin;
     }
     /**
@@ -124,7 +121,7 @@ class PHPUtilsCommand extends Command{
                     }
                     return true;
                 default:
-                    $this->sendCommandHelp($sender);
+                    $sender->sendMessage("Usage: /phputils <sub-command> [parameters]");
                     return false;
             }
         }
