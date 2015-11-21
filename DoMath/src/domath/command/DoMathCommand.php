@@ -18,11 +18,8 @@ class DoMathCommand extends Command{
      * @param DoMath $plugin
      */
     public function __construct(DoMath $plugin){
-        parent::__construct("domath");
-        $this->setDescription("Shows all DoMath commands");
-        $this->setUsage("/domath <sub-command> [parameters]");
+        parent::__construct("domath", "Shows all DoMath commands", null, ["dm"]);
         $this->setPermission("domath.command.domath");
-        $this->setAliases(["dm"]);
         $this->plugin = $plugin;
     }
     /**
@@ -35,15 +32,20 @@ class DoMathCommand extends Command{
      * @param CommandSender $sender
      */
     public function sendCommandHelp(CommandSender $sender){
+        $commands = [
+            "add" => "",
+            "divide" => "",
+            "exponent" => "",
+            "help" => "Shows all DoMath commands",
+            "multiply" => "",
+            "percent" => "",
+            "square" => "",
+            "subtract" => ""
+        ];
         $sender->sendMessage("DoMath commands:");
-        $sender->sendMessage("/domath add:");
-        $sender->sendMessage("/domath divide:");
-        $sender->sendMessage("/domath exponent:");
-        $sender->sendMessage("/domath help: Shows all DoMath commands");
-        $sender->sendMessage("/domath multiply:");
-        $sender->sendMessage("/domath percent:");
-        $sender->sendMessage("/domath square:");
-        $sender->sendMessage("/domath subtract:");
+        foreach($commands as $name => $description){
+            $sender->sendMessage("/domath ".$name.": ".$description);
+        }
     }
     /**
      * @param CommandSender $sender
@@ -122,7 +124,7 @@ class DoMathCommand extends Command{
                     }
                     return true;
                 default:
-                    $this->sendCommandHelp($sender);
+                    $sender->sendMessage("Usage: /domath <sub-command> [parameters]");
                     return false;
             }
         }
