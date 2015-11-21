@@ -15,11 +15,8 @@ class RestartMeCommand extends Command{
      * @param RestartMe $plugin
      */
     public function __construct(RestartMe $plugin){
-        parent::__construct("restartme");
-        $this->setDescription("Shows all RestartMe commands");
-        $this->setUsage("/restartme <sub-command> [parameters]");
+        parent::__construct("restartme", "Shows all RestartMe commands", null, ["rm"]);
         $this->setPermission("restartme.command.restartme");
-        $this->setAliases(["rm"]);
         $this->plugin = $plugin;
     }
     /** 
@@ -136,7 +133,7 @@ class RestartMeCommand extends Command{
                     $sender->sendMessage(TextFormat::YELLOW."Time remaining: ".$this->getPlugin()->getFormattedTime());
                     return true;
                 default:
-                    $sender->sendMessage("Usage: ".$this->getUsage());
+                    $sender->sendMessage("Usage: /restartme <sub-command> [parameters]");
                     return false;
             }
         }
