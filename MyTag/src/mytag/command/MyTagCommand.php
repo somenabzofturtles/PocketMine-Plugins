@@ -14,11 +14,8 @@ class MyTagCommand extends Command{
      * @param MyTag $plugin
      */
     public function __construct(MyTag $plugin){
-        parent::__construct("mytag");
-        $this->setDescription("Shows all MyTag commands");
-        $this->setUsage("/mytag <sub-command> [parameters]");
+        parent::__construct("mytag", "Shows all MyTag commands", null, ["mt"]);
         $this->setPermission("mytag.command.mytag");
-        $this->setAliases(["mt"]);
     	$this->plugin = $plugin;
     }
     /**
@@ -68,7 +65,7 @@ class MyTagCommand extends Command{
 	        case "view":
                     return true;
                 default:
-                    $this->sendCommandHelp($sender);
+                    $sender->sendMessage("Usage: /mytag <sub-command> [parameters]");
                     return false;
 	    }
     	}
