@@ -16,11 +16,8 @@ class SkinToolsCommand extends Command{
      * @param SkinTools $plugin
      */
     public function __construct(SkinTools $plugin){
-        parent::__construct("skintools");
-        $this->setDescription("Shows all SkinTools commands");
-        $this->setUsage("/skintools <sub-command> [parameters]");
+        parent::__construct("skintools", "Shows all SkinTools commands", null, ["st"]);
         $this->setPermission("skintools.command.skintools");
-        $this->setAliases(["st"]);
         $this->plugin = $plugin;
     }
     /** 
@@ -153,7 +150,7 @@ class SkinToolsCommand extends Command{
                     }
                     return true;
                 default:
-                    $sender->sendMessage("Usage: ".$this->getUsage());
+                    $sender->sendMessage("Usage: /skintools <sub-command> [parameters]");
                     return false;
             }
         }

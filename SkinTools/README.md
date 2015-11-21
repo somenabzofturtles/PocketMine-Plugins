@@ -27,3 +27,4 @@ Main command: **skintools**, **st**
 |:-------:|------------|:--------:|
 |1.0.0|August 13, 2015|[available](http://forums.pocketmine.net/plugins/skintools.1364/download?version=2607)|
 |1.1.0|?|unavailable|
+|1.2.0|?|unavailable|
