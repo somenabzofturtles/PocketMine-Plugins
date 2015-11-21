@@ -14,11 +14,8 @@ class RapidCMDCommand extends Command{
      * @param RapidCMD $plugin
      */
     public function __construct(RapidCMD $plugin){
-        parent::__construct("rapidcmd");
-        $this->setDescription("Shows all RapidCMD commands");
-        $this->setUsage("/rapidcmd <sub-command> [parameters]");
+        parent::__construct("rapidcmd", "Shows all RapidCMD commands", null, ["rc"]);
         $this->setPermission("rapidcmd.command.rapidcmd");
-        $this->setAliases(["rc"]);
         $this->plugin = $plugin;
     }
     /**
@@ -31,15 +28,20 @@ class RapidCMDCommand extends Command{
      * @param CommandSender $sender
      */
     public function sendCommandHelp(CommandSender $sender){
+        $commands = [
+            "addcmd" => "Creates a new RCMD",
+            "after" => "Runs a command after n seconds",
+            "as" => "Runs a command as a player",
+            "cmd" => "Sends information about a command",
+            "delcmd" => "Deletes a RCMD, if it exists",
+            "help" => "Shows all RapidCMD commands",
+            "list" => "Returns a list of names of loaded RCMDs",
+            "repeat" => "Runs the user's last command, if they have one"
+        ];
         $sender->sendMessage("RapidCMD commands:");
-        $sender->sendMessage("/rapidcmd addcmd: Creates a new RCMD");
-        $sender->sendMessage("/rapidcmd after: Runs a command after n seconds");
-        $sender->sendMessage("/rapidcmd as: Runs a command as a player");
-        $sender->sendMessage("/rapidcmd cmd: Sends information about a command");
-        $sender->sendMessage("/rapidcmd delcmd: Deletes a RCMD, if it exists");
-        $sender->sendMessage("/rapidcmd help: Shows all RapidCMD commands");
-        $sender->sendMessage("/rapidcmd list: Returns a list of names of loaded RCMDs");
-        $sender->sendMessage("/rapidcmd repeat: Runs the user's last command, if they have one");
+        foreach($commands as $name => $description){
+            $sender->sendMessage("/rapidcmd ".$name.": ".$description);
+        }
     }
     /**
      * @param CommandSender $sender
@@ -102,7 +104,7 @@ class RapidCMDCommand extends Command{
                 case "repeat":
                     return true;
                 default:
-                    $sender->sendMessage("Usage: ".$this->getUsage());
+                    $sender->sendMessage("Usage: /rapidcmd <sub-command> [parameters]");
                     return false;
             }
         }
