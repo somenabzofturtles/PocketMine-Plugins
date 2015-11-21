@@ -13,7 +13,8 @@ class BlockFreezerCommand extends Command{
      * @param BlockFreezer $plugin
      */
     public function __construct(BlockFreezer $plugin){
-        parent::__construct("blockfreezer");
+        parent::__construct("blockfreezer", "Shows all BlockFreezer commands", null, ["bf"]);
+        $this->setPermission("blockfreezer.command.blockfreezer");
         $this->plugin = $plugin;
     }
     /**
@@ -26,7 +27,15 @@ class BlockFreezerCommand extends Command{
      * @param CommandSender $sender
      */
     public function sendCommandHelp(CommandSender $sender){
+        $commands = [
+            "addblock" => "",
+            "delblock" => "",
+            "help" => "Shows all BlockFreezer commands"
+        ];
         $sender->sendMessage("BlockFreezer commands:");
+        foreach($commands as $name => $description){
+            $sender->sendMessage("/blockfreezer ".$name.": ".$description);
+        }
     }
     /**
      * @param CommandSender $sender
@@ -48,7 +57,7 @@ class BlockFreezerCommand extends Command{
                     $this->sendCommandHelp($sender);
                     return true;
                 default:
-                    $this->sendCommandHelp($sender);
+                    $sender->sendMessage("Usage: /blockfreezer <sub-command> [parameters]");
                     return false;
             }
         }
