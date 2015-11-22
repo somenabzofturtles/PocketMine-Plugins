@@ -65,7 +65,6 @@ class PHPUtils extends PluginBase{
             "PHP-version" => phpversion(),
             "Zend-version" => zend_version()
         ];
-        $sender->sendMessage("PHP information:");
         foreach($info as $key => $value){
             $sender->sendMessage($key.": ".$value);
         }
