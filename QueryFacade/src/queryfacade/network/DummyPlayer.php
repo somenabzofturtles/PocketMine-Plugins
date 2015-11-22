@@ -4,6 +4,7 @@ namespace queryfacade\network;
 
 use pocketmine\IPlayer;
 
+//TODO: Remove hacks, although it works this way already, there might be some problems that aren't so obvious
 class DummyPlayer implements IPlayer{
     /** @var string */
     protected $name;

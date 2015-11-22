@@ -1,12 +1,12 @@
 #Configuration file for QueryFacade v1.0.0
 combine: false
-#Set to true to allow query data to be combined with other servers
+#Set to true to allow query data to be combined with other servers, NOT IMPLEMENTED YET
 level: "world"
 #Sets the world name sent in a query
 maxPlayerCount: 20
 #Sets the max player count sent in a query
 playerCount: 20
-#Sets the player count sent in a query, please do not to abuse this, or there will be social consequences
+#Sets the player count sent in a query, try not to abuse this, or bad things might happen
 playerList:
 #Sets the players that will be "online"
 - "Gamecrafter"
@@ -14,16 +14,16 @@ playerList:
 - "shoghicp"
 - "Steve"
 plugins:
-#Sets the plugins that will be "enabled"
+#Sets the plugins that will be "installed"
 - "DoMath;1.0.0"
 - "PHPUtils;1.0.0"
 - "QueryFacade;1.0.0"
 - "RestartMe;1.2.0"
 servers:
-#Fetchs data from all the servers specified, if they are valid and the have query turned on, and combine is set to true
+#Fetchs data from all the servers specified, if they are valid and the have query turned on, and combine is set to true, NOT IMPLEMENTED YET
 - "example.com:19132"
 - "example.com:19133"
 - "example.com:19134"
 - "example.com:19135"
 timeout: 3
-#Sets the timeout in seconds, if it takes longer than the timeout to query a server, the plugin will assume the server is offline
+#Sets the timeout in seconds, if it takes longer than the timeout to query a server, the plugin will assume the server is offline, NOT IMPLEMENTED YET

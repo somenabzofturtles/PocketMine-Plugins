@@ -7,6 +7,10 @@ use pocketmine\Server;
 use queryfacade\utils\MinecraftQuery;
 
 class QueryServerTask extends AsyncTask{
+    /** @var string[] */
+    private $targets;
+    /** @var int */
+    private $timeout;
     /** @var array */
     private $data = [];
     /**

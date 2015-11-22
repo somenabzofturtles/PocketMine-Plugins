@@ -5,7 +5,7 @@
 Cloak and edit your server data!
 
 ###Commands:
-Main command: **queryfacade**, **qr**
+Main command: **queryfacade**, **qf**
 
 |Sub-command|Description|
 |-----------|-----------|

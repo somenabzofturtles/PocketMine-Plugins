@@ -3,12 +3,14 @@
 namespace queryfacade\utils;
 
 //use queryfacade\event\server\QueryInformationChangeEvent;
+use queryfacade\network\DummyPlayer;
+use queryfacade\network\DummyPlugin;
 
 //TODO: Fire QueryInformationChangeEvent when query data is modified, fully implement events
 class DataModifier{
-    /** @var \pocketmine\plugin\Plugin[] */
+    /** @var DummyPlugin[] */
     private $plugins = [];
-    /** @var \pocketmine\Player[] */
+    /** @var DummyPlayer[] */
     private $players = [];
     /** @var int */
     private $playerCount = 0;
@@ -17,28 +19,53 @@ class DataModifier{
     /** @var string */
     private $level = "world";
     /**
-     * @return \pocketmine\plugin\Plugin[]
+     * @return DummyPlugin[]
      */
     public function getPlugins(){
         return $this->plugins;
     }
     /**
-     * @param \pocketmine\plugin\Plugin[] $plugins
+     * @param string[] $plugins
      */
     public function setPlugins(array $plugins){
-        $this->plugins = $plugins;
+        foreach($plugins as $plugin){
+            $info = explode(";", $plugin);
+            $this->plugins[] = new DummyPlugin($info[0], isset($info[1]) ? $info[1] : "1.0.0");
+        }
     }
     /**
-     * @return \pocketmine\Player[]
+     * @return string
+     */
+    public function listPlugins(){
+        $names = "";
+        foreach($this->getPlugins() as $plugin){
+            $names .= $plugin->getDescription()->getFullName().", ";
+        }
+        return substr($names, 0, -2);
+    }
+    /**
+     * @return DummyPlayer[]
      */
     public function getPlayers(){
         return $this->players;
     }
     /**
-     * @param \pocketmine\Player[] $players
+     * @param string[] $players
      */
     public function setPlayers(array $players){
-        $this->players = $players;
+        foreach($players as $player){
+            $this->players[] = new DummyPlayer($player);
+        }
+    }
+    /**
+     * @return string
+     */
+    public function listPlayers(){
+        $names = "";
+        foreach($this->getPlayers() as $player){
+            $names .= $player->getName().", ";
+        }
+        return substr($names, 0, -2);
     }
     /**
      * @return int
