@@ -6,3 +6,12 @@ load: POSTWORLD
 author: Gamecrafter
 description: Control what blocks update in your worlds!
 website: https://github.com/Gamecrafter/PocketMine-Plugins/tree/master/BlockFreezer
+permissions:
+ blockfreezer:
+  default: op
+  children:
+   blockfreezer.command:
+    default: op
+    children:
+     blockfreezer.command.blockfreezer:
+      default: op
