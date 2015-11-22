@@ -65,6 +65,10 @@ class DummyPlayer implements IPlayer{
     public function isOnline(){
         return true;
     }
+    /**
+     * @return DummyPlayer
+     */
     public function getPlayer(){
+        return $this;
     }
 }
