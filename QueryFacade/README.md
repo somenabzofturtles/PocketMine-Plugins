@@ -23,4 +23,5 @@ Main command: **queryfacade**, **qf**
 ###Releases:
 |Version|Release Date|Download|
 |:-------:|------------|:--------:|
+|1.0.0beta|November 22, 2015|https://github.com/Gamecrafter/PocketMine-Plugins/blob/master/QueryFacade/releases/QueryFacade_v1.0.0beta.phar?raw=true|
 |1.0.0|?|unavailable|
