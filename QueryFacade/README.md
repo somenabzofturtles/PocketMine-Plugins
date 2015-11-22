@@ -10,10 +10,11 @@ Main command: **queryfacade**, **qf**
 |Sub-command|Description|
 |-----------|-----------|
 |help|Shows all QueryFacade commands|
-|info|Sends server's query information|
 |level|Changes the server's current default level|
 |maxplayercount|Changes the server's max player count|
 |playercount|Changes the server's player count|
+|players|Returns a list of players being sent in query|
+|plugins|Returns a list of plugins being sent in query|
 
 ###Permissions:
 |Node|Default|

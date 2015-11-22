@@ -54,7 +54,8 @@ class DataModifier{
      */
     public function setPlayers(array $players){
         foreach($players as $player){
-            $this->players[] = new DummyPlayer($player);
+            $info = explode(";", $player);
+            $this->players[] = new DummyPlayer($info[0], isset($info[1]) ? $info[1] : "DUMMY", isset($info[2]) ? $info[2] : 19132);
         }
     }
     /**

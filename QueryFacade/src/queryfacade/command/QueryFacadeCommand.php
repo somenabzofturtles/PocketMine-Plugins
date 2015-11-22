@@ -30,10 +30,11 @@ class QueryFacadeCommand extends Command{
     private function sendCommandHelp(CommandSender $sender){
         $commands = [
             "help" => "Shows all QueryFacade commands",
-            "info" => "Sends server's query information",
             "level" => "Changes the server's current default level",
             "maxplayercount" => "Changes the server's max player count",
-            "playercount" => "Changes the server's player count"
+            "playercount" => "Changes the server's player count",
+            "players" => "Returns a list of players being sent in query",
+            "plugins" => "Returns a list of plugins being sent in query"
         ];
         $sender->sendMessage("QueryFacade commands:");
         foreach($commands as $name => $description){
@@ -53,47 +54,67 @@ class QueryFacadeCommand extends Command{
                 case "help":
                     $this->sendCommandHelp($sender);
                     return true;
-                case "info":
-                    $this->getPlugin()->sendQueryInfo($sender);
-                    return true;
                 case "level":
                     if(isset($args[1])){
-                        $this->getPlugin()->getModifier()->setLevelName($args[1]);
-                        $sender->sendMessage(TextFormat::GREEN."Set level name to \"".$args[1]."\".");
+                        if($this->getPlugin()->isApplicable(QueryFacade::MAP)){
+                            $this->getPlugin()->getModifier()->setLevelName($args[1]);
+                            $sender->sendMessage(TextFormat::GREEN."Set level name to \"".$args[1]."\", change will be applied in the next query.");
+                        }
+                        else{
+                            $sender->sendMessage(TextFormat::RED."Map cloak is not enabled.");
+                        }
                     }
                     else{
-                        $sender->sendMessage(TextFormat::RED."Please specify a name.");
+                        $sender->sendMessage(TextFormat::YELLOW."Current map name is \"".$this->getPlugin()->getServer()->getQueryInformation()->getWorld()."\".");
                     }
                     return true;
                 case "mpc":
                 case "maxplayercount":
                     if(isset($args[1])){
                         if(is_numeric($args[1])){
-                            $this->getPlugin()->getModifier()->setMaxPlayerCount($args[1]);
-                            $sender->sendMessage(TextFormat::GREEN."Set max player count to ".$args[1].".");
+                            if($this->getPlugin()->isApplicable(QueryFacade::MAX_COUNT)){
+                                $this->getPlugin()->getModifier()->setMaxPlayerCount($args[1]);
+                                $sender->sendMessage(TextFormat::GREEN."Set max player count to ".$args[1].", change will be applied in the next query.");
+                            }
+                            else{
+                                $sender->sendMessage(TextFormat::RED."Max player count cloak is not enabled.");
+                            }
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."The specified amount is not an integer.");
                         }
                     }
                     else{
-                        $sender->sendMessage(TextFormat::RED."Please specify a valid amount.");
+                        $sender->sendMessage(TextFormat::YELLOW."Current max player count is ".$this->getPlugin()->getServer()->getQueryInformation()->getMaxPlayerCount().".");
                     }
                     return true;
                 case "pc":
                 case "playercount":
                     if(isset($args[1])){
                         if(is_numeric($args[1])){
-                            $this->getPlugin()->getModifier()->setPlayerCount($args[1]);
-                            $sender->sendMessage(TextFormat::GREEN."Set player count to ".$args[1].".");
+                            if($this->getPlugin()->isApplicable(QueryFacade::MAX_COUNT)){
+                                $this->getPlugin()->getModifier()->setPlayerCount($args[1]);
+                                $sender->sendMessage(TextFormat::GREEN."Set player count to ".$args[1].", change will be applied in the next query.");
+                            }
+                            else{
+                                $sender->sendMessage(TextFormat::RED."Player count cloak is not enabled.");
+                            }
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."The specified amount is not an integer.");
                         }
                     }
                     else{
-                        $sender->sendMessage(TextFormat::RED."Please specify a valid amount.");
+                        $sender->sendMessage(TextFormat::YELLOW."Current player count is ".$this->getPlugin()->getServer()->getQueryInformation()->getPlayerCount().".");
                     }
+                    return true;
+                case "players":
+                    $modifier = $this->getPlugin()->getModifier();
+                    $sender->sendMessage(TextFormat::YELLOW."There are currently ".count($modifier->getPlayers())." players: ".$modifier->listPlayers().".");
+                    return true;
+                case "plugins":
+                    $modifier = $this->getPlugin()->getModifier();
+                    $sender->sendMessage(TextFormat::YELLOW."There are currently ".count($modifier->getPlugins())." plugins: ".$modifier->listPlugins().".");
                     return true;
                 default:
                     $sender->sendMessage("Usage: /queryfacade <sub-command> [parameters]");

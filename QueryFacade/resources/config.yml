@@ -1,4 +1,11 @@
 #Configuration file for QueryFacade v1.0.0
+apply:
+#Everything that is set to true will be sent, if set to false, that cloak will be disabled and real data will be sent
+ level: true
+ maxPlayerCount: true
+ playerCount: true
+ playerList: true
+ plugins: true
 combine: false
 #Set to true to allow query data to be combined with other servers, NOT IMPLEMENTED YET
 level: "world"
@@ -8,13 +15,13 @@ maxPlayerCount: 20
 playerCount: 20
 #Sets the player count sent in a query, try not to abuse this, or bad things might happen
 playerList:
-#Sets the players that will be "online"
-- "Gamecrafter"
-- "notch"
-- "shoghicp"
-- "Steve"
+#Sets the players that will be "online", format: "name;ipAddress;portNumber"
+- "Gamecrafter;HIDDEN_IP;UNKNOWN"
+- "notch;HIDDEN_IP;UNKNOWN"
+- "shoghicp;HIDDEN_IP;UNKNOWN"
+- "Steve;HIDDEN_IP;UNKNOWN"
 plugins:
-#Sets the plugins that will be "installed"
+#Sets the plugins that will be "installed", format: "name;versionString"
 - "DoMath;1.0.0"
 - "PHPUtils;1.0.0"
 - "QueryFacade;1.0.0"

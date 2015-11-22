@@ -9,7 +9,7 @@ use pocketmine\plugin\PluginDescription;
 
 class DummyPlugin implements Plugin{
     /** @var PluginDescription */
-    protected $description;
+    private $description;
     /**
      * @param string $name
      * @param string $version

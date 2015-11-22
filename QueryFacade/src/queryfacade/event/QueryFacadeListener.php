@@ -25,12 +25,12 @@ class QueryFacadeListener implements Listener{
      * @param QueryRegenerateEvent $event 
      */
     public function onQueryRegenerate(QueryRegenerateEvent $event){
-        $event->setPlugins($this->getPlugin()->getModifier()->getPlugins());
+        if($this->getPlugin()->isApplicable(QueryFacade::PLUGINS)) $event->setPlugins($this->getPlugin()->getModifier()->getPlugins());
         //var_dump($event->getPlugins());
-        $event->setPlayerList($this->getPlugin()->getModifier()->getPlayers());
+        if($this->getPlugin()->isApplicable(QueryFacade::PLAYERS)) $event->setPlayerList($this->getPlugin()->getModifier()->getPlayers());
         //var_dump($event->getPlayerList());
-        $event->setPlayerCount($this->getPlugin()->getModifier()->getPlayerCount());
-        $event->setMaxPlayerCount($this->getPlugin()->getModifier()->getMaxPlayerCount());
-        $event->setWorld($this->getPlugin()->getModifier()->getLevelName());
+        if($this->getPlugin()->isApplicable(QueryFacade::COUNT)) $event->setPlayerCount($this->getPlugin()->getModifier()->getPlayerCount());
+        if($this->getPlugin()->isApplicable(QueryFacade::MAX_COUNT)) $event->setMaxPlayerCount($this->getPlugin()->getModifier()->getMaxPlayerCount());
+        if($this->getPlugin()->isApplicable(QueryFacade::MAP)) $event->setWorld($this->getPlugin()->getModifier()->getLevelName());
     }
 }
