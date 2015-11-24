@@ -5,6 +5,7 @@ namespace rapidcmd\command;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\utils\TextFormat;
+use rapidcmd\task\DelayedCommandTask;
 use rapidcmd\RapidCMD;
 
 class RapidCMDCommand extends Command{
@@ -60,7 +61,7 @@ class RapidCMDCommand extends Command{
                     if(isset($args[1]) and isset($args[2])){
                         if(is_numeric($args[1])){
                             $command = implode(" ", array_slice($args, 2));
-                            $this->getPlugin()->runLater($command, $args[1]);
+                            $this->getPlugin()->getServer()->getScheduler()->scheduleDelayedTask(new DelayedCommandTask($this->getPlugin(), $command), ($args[1] * 20));
                             $sender->sendMessage(TextFormat::GREEN."Command \"".$command."\" will be run in ".$args[1]." seconds.");
                         }
                         else{
@@ -72,6 +73,19 @@ class RapidCMDCommand extends Command{
                     }
                     return true;
                 case "as":
+                    if(isset($args[1]) and ($player = $sender->getServer()->getPlayer($args[1]))){
+                        if(isset($args[2])){
+                            $command = implode(" ", array_slice($args, 2));
+                            $sender->getServer()->dispatchCommand($player, $command);
+                            $sender->sendMessage(TextFormat::GREEN."Command \"".$command."\" was run as ".$player->getName().".");
+                        }
+                        else{
+                            $sender->sendMessage(TextFormat::RED."Please specify a command.");
+                        }
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Please specify a valid player.");
+                    }
                     return true;
                 case "cmd":
                     return true;

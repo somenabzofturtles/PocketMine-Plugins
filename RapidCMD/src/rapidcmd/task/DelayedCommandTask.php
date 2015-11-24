@@ -6,7 +6,7 @@ use pocketmine\command\ConsoleCommandSender;
 use pocketmine\scheduler\PluginTask;
 use rapidcmd\RapidCMD;
 
-class RunCommandTask extends PluginTask{
+class DelayedCommandTask extends PluginTask{
     /** @var RapidCMD */
     private $plugin;
     /** @var string */

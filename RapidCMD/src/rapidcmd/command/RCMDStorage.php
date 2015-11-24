@@ -40,6 +40,7 @@ class RCMDStorage{
                 }
             }
             $this->getPlugin()->getServer()->getLogger()->info("Loaded ".$count."/".count($commands)." RCMD(s).");
+            //var_dump($this->getCommands(), $count);
         }
         else{
             $this->getPlugin()->getServer()->getLogger()->critical("Failed to load RCMD(s), please make sure the config file is properly set up.");
