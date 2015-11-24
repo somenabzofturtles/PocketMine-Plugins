@@ -16,8 +16,6 @@ class QueryPocketMineTask extends AsyncTask{
     /** @var string */
     private $sender;
     /** @var mixed */
-    private $data = null;
-    /** @var mixed */
     private $result = null;
     /**
      * @param string $plugin
@@ -30,8 +28,8 @@ class QueryPocketMineTask extends AsyncTask{
     public function onRun(){
         try{
             //$attempts = 0;
-            $this->data = json_decode(file_get_contents("http://forums.pocketmine.net/api.php"), true);
-            foreach($this->data["resources"] as $info){
+            $data = json_decode(file_get_contents("http://forums.pocketmine.net/api.php"), true);
+            foreach($data["resources"] as $info){
                 if(strtolower($info["title"]) === $this->plugin){
                     $this->result = $info;
                     //echo $info["title"]." was found after ".$attempts." failed attempt(s)!\n";
