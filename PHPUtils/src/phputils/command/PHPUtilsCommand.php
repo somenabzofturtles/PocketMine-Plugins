@@ -2,6 +2,7 @@
 
 namespace phputils\command;
 
+use phputils\task\QueryPocketMineTask;
 use phputils\PHPUtils;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -14,7 +15,7 @@ class PHPUtilsCommand extends Command{
      * @param PHPUtils $plugin
      */
     public function __construct(PHPUtils $plugin){
-        parent::__construct("phputils", "Shows all PHPUtils commands", null, ["pt"]);
+        parent::__construct("phputils", "Shows all PHPUtils commands", null, ["pu"]);
         $this->setPermission("phputils.command.phputils");
         $this->plugin = $plugin;
     }
@@ -36,6 +37,7 @@ class PHPUtilsCommand extends Command{
             "hash" => "Returns a hash the specified string using the specified hashing algorithm",
             "help" => "Shows all PHPUtils commands",
             "php" => "Gets info about the PHP software the system is using",
+            "plugin" => "Sends info about the specified plugin retrieved from the PocketMine server",
             "shell" => "Executes a command in the command shell",
         ];
         $sender->sendMessage("PHPUtils commands:");
@@ -68,7 +70,7 @@ class PHPUtilsCommand extends Command{
                 case "class":
                     if(isset($args[1])){
                         $classPath = str_replace(["/", "\\\\", "//"], "\\", $args[1]);
-                        $sender->sendMessage($classPath." ".(class_exists($classPath, false) ? "was" : "was not")." found.");
+                        $sender->sendMessage("Class ".$classPath." ".(class_exists($classPath, false) ? "was" : "was not")." found.");
                     }
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a class path.");
@@ -80,7 +82,7 @@ class PHPUtilsCommand extends Command{
                     return true;
                 case "func":
                     if(isset($args[1])){
-                        $sender->sendMessage($args[1]." ".(function_exists($args[1]) ? "was" : "was not")." found.");
+                        $sender->sendMessage("Function ".$args[1]." ".(function_exists($args[1]) ? "was" : "was not")." found.");
                     }
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a function name.");
@@ -109,6 +111,15 @@ class PHPUtilsCommand extends Command{
                     return true;
                 case "php":
                     $this->getPlugin()->sendPHPInfo($sender);
+                    return true;
+                case "plugin":
+                    if(isset($args[1])){
+                        $sender->sendMessage(TextFormat::GREEN."Searching...");
+                        $this->getPlugin()->getServer()->getScheduler()->scheduleAsyncTask(new QueryPocketMineTask($args[1], $sender->getName()));
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Please specify a plugin name.");
+                    }
                     return true;
                 case "shell":
                     if(isset($args[1])){

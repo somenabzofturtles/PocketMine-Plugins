@@ -3,8 +3,10 @@
 namespace phputils;
 
 use phputils\command\PHPUtilsCommand;
+use phputils\task\QueryPocketMineTask;
 use pocketmine\command\CommandSender;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\TextFormat;
 
 class PHPUtils extends PluginBase{
     const NOT_FOUND = -1;
@@ -67,6 +69,34 @@ class PHPUtils extends PluginBase{
         ];
         foreach($info as $key => $value){
             $sender->sendMessage($key.": ".$value);
+        }
+    }
+    /**
+     * @param CommandSender $sender
+     * @param mixed $data
+     */
+    public function sendPluginInfo(CommandSender $sender, $data){
+        if(is_array($data)){
+            $sender->sendMessage(TextFormat::GREEN."Successfully retrieved data!");
+            foreach($data as $name => $info){
+                $sender->sendMessage($name.": ".$info);
+            }
+            //var_dump($data);
+        }
+        else{
+            switch($data){
+                case QueryPocketMineTask::SERVER_OFFLINE:
+                    $sender->sendMessage(TextFormat::RED."Failed to retrieve data, the PocketMine server appears to be offline.");
+                    break;
+                case QueryPocketMineTask::PLUGIN_NOT_FOUND:
+                    $sender->sendMessage(TextFormat::RED."Failed to retrieve data, the plugin wasn't found.");
+                    break;
+                /*
+                default:
+                    $sender->sendMessage(TextFormat::RED."Failed to retrieve data, an unknown error occurred."); //This will most likely never happen
+                    break;
+                 */
+            }
         }
     }
 }

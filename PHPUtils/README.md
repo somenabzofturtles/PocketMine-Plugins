@@ -16,6 +16,7 @@ Main command: **phputils**, **pu**
 |hash|Returns a hash the specified string using the specified hashing algorithm|
 |help|Shows all PHPUtils commands|
 |php|Gets info about the PHP software the system is using|
+|plugin|Sends info about the specified plugin retrieved from the PocketMine server|
 |shell|Executes a command in the command shell|
 
 ###Permissions:

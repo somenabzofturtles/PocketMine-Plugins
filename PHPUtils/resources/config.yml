@@ -6,4 +6,5 @@ func: false
 hash: false
 help: true
 php: false
+plugin: false
 shell: false
