@@ -77,7 +77,7 @@ class PHPUtils extends PluginBase{
      */
     public function sendPluginInfo(CommandSender $sender, $data){
         if(is_array($data)){
-            $sender->sendMessage(TextFormat::GREEN."Successfully retrieved data!");
+            $sender->sendMessage(TextFormat::GREEN."Successfully retrieved data!"); //Server is online, the plugin was found
             foreach($data as $name => $info){
                 $sender->sendMessage($name.": ".$info);
             }
@@ -86,10 +86,10 @@ class PHPUtils extends PluginBase{
         else{
             switch($data){
                 case QueryPocketMineTask::SERVER_OFFLINE:
-                    $sender->sendMessage(TextFormat::RED."Failed to retrieve data, the PocketMine server appears to be offline.");
+                    $sender->sendMessage(TextFormat::RED."Failed to retrieve data, the PocketMine server appears to be offline."); //Server is offline
                     break;
                 case QueryPocketMineTask::PLUGIN_NOT_FOUND:
-                    $sender->sendMessage(TextFormat::RED."Failed to retrieve data, the plugin wasn't found.");
+                    $sender->sendMessage(TextFormat::RED."Failed to retrieve data, the plugin wasn't found."); //Server is online, but the plugin wasn't found
                     break;
                 /*
                 default:

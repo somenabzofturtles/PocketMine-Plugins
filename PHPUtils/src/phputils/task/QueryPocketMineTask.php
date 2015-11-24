@@ -21,6 +21,7 @@ class QueryPocketMineTask extends AsyncTask{
     private $result = null;
     /**
      * @param string $plugin
+     * @param string $sender
      */
     public function __construct($plugin, $sender){
         $this->plugin = strtolower($plugin);
