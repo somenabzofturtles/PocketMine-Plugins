@@ -77,7 +77,7 @@ class PHPUtils extends PluginBase{
      */
     public function sendPluginInfo(CommandSender $sender, $data){
         if(is_array($data)){
-            $sender->sendMessage(TextFormat::GREEN."Successfully retrieved data!"); //Server is online, the plugin was found
+            $sender->sendMessage(TextFormat::GREEN."Successfully retrieved information on ".$data["title"]." by ".$data["author_username"]."!"); //Server is online, the plugin was found
             foreach($data as $name => $info){
                 $sender->sendMessage($name.": ".$info);
             }
@@ -97,6 +97,28 @@ class PHPUtils extends PluginBase{
                     break;
                  */
             }
+        }
+    }
+    /**
+     * @param mixed $const
+     * @return string
+     */
+    public function getConstantValue($const){
+        $const = constant($const);
+        if(is_array($const)){
+            return implode(", ", $const);
+        }
+        elseif(is_bool($const) or is_float($const) or is_int($const) or is_string($const)){
+            return (string) $const;
+        }
+        elseif(is_resource($const)){
+            return "FAILED_TO_READ";
+        }
+        elseif(is_null($const)){
+            return "NULL";
+        }
+        else{
+            return "UNKNOWN_VALUE";
         }
     }
 }

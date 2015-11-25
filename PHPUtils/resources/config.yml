@@ -1,6 +1,7 @@
 #Configuration file for PHPUtils v1.0.0
 algos: false
 class: false
+const: false
 extens: false
 func: false
 hash: false

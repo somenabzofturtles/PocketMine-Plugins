@@ -11,6 +11,7 @@ Main command: **phputils**, **pu**
 |-----------|-----------|
 |algos|Lists all the registered hashing algorithms|
 |class|Checks if the specified class exists|
+|const|Returns the value of a constant, if it exists|
 |extens|Lists all the loaded PHP extensions|
 |func|Checks if the specified function exists|
 |hash|Returns a hash the specified string using the specified hashing algorithm|
@@ -27,4 +28,5 @@ Main command: **phputils**, **pu**
 ###Releases:
 |Version|Release Date|Download|
 |:-------:|------------|:--------:|
-|1.0.0|?|unavailable|
+|1.0.0|November 8, 2015|[available](https://github.com/Gamecrafter/PocketMine-Plugins/blob/master/PHPUtils/releases/PHPUtils_v1.0.0.phar?raw=true)|
+|1.1.0|?|unavailable|

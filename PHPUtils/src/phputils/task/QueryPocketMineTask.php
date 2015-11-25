@@ -38,7 +38,7 @@ class QueryPocketMineTask extends AsyncTask{
                 else{
                     $this->result = self::PLUGIN_NOT_FOUND;
                     //$attempts++;
-                    //echo $attempts." attempt(s) have been made to find ".$this->plugin.".\n";
+                    //echo $attempts." attempt(s) have been made to find \"".$this->plugin."\".\n";
                 }
             }
         }
