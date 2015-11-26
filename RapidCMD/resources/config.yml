@@ -1,20 +1,13 @@
 #Configuration file for RapidCMD v1.0.0
 commands:
- test1:
-  name: "test1"
+ example:
+  name: "example"
   #Sets the command name
-  description: "This is test1 command"
+  description: "This is an example command to show you how it works"
   #Sets the command description
-  permission: "command.test1"
-  #Sets the command permission node
-  value: "op"
-  #Sets the command perm value, four options: true, false, notop, op
-  actions:
-  - "run;say This is test1 command"
- test2:
-  name: "test2"
-  description: "This is test1 command"
-  permission: "command.test2"
-  value: "true"
-  actions:
-  - "run;say This is test2 command"
+  usage: "/example"
+  #Sets the command usage message
+  aliases: ["e"]
+  #Sets the command aliases
+  actions: []
+  #Sets the actions that will be executed upon execution

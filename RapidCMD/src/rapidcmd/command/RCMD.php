@@ -2,78 +2,31 @@
 
 namespace rapidcmd\command;
 
-class RCMD{
-    /** @var string */
-    protected $name;
-    /** @var string */
-    protected $description;
-    /** @var string */
-    protected $permNode;
-    /** @var mixed */
-    protected $permValue;
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
+
+class RCMD extends Command{
     /** @var string[] */
     protected $actions;
     /**
      * @param string $name
      * @param string $description
-     * @param string $permNode
-     * @param mixed $permValue
+     * @param string $usage
+     * @param string[] $aliases
      * @param string[] $actions
      */
-    public function __construct($name = "", $description = "", $permNode = "", $permValue = false, array $actions = []){
-        $this->name = $name;
-        $this->description = $description;
-        $this->permNode = $permNode;
-        $this->permValue = $permValue;
+    public function __construct($name, $description = "", $usage = null, array $aliases = [], array $actions = []){
+        parent::__construct($name, $description, $usage, $aliases);
+        $this->setPermission("rcmd.".strtolower($name));
         $this->actions = $actions;
     }
     /**
-     * @param string $name
+     * @param CommandSender $sender
+     * @param string $label
+     * @param string[] $args
      */
-    public function setName($name){
-        $this->name = $name;
-    }
-    /**
-     * @return string
-     */
-    public function getName(){
-        return $this->name;
-    }
-    /**
-     * @param string $description
-     */
-    public function setDescription($description){
-        $this->description = $description;
-    }
-    /**
-     * @return string
-     */
-    public function getDescription(){
-        return $this->description;
-    }
-    /**
-     * @param string $name
-     */
-    public function setPermNode($name){
-        $this->permNode = $name;
-    }
-    /**
-     * @return string
-     */
-    public function getPermNode(){
-        return $this->permNode;
-    }
-    /**
-     * @param mixed $value
-     */
-    public function setPermValue($value){
-        $this->permValue = $value;
-    }
-    /**
-     * @return bool|string
-     */
-    public function getPermValue(){
-        return $this->permValue;
+    public function execute(CommandSender $sender, $label, array $args){
+        if(!$this->testPermission($sender)) return false;
     }
     /**
      * @param string[] $actions
