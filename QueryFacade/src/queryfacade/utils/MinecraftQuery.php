@@ -31,7 +31,7 @@ class MinecraftQuery{
             throw new \InvalidArgumentException("Timeout must be an integer.");
 	}
 	$this->socket = @fsockopen("udp://".$ip, (int) $port, $errno, $errstr, $timeout);
-	if($errno or $this->socket === false){
+	if($errno or !$this->socket){
             throw new MinecraftQueryException("Could not create socket: ".$errstr);
         }
 	stream_set_timeout($this->socket, $timeout);
@@ -86,18 +86,19 @@ class MinecraftQuery{
 	}
 	$players = substr($data[1], 0, -2);
 	$data = explode("\x00", $data[0]);
-	$keys = [
-            "hostname" => "HostName",
-            "gametype" => "GameType",
-            "version" => "Version",
-            "plugins" => "Plugins",
-            "map" => "Map",
-            "numplayers" => "Players",
-            "maxplayers" => "MaxPlayers",
-            "hostport" => "HostPort",
-            "hostip" => "HostIp",
-            "game_id" => "GameName"
-	];
+        $keys = [
+            "hostname" => "hostname",
+            "gametype" => "gametype",
+            "game_id" => "game_id",
+            "version" => "version",
+            "server_engine" => "server_engine",
+            "plugins" => "plugins",
+            "map" => "map",
+            "numplayers" => "numplayers",
+            "maxplayers" => "maxplayers",
+            "hostip" => "hostip",
+            "hostport" => "hostport"
+        ];
 	foreach($data as $key => $value){
             if(~$key & 1){
 		if(!array_key_exists($value, $keys)){
@@ -111,19 +112,19 @@ class MinecraftQuery{
 		$info[$last] = mb_convert_encoding($value, "UTF-8");
             }
 	}
-	$info["players"] = intval($info["players"]);
-	$info["maxPlayers"] = intval($info["maxPlayers"]);
-	$info["hostPort"] = intval($info["hostPort"]);
+	$info["numplayers"] = (int) $info["numplayers"];
+	$info["maxplayers"] = (int) $info["maxplayers"];
+	$info["hostport"] = (int) $info["hostport"];
 	if($info["plugins"]){
             $data = explode(": ", $info["plugins"], 2);
-            $info["rawPlugins"] = $info["plugins"];
-            $info["software"] = $data[0];
+            $info["rawplugins"] = $info["plugins"];
+            $info["server_engine"] = $data[0];
             if(count($data) == 2){
 		$info["plugins"] = explode("; ", $data[1]);
             }
         }
 	else{
-            $info["software"] = "Vanilla";
+            $info["server_engine"] = "Vanilla";
 	}
 	$this->info = $info;
 	if(empty($players)){
@@ -136,7 +137,7 @@ class MinecraftQuery{
     /**
      * @param string $command
      * @param string $append
-     * @return bool
+     * @return mixed
      * @throws MinecraftQueryException
      */
     private function writeData($command, $append = ""){

@@ -8,11 +8,11 @@ use queryfacade\event\QueryFacadeListener;
 use queryfacade\utils\DataModifier;
 
 class QueryFacade extends PluginBase{
-    const PLUGINS = "apply.plugins";
-    const PLAYERS = "apply.playerList";
-    const COUNT = "apply.playerCount";
-    const MAX_COUNT = "apply.maxPlayerCount";
-    const MAP = "apply.level";
+    const PLUGINS = "plugins";
+    const PLAYERS = "playerList";
+    const COUNT = "playerCount";
+    const MAX_COUNT = "maxPlayerCount";
+    const MAP = "level";
     /** @var QueryModifier */
     private $modifier;
     public function onEnable(){
@@ -77,6 +77,6 @@ class QueryFacade extends PluginBase{
      * @return bool
      */
     public function isApplicable($name){
-        return $this->getConfig()->getNested($name) === true;
+        return $this->getConfig()->getNested("apply.".$name) === true;
     }
 }

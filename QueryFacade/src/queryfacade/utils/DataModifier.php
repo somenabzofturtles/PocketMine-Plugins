@@ -28,10 +28,12 @@ class DataModifier{
      * @param string[] $plugins
      */
     public function setPlugins(array $plugins){
+        $result = [];
         foreach($plugins as $plugin){
             $info = explode(";", $plugin);
-            $this->plugins[] = new DummyPlugin($info[0], isset($info[1]) ? $info[1] : "1.0.0");
+            $result[] = new DummyPlugin($info[0], isset($info[1]) ? $info[1] : "1.0.0");
         }
+        $this->plugins = $result;
     }
     /**
      * @return string
@@ -53,10 +55,12 @@ class DataModifier{
      * @param string[] $players
      */
     public function setPlayers(array $players){
+        $result = [];
         foreach($players as $player){
             $info = explode(";", $player);
-            $this->players[] = new DummyPlayer($info[0], isset($info[1]) ? $info[1] : "DUMMY", isset($info[2]) ? $info[2] : 19132);
+            $result[] = new DummyPlayer($info[0], isset($info[1]) ? $info[1] : "DUMMY", isset($info[2]) ? $info[2] : 19132);
         }
+        $this->players = $result;
     }
     /**
      * @return string

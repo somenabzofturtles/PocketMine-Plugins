@@ -12,21 +12,23 @@ class QueryServerTask extends AsyncTask{
     /** @var int */
     private $timeout;
     /** @var array */
-    private $data = [];
+    private $result = null;
     /**
      * @param array $targets
      * @param int $timeout
      */
     public function __construct($targets = [], $timeout = 3){
         $this->targets = $targets;
+        //var_dump($targets);
         $this->timeout = (int) $timeout;
     }
     public function onRun(){
         $query = new MinecraftQuery();
         foreach($this->targets as $target){
             $address = explode(":", $target);
-            $query->connect($address[0], $address[1]);
-            $this->data[] = $query->getInfo();
+            $query->connect($address[0], isset($address[1]) ? $address[1] : 19132);
+            $this->result[] = $query->getInfo();
+            //var_dump($query->getInfo());
         }
     }
     /**
