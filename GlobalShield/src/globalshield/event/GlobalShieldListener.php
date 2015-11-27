@@ -20,7 +20,6 @@ class GlobalShieldListener implements Listener{
      * @param GlobalShield $plugin
      */
     public function __construct(GlobalShield $plugin){
-        parent::__construct($plugin);
         $this->plugin = $plugin;
     }
     /** 

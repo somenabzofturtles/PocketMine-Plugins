@@ -8,6 +8,7 @@ use pocketmine\level\Level;
 use pocketmine\plugin\PluginBase;
 use pocketmine\tile\Sign;
 use pocketmine\tile\Tile;
+use pocketmine\Player;
 
 class GlobalShield extends PluginBase{
     const ACTION_BLOCK_BREAKING = 0;
@@ -56,5 +57,12 @@ class GlobalShield extends PluginBase{
                 $text .= strtolower(trim($line));
             }
         }
+    }
+    /**
+     * @param Player $player
+     * @param mixed $data
+     */
+    public function readData(Player $player, $data){
+        
     }
 }
