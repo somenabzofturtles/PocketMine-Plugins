@@ -5,6 +5,7 @@ namespace queryfacade\task;
 use pocketmine\scheduler\AsyncTask;
 use pocketmine\Server;
 use queryfacade\utils\MinecraftQuery;
+use queryfacade\utils\MinecraftQueryException;
 
 class QueryServerTask extends AsyncTask{
     /** @var string[] */
@@ -12,7 +13,7 @@ class QueryServerTask extends AsyncTask{
     /** @var int */
     private $timeout;
     /** @var array */
-    private $result = null;
+    private $result = [];
     /**
      * @param array $targets
      * @param int $timeout
@@ -23,18 +24,26 @@ class QueryServerTask extends AsyncTask{
         $this->timeout = (int) $timeout;
     }
     public function onRun(){
+        $data = [];
         $query = new MinecraftQuery();
         foreach($this->targets as $target){
             $address = explode(":", $target);
-            $query->connect($address[0], isset($address[1]) ? $address[1] : 19132);
-            $this->result[] = $query->getInfo();
-            //var_dump($query->getInfo());
+            try{
+                $query->connect($address[0], isset($address[1]) ? $address[1] : 19132);
+                $data[] = $query->getInfo();
+                //var_dump($query->getInfo());
+            }
+            catch(MinecraftQueryException $exception){
+                $data[] = false;
+                //echo "[".date("H:i:s")."]: ".$exception->getMessage()."\n";
+            }
         }
+        $this->result = $data;
     }
     /**
      * @param Server $server
      */
     public function onCompletion(Server $server){
-        //TODO: Find a way to store the server data back in the main thread
+        //var_dump($this->result);
     }
 }

@@ -13,11 +13,11 @@ use queryfacade\utils\MinecraftQueryException;
 class MinecraftQuery{
     const STATISTIC = 0x00;
     const HANDSHAKE = 0x09;
-    /** @var array */
+    /** @var array|bool */
     private $info;
-    /** @var array */
+    /** @var array|bool */
     private $players;
-    /** @var resource */
+    /** @var mixed */
     private $socket;
     /**
      * @param string $ip
