@@ -27,7 +27,7 @@ class EasyMessages extends PluginBase{
         $this->saveResource("values.txt");
     	$this->getServer()->getCommandMap()->register("easymessages", new EasyMessagesCommand($this));
     	$this->getServer()->getPluginManager()->registerEvents(new EasyMessagesListener($this), $this);
-    	if($this->getConfig()->getNested("message.autoBroadcast") === true){
+    	if($this->getConfig()->getNested("message.autoBroadcast")){
     	    $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoMessageTask($this), ($this->getConfig()->getNested("message.interval") * 20));
     	}
         switch(strtolower($this->getConfig()->getNested("popup.displayType"))){
@@ -146,7 +146,7 @@ class EasyMessages extends PluginBase{
     	    "&o",
     	    "&r"
     	];
-    	if($revert === true){
+    	if($revert){
     	    return str_replace($defaultFormat, "", $message);
     	}
     	else{

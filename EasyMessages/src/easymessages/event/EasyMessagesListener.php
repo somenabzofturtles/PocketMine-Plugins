@@ -25,7 +25,7 @@ class EasyMessagesListener implements Listener{
      * @param PlayerChatEvent $event 
      */
     public function onPlayerChat(PlayerChatEvent $event){
-        if(!$this->getPlugin()->getConfig()->getNested("color.colorChat") !== true and !$event->getPlayer()->hasPermission("easymessages.action.color")){
+        if(!$this->getPlugin()->getConfig()->getNested("color.colorChat") and !$event->getPlayer()->hasPermission("easymessages.action.color")){
             $event->setMessage($this->getPlugin()->replaceSymbols($event->getMessage(), true));
         }
     }
