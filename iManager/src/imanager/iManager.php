@@ -44,7 +44,7 @@ class iManager extends PluginBase{
      * @param bool $value
      */
     public function setAddressWhitelist(Player $player, $value = true){
-    	if($value === true){
+    	if($value){
     	    $this->ip->set(strtolower($player->getName()));
             $this->ip->save();
     	}
@@ -65,7 +65,7 @@ class iManager extends PluginBase{
      * @param bool $value
      */
     public function setExempt(Player $player, $value = true){
-	if($value === true){
+	if($value){
 	    $this->exempts->set(strtolower($player->getName()));
 	    $this->exempts->save();
 	}
@@ -141,10 +141,9 @@ class iManager extends PluginBase{
      * @param string $message
      */
     public function transferAll($ip = "127.0.0.1", $port = 19132, $message = ""){
-        $fastTransfer = $this->getServer()->getPluginManager()->getPlugin("FastTransfer");
-        if($fastTransfer instanceof PluginBase){
+        if(($plugin = $this->getServer()->getPluginManager()->getPlugin("FastTransfer")) instanceof PluginBase){
             foreach($this->getServer()->getOninePlayers() as $player){
-                $fastTransfer->transferPlayer($player, $ip, (int) $port, $message);
+                $plugin->transferPlayer($player, $ip, (int) $port, $message);
             }
         }
     }
