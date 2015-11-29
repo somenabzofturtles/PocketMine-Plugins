@@ -22,7 +22,7 @@ class PHPUtils extends PluginBase{
      */
     public function isCommandEnabled($name){
         if($this->getConfig()->exists($name, true)){
-            if($this->getConfig()->get(strtolower($name)) === true){
+            if($this->getConfig()->get(strtolower($name))){
                 return self::ENABLED; //Command found, and is enabled
             }
             return self::DISABLED; //Command found, and is disabled
