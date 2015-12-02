@@ -141,7 +141,7 @@ class MinecraftQuery{
      * @throws MinecraftQueryException
      */
     private function writeData($command, $append = ""){
-	$command = pack("c*", 0xfe, 0xfd, $command, 0x01, 0x02, 0x03, 0x04).$append;
+	$command = pack("c*", 0xFE, 0xFD, $command, 0x01, 0x02, 0x03, 0x04).$append;
 	$length = strlen($command);
 	if($length !== fwrite($this->socket, $command, $length)){
             throw new MinecraftQueryException("Failed to write on socket.");

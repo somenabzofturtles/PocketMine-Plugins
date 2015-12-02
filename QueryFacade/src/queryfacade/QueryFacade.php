@@ -20,50 +20,56 @@ class QueryFacade extends PluginBase{
         $this->modifier = new DataModifier();
     	$this->getServer()->getCommandMap()->register("queryfacade", new QueryFacadeCommand($this));
     	$this->getServer()->getPluginManager()->registerEvents(new QueryFacadeListener($this), $this);
-        if($this->isApplicable(self::PLUGINS)){
-            if(is_array($plugins = $this->getConfig()->get("plugins")) and !empty($plugins)){
-                $this->getModifier()->setPlugins($plugins);
-                $this->getServer()->getLogger()->notice(count($this->getModifier()->getPlugins())." plugin(s) have been \"installed\": ".$this->getModifier()->listPlugins().".");
+        if($this->getServer()->getConfigBoolean("enable-query", true)){
+            if($this->isApplicable(self::PLUGINS)){
+                if(is_array($plugins = $this->getConfig()->get("plugins"))){
+                    $this->getModifier()->setPlugins($plugins);
+                    $this->getServer()->getLogger()->notice(count($this->getModifier()->getPlugins())." plugin(s) have been \"installed\": ".$this->getModifier()->listPlugins().".");
+                }
+                else{
+                    $this->getServer()->getLogger()->alert("Plugin list is incorrectly set up, real plugin data will be sent instead.");
+                }
             }
             else{
-                $this->getServer()->getLogger()->alert("Plugin list is incorrectly set up or empty, real plugin data will be sent instead.");
+                $this->getServer()->getLogger()->alert("Plugin list cloak is disabled, real player list will be sent.");
             }
-        }
-        else{
-            $this->getServer()->getLogger()->alert("Plugin list cloak is disabled, real player list will be sent.");
-        }
-        if($this->isApplicable(self::PLAYERS)){
-            if(is_array($players = $this->getConfig()->get("playerList")) and !empty($players)){
-                $this->getModifier()->setPlayers($players);
-                $this->getServer()->getLogger()->notice(count($this->getModifier()->getPlayers())." player(s) have \"joined\" the game: ".$this->getModifier()->listPlayers().".");
+            if($this->isApplicable(self::PLAYERS)){
+                if(is_array($players = $this->getConfig()->get("playerList"))){
+                    $this->getModifier()->setPlayers($players);
+                    $this->getServer()->getLogger()->notice(count($this->getModifier()->getPlayers())." player(s) have \"joined\" the game: ".$this->getModifier()->listPlayers().".");
+                }
+                else{
+                    $this->getServer()->getLogger()->alert("Player list is incorrectly set up, real player data will be sent instead.");
+                }
             }
             else{
-                $this->getServer()->getLogger()->alert("Player list is incorrectly set up or empty, real player data will be sent instead.");
+                $this->getServer()->getLogger()->alert("Player list cloak disabled, real player list will be sent.");
+            }
+            if($this->isApplicable(self::COUNT)){
+                $this->getModifier()->setPlayerCount($count = $this->getConfig()->get("playerCount"));
+                $this->getServer()->getLogger()->notice("Player count set to ".$count.".");
+            }
+            else{
+                $this->getServer()->getLogger()->alert("Player count cloak disabled, real player count will be sent.");
+            }
+            if($this->isApplicable(self::MAX_COUNT)){
+                $this->getModifier()->setMaxPlayerCount($maxCount = $this->getConfig()->get("maxPlayerCount"));
+                $this->getServer()->getLogger()->notice("Max player count set to ".$maxCount.".");
+            }
+            else{
+                $this->getServer()->getLogger()->alert("Max player count cloak disabled, real max player count will be sent.");
+            }
+            if($this->isApplicable(self::MAP)){
+                $this->getModifier()->setLevelName($this->getConfig()->get("level"));
+                $this->getServer()->getLogger()->notice("Current map name set to \"".$this->getModifier()->getLevelName()."\".");
+            }
+            else{
+                $this->getServer()->getLogger()->alert("Map cloak disabled, real map name will be sent.");
             }
         }
         else{
-            $this->getServer()->getLogger()->alert("Player list cloak disabled, real player list will be sent.");
-        }
-        if($this->isApplicable(self::COUNT)){
-            $this->getModifier()->setPlayerCount($count = $this->getConfig()->get("playerCount"));
-            $this->getServer()->getLogger()->notice("Player count set to ".$count.".");
-        }
-        else{
-            $this->getServer()->getLogger()->alert("Player count cloak disabled, real player count will be sent.");
-        }
-        if($this->isApplicable(self::MAX_COUNT)){
-            $this->getModifier()->setMaxPlayerCount($maxCount = $this->getConfig()->get("maxPlayerCount"));
-            $this->getServer()->getLogger()->notice("Max player count set to ".$count.".");
-        }
-        else{
-            $this->getServer()->getLogger()->alert("Max player count cloak disabled, real max player count will be sent.");
-        }
-        if($this->isApplicable(self::MAP)){
-            $this->getModifier()->setLevelName($this->getConfig()->get("level"));
-            $this->getServer()->getLogger()->notice("Current map name set to \"".$this->getModifier()->getLevelName()."\".");
-        }
-        else{
-            $this->getServer()->getLogger()->alert("Map cloak disabled, real map name will be sent.");
+            $this->getServer()->getLogger()->critical("Query is currently disabled for this server. This plugin won't work if it is disabled. You can enable query by going to the PocketMine properties file and setting \"enable-query\" to \"on\".");
+            $this->getPluginLoader()->disablePlugin($this);
         }
     }
     /**
