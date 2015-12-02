@@ -28,6 +28,8 @@ class SkinToolsListener implements Listener{
     }
     /** 
      * @param EntityDamageEvent $event 
+     * @priority MONITOR
+     * @ignoreCancelled true
      */
     public function onEntityDamage(EntityDamageEvent $event){
         if($event instanceof EntityDamageByEntityEvent){
@@ -50,6 +52,8 @@ class SkinToolsListener implements Listener{
     }
     /** 
      * @param PlayerLoginEvent $event 
+     * @priority HIGHEST
+     * @ignoreCancelled true
      */
     public function onPlayerLogin(PlayerLoginEvent $event){
         $this->getPlugin()->storeSkinData($event->getPlayer());
@@ -57,6 +61,7 @@ class SkinToolsListener implements Listener{
     }
     /** 
      * @param PlayerQuitEvent $event 
+     * @priority MONITOR
      */
     public function onPlayerQuit(PlayerQuitEvent $event){
         if($this->getPlugin()->isSkinStored($event->getPlayer())){

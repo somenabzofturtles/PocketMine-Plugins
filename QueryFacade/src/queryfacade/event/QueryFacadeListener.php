@@ -23,6 +23,7 @@ class QueryFacadeListener implements Listener{
     }
     /** 
      * @param QueryRegenerateEvent $event 
+     * @priority HIGHEST
      */
     public function onQueryRegenerate(QueryRegenerateEvent $event){
         if($this->getPlugin()->isApplicable(QueryFacade::PLUGINS)) $event->setPlugins($this->getPlugin()->getModifier()->getPlugins());

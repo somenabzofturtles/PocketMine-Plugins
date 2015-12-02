@@ -24,12 +24,16 @@ class iManagerListener implements Listener{
     }
     /**
      * @param PlayerMoveEvent $event
+     * @priority HIGHEST
+     * @ignoreCancelled true
      */
     public function onPlayerMove(PlayerMoveEvent $event){
         
     }
     /**
      * @param PlayerPreLoginEvent $event
+     * @priority HIGHEST
+     * @ignoreCancelled true
      */
     public function onPlayerPreLogin(PlayerPreLoginEvent $event){
         if(!$this->getPlugin()->isAddressWhitelisted($event->getPlayer()->getAddress()) and $this->getPlugin()->getConfig()->getNested("plugin.ipWhitelist") === true){

@@ -22,7 +22,8 @@ class EasyMessagesListener implements Listener{
         return $this->plugin;
     }
     /** 
-     * @param PlayerChatEvent $event 
+     * @param PlayerChatEvent $event
+     * @priority MONITOR
      */
     public function onPlayerChat(PlayerChatEvent $event){
         if(!$this->getPlugin()->getConfig()->getNested("color.colorChat") and !$event->getPlayer()->hasPermission("easymessages.action.color")){

@@ -25,18 +25,23 @@ class RapidCMDListener implements Listener{
     }
     /**
      * @param PlayerCommandPreprocessEvent $event
+     * @priority LOWEST
+     * @ignoreCancelled true
      */
     public function onPlayerCommandPreprocess(PlayerCommandPreprocessEvent $event){
 
     }
     /**
      * @param RemoteServerCommandEvent $event
+     * @priority LOWEST
      */
     public function onRemoteServerCommand(RemoteServerCommandEvent $event){
         
     }
     /**
      * @param ServerCommandEvent $event
+     * @priority LOWEST
+     * @ignoreCancelled true
      */
     public function onServerCommand(ServerCommandEvent $event){
         

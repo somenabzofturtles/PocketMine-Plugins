@@ -23,6 +23,8 @@ class BlockFreezerListener implements Listener{
     }
     /**
      * @param BlockUpdateEvent $event
+     * @priority HIGHEST
+     * @ignoreCancelled true
      */
     public function onBlockUpdate(BlockUpdateEvent $event){
 	if($this->getPlugin()->isBlockSpecified($event->getBlock())){

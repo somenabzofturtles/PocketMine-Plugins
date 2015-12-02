@@ -25,18 +25,22 @@ class MyTagListener implements Listener{
     }
     /**
      * @param PlayerChatEvent $event
+     * @priority MONITOR
+     * @ignoreCancelled true
      */
     public function onPlayerChat(PlayerChatEvent $event){
 
     }
     /**
      * @param PlayerJoinEvent $event
+     * @priority MONITOR
      */
     public function onPlayerJoin(PlayerJoinEvent $event){
 
     }
     /**
      * @param PlayerQuitEvent $event
+     * @priority MONITOR
      */
     public function onPlayerQuit(PlayerQuitEvent $event){
 
