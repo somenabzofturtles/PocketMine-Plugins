@@ -1,4 +1,4 @@
-#Configuration file for RestartMe v1.2.0
+#Configuration file for RestartMe v1.3.0
 broadcastInterval: 1200
 #Sets the interval of the countdown before broadcast, in seconds
 broadcastMessage: "§eServer will restart in {RESTART_FORMAT_TIME}."
@@ -11,7 +11,7 @@ memoryLimit: 1200M
 #Sets the max memory that can be allocated before server restarts due to overload
 #B = byte; K = kilobyte; M = megabyte; G = gigabyte; T = terabyte
 overloadQuitMessage: "§eServer restarted due to overload."
-#Sets the message sent to a player when they are kicked because of a memory overload
+#Sets the message sent to a player when they are kicked because of a server restart triggered by a memory overload
 quitMessage: "§aServer restarted."
 #Sets the message sent to a player when they are kicked because of a server restart
 restartInterval: 90

@@ -29,3 +29,4 @@ Main command: **restartme**, **rm**
 |1.0.0|September 10, 2015|[available](https://github.com/Gamecrafter/PocketMine-Plugins/blob/master/RestartMe/releases/RestartMe_v1.0.0.phar?raw=true)|
 |1.1.0|October 12, 2015|[available](http://forums.pocketmine.net/plugins/restartme.1509/download?version=2836)|
 |1.2.0|?|unavailable|
+|1.3.0|?|unavailable|
