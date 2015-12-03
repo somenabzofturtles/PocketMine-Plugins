@@ -20,7 +20,7 @@ class RestartMe extends PluginBase{
         $this->saveResource("values.txt");
         $this->getServer()->getCommandMap()->register("restartme", new RestartMeCommand($this));
         $this->getServer()->getScheduler()->scheduleRepeatingTask(new AutoBroadcastTask($this), ($this->getConfig()->get("broadcastInterval") * 20));
-        if($this->getConfig()->get("restartOnOverload") === true){
+        if($this->getConfig()->get("restartOnOverload")){
             $this->getServer()->getScheduler()->scheduleRepeatingTask(new CheckMemoryTask($this), 6000);
             $this->getServer()->getLogger()->notice("Memory overload restarts are enabled. If memory usage goes above ".$this->getMemoryLimit().", the server will restart.");
         }

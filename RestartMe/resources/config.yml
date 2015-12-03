@@ -2,9 +2,9 @@
 broadcastInterval: 1200
 #Sets the interval of the countdown before broadcast, in seconds
 broadcastMessage: "§eServer will restart in {RESTART_FORMAT_TIME}."
-#Sets the message format, will broadcast at the intervals set in broadcastInterval
+#Sets the message format, will broadcast at the intervals set in broadcastInterval, refer to values.txt for entire list of usable values
 countdownMessage: "Server restarting in {RESTART_TIME}..."
-#Sets the message format, will broadcast during countdown
+#Sets the message format, will broadcast during countdown, refer to values.txt for entire list of usable values
 displayType: chat
 #Sets how players get the countdown message, three options: chat, popup, tip
 memoryLimit: 1200M
