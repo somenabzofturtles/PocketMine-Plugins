@@ -18,8 +18,6 @@ class BasicCalculator{
      */
     public static function toString($input, $mode){
         $output = "";
-        $answer = null;
-        $symbol = null;
         switch($mode){
             case self::ADD:
                 $symbol = "+";
@@ -48,6 +46,10 @@ class BasicCalculator{
             case self::EXPONENT:
                 $symbol = "^";
                 if(is_array($input)) $answer = self::exponent($input[0], $input[1]);
+                break;
+            default:
+                $symbol = "";
+                $answer = "ERROR";
                 break;
         }
         if(is_array($input)){
