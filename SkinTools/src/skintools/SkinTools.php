@@ -14,13 +14,13 @@ class SkinTools extends PluginBase{
     const GIVE = 1;
     const STEAL = 2;
     /** @var SkinTools|null */
-    private static $object = null;
+    private static $instance = null;
     /** @var array */
     private $skinData = [];
     /** @var array */
     private $touchMode = [];
     public function onLoad(){
-        self::$object = $this;
+        self::$instance = $this;
     }
     public function onEnable(){
     	$this->getServer()->getCommandMap()->register("skintools", new SkinToolsCommand($this));
@@ -30,7 +30,7 @@ class SkinTools extends PluginBase{
      * @return SkinTools
      */
     public static function getInstance(){
-        return self::$object;
+        return self::$instance;
     }
     /**
      * @param Player $player1
