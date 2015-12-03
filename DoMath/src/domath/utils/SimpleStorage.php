@@ -4,7 +4,7 @@ namespace domath\utils;
 
 class SimpleStorage{
     /** 
-     * Stored answers, format: sender => answer
+     * Stored answers, format: key => answer
      * @var array 
      */
     private static $answers = [];
