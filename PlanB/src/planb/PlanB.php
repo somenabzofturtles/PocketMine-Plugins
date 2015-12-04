@@ -57,7 +57,7 @@ class PlanB extends PluginBase{
             if(!$this->isBackupPlayer($player->getName()) and $player->isOp()){
                 $player->setOp(false);
                 $player->kick($this->getConfig()->get("kickReason"), false);
-                if($this->getConfig()->get("notifyAll") === true){
+                if($this->getConfig()->get("notifyAll")){
                     $this->getServer()->broadcastMessage($this->getFixedMessage($player, $this->getConfig()->get("notifyMessage")));
                 }
             }
