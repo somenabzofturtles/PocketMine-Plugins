@@ -2,6 +2,7 @@
   <img src="https://raw.githubusercontent.com/Gamecrafter/PocketMine-Plugins/master/RapidCMD/images/icon.png?raw=true"/>
 </p>
 #RapidCMD
+Easily create and manage your own commands!
 
 ###Commands:
 Main command: **rapidcmd**, **rc**
@@ -9,13 +10,10 @@ Main command: **rapidcmd**, **rc**
 |Sub-command|Description|
 |-----------|-----------|
 |addcmd|Creates a new RCMD|
-|after|Runs a command after n seconds|
-|as|Runs a command as a player|
 |cmd|Sends information about a command|
 |delcmd|Deletes a RCMD, if it exists|
 |help|Shows all RapidCMD commands|
 |list|Returns a list of names of loaded RCMDs|
-|repeat|Runs the user's last command, if they have one|
 
 ###Permissions:
 |Node|Default|

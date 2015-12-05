@@ -4,7 +4,7 @@ version: 1.0.0
 api: 1.10.0
 load: STARTUP
 author: Gamecrafter
-description: 
+description: Easily create and manage your own commands!
 website: https://github.com/Gamecrafter/PocketMine-Plugins/tree/master/RapidCMD
 permissions:
  rapidcmd:
