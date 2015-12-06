@@ -2,6 +2,7 @@
 
 namespace easymessages\task;
 
+use easymessages\utils\Utils;
 use easymessages\EasyMessages;
 use pocketmine\scheduler\PluginTask;
 
@@ -25,6 +26,6 @@ class AutoTipTask extends PluginTask{
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        $this->getPlugin()->broadcastTip($this->getPlugin()->getRandomMessage($this->getPlugin()->getConfig()->getNested("tip.autoMessages")));
+        $this->getPlugin()->broadcastTip(Utils::getRandom($this->getPlugin()->getConfig()->getNested("tip.autoMessages")));
     }
 }

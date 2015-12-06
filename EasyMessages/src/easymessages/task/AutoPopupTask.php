@@ -2,6 +2,7 @@
 
 namespace easymessages\task;
 
+use easymessages\utils\Utils;
 use easymessages\EasyMessages;
 use pocketmine\scheduler\PluginTask;
 
@@ -25,6 +26,6 @@ class AutoPopupTask extends PluginTask{
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        $this->getPlugin()->broadcastPopup($this->getPlugin()->getRandomMessage($this->getPlugin()->getConfig()->getNested("popup.autoMessages")));
+        $this->getPlugin()->broadcastPopup(Utils::getRandom($this->getPlugin()->getConfig()->getNested("popup.autoMessages")));
     }
 }

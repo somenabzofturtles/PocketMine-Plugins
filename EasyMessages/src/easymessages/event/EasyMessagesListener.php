@@ -2,6 +2,7 @@
 
 namespace easymessages\event;
 
+use easymessages\utils\Utils;
 use easymessages\EasyMessages;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\Listener;
@@ -27,7 +28,7 @@ class EasyMessagesListener implements Listener{
      */
     public function onPlayerChat(PlayerChatEvent $event){
         if(!$this->getPlugin()->getConfig()->getNested("color.colorChat") and !$event->getPlayer()->hasPermission("easymessages.action.color")){
-            $event->setMessage($this->getPlugin()->replaceSymbols($event->getMessage(), true));
+            $event->setMessage(Utils::replaceSymbols($event->getMessage(), true));
         }
     }
 }

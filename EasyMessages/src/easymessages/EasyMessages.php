@@ -15,7 +15,6 @@ use easymessages\task\ScrollingPopupTask;
 use easymessages\task\ScrollingTipTask;
 use easymessages\task\UpdateMotdTask;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\TextFormat;
 
 class EasyMessages extends PluginBase{
     /** @var string */
@@ -85,74 +84,6 @@ class EasyMessages extends PluginBase{
     	    $player->sendTip($message);
     	}
     }
-    /** 
-     * @param array $messages
-     * @return string
-     */
-    public function getRandomMessage(array $messages){
-    	if(is_array($messages)) return $messages[array_rand($messages, 1)];
-    }
-    /**
-     * @param string $message
-     * @param bool $revert
-     * @return string
-     */
-    public function replaceSymbols($message, $revert = false){
-    	$defaultFormat = [
-    	    TextFormat::BLACK,
-    	    TextFormat::DARK_BLUE,
-    	    TextFormat::DARK_GREEN,
-    	    TextFormat::DARK_AQUA,
-    	    TextFormat::DARK_RED,
-    	    TextFormat::DARK_PURPLE,
-    	    TextFormat::GOLD,
-    	    TextFormat::GRAY,
-    	    TextFormat::DARK_GRAY,
-    	    TextFormat::BLUE,
-    	    TextFormat::GREEN,
-    	    TextFormat::AQUA,
-    	    TextFormat::RED,
-    	    TextFormat::LIGHT_PURPLE,
-    	    TextFormat::YELLOW,
-    	    TextFormat::WHITE,
-    	    TextFormat::OBFUSCATED,
-    	    TextFormat::BOLD,
-    	    TextFormat::STRIKETHROUGH,
-    	    TextFormat::UNDERLINE,
-    	    TextFormat::ITALIC,
-    	    TextFormat::RESET
-    	];
-    	$newFormat = [
-    	    "&0",
-    	    "&1",
-    	    "&2",
-    	    "&3",
-    	    "&4",
-    	    "&5",
-    	    "&6",
-    	    "&7",
-    	    "&8",
-    	    "&9",
-    	    "&a",
-    	    "&b",
-    	    "&c",
-    	    "&d",
-    	    "&e",
-    	    "&f",
-    	    "&k",
-    	    "&l",
-    	    "&m",
-    	    "&n",
-    	    "&o",
-    	    "&r"
-    	];
-    	if($revert){
-    	    return str_replace($defaultFormat, "", $message);
-    	}
-    	else{
-    	    return str_replace($newFormat, $defaultFormat, $message);
-    	}
-    }
     /**
      * @param string $message
      */
@@ -160,7 +91,7 @@ class EasyMessages extends PluginBase{
         $this->scrollingPopup = (string) $message;
     }
     /**
-     * @return string|null
+     * @return string
      */
     public function getScrollingPopup(){
         return $this->scrollingPopup;
@@ -172,7 +103,7 @@ class EasyMessages extends PluginBase{
         $this->scrollingTip = (string) $message;
     }
     /**
-     * @return string|null
+     * @return string
      */
     public function getScrollingTip(){
         return $this->scrollingTip;
