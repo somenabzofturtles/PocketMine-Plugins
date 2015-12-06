@@ -31,6 +31,7 @@ class EasyMessagesCommand extends Command{
         $commands = [
             "help" => "Shows all EasyMessages commands",
             "message" => "Sends a message",
+            "motd" => "Sets the server MOTD",
             "popup" => "Sends a popup",
             "tip" => "Sends a tip"
         ];
@@ -71,6 +72,9 @@ class EasyMessagesCommand extends Command{
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a recipient.");
                     }
+                    return true;
+                case "motd":
+                    //TODO: Fully implement command
                     return true;
                 case "p":
                 case "popup":

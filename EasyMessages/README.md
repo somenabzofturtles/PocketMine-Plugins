@@ -10,6 +10,7 @@ Main command: **easymessages**, **em**
 |-----------|-----------|
 |help|Shows all EasyMessages commands|
 |message|Sends a message|
+|motd|Sets the server MOTD|
 |popup|Sends a popup|
 |tip|Sends a tip|
 
