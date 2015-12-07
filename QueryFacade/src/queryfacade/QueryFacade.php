@@ -5,6 +5,7 @@ namespace queryfacade;
 use pocketmine\plugin\PluginBase;
 use queryfacade\command\QueryFacadeCommand;
 use queryfacade\event\QueryFacadeListener;
+use queryfacade\task\UpdateDataTask;
 use queryfacade\utils\DataModifier;
 
 class QueryFacade extends PluginBase{
@@ -24,7 +25,7 @@ class QueryFacade extends PluginBase{
             if($this->isApplicable(self::PLUGINS)){
                 if(is_array($plugins = $this->getConfig()->get("plugins"))){
                     $this->getModifier()->setPlugins($plugins);
-                    $this->getServer()->getLogger()->notice(count($this->getModifier()->getPlugins())." plugin(s) have been \"installed\": ".$this->getModifier()->listPlugins().".");
+                    $this->getServer()->getLogger()->notice(count($this->getModifier()->getPlugins())." plugin(s) have been \"installed\"".(count($plugins) > 0 ? ": ".$this->getModifier()->listPlugins() : "").".");
                 }
                 else{
                     $this->getServer()->getLogger()->alert("Plugin list is incorrectly set up, real plugin data will be sent instead.");
@@ -36,7 +37,7 @@ class QueryFacade extends PluginBase{
             if($this->isApplicable(self::PLAYERS)){
                 if(is_array($players = $this->getConfig()->get("playerList"))){
                     $this->getModifier()->setPlayers($players);
-                    $this->getServer()->getLogger()->notice(count($this->getModifier()->getPlayers())." player(s) have \"joined\" the game: ".$this->getModifier()->listPlayers().".");
+                    $this->getServer()->getLogger()->notice(count($this->getModifier()->getPlayers())." player(s) have \"joined\" the game".(count($players) > 0 ? ": ".$this->getModifier()->listPlayers() : "").".");
                 }
                 else{
                     $this->getServer()->getLogger()->alert("Player list is incorrectly set up, real player data will be sent instead.");
@@ -65,6 +66,13 @@ class QueryFacade extends PluginBase{
             }
             else{
                 $this->getServer()->getLogger()->alert("Map cloak disabled, real map name will be sent.");
+            }
+            if($this->getConfig()->get("combine")){
+                $this->getServer()->getScheduler()->scheduleRepeatingTask(new UpdateDataTask($this), 2400);
+                $this->getServer()->getLogger()->notice("Query data will be combined with the servers specified in the configuration file. Data will be updated once every 2 minutes.");
+            }
+            else{
+                $this->getServer()->getLogger()->notice("Query data will not be combined.");
             }
         }
         else{

@@ -6,6 +6,7 @@ use pocketmine\scheduler\AsyncTask;
 use pocketmine\Server;
 use queryfacade\utils\MinecraftQuery;
 use queryfacade\utils\MinecraftQueryException;
+use queryfacade\QueryFacade;
 
 class QueryServerTask extends AsyncTask{
     /** @var string[] */
@@ -30,8 +31,10 @@ class QueryServerTask extends AsyncTask{
             $address = explode(":", $target);
             try{
                 $query->connect($address[0], isset($address[1]) ? $address[1] : 19132);
-                $data[] = $query->getInfo();
+                $data[]["info"] = $query->getInfo();
                 //var_dump($query->getInfo());
+                $data[]["players"] = $query->getPlayers();
+                //var_dump($query->getPlugins());
             }
             catch(MinecraftQueryException $exception){
                 $data[] = false;
@@ -45,5 +48,16 @@ class QueryServerTask extends AsyncTask{
      */
     public function onCompletion(Server $server){
         //var_dump($this->result);
+        $numPlayers = 0;
+        $maxPlayers = 0;
+        foreach($this->result as $result){
+            if(is_array($result)) continue;
+            $numPlayers += $result["numplayers"];
+            $maxPlayers += $result["maxplayers"];
+        }
+        if(($plugin = $server->getPluginManager()->getPlugin("QueryFacade")) instanceof QueryFacade){
+            $plugin->getModifier()->setPlayerCount($numPlayers);
+            $plugin->getModifier()->setMaxPlayerCount($maxPlayers);
+        }
     }
 }

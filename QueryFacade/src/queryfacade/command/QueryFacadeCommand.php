@@ -29,12 +29,16 @@ class QueryFacadeCommand extends Command{
      */
     private function sendCommandHelp(CommandSender $sender){
         $commands = [
+            "addplayer" => "Adds a player to the player list",
+            "addplugin" => "Adds a plugin to the plugin list",
             "help" => "Shows all QueryFacade commands",
             "level" => "Changes the server's current default level",
             "maxplayercount" => "Changes the server's max player count",
             "playercount" => "Changes the server's player count",
             "players" => "Returns a list of players being sent in query",
-            "plugins" => "Returns a list of plugins being sent in query"
+            "plugins" => "Returns a list of plugins being sent in query",
+            "removeplayer" => "Removes the specified player from the player list",
+            "removeplugin" => "Removes the specified plugin from the plugin list"
         ];
         $sender->sendMessage("QueryFacade commands:");
         foreach($commands as $name => $description){
@@ -50,71 +54,103 @@ class QueryFacadeCommand extends Command{
     public function execute(CommandSender $sender, $label, array $args){
         if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
+            $modifier = $this->getPlugin()->getModifier();
             switch(strtolower($args[0])){
+                case "apr":
+                case "addplayer":
+                    if(isset($args[1])){
+                        $this->getPlugin()->getModifier()->addPlayer($args[1], isset($args[2]) ? $args[2] : "DUMMY", isset($args[3]) ? $args[3] : 19132);
+                        $sender->sendMessage(TextFormat::GREEN."Added \"".$args[1]."\" to the player list.");
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Failed to add player, no name specified.");
+                    }
+                    return true;
+                case "apn":
+                case "addplugin":
+                    if(isset($args[1]) and isset($args[2])){
+                        $this->getPlugin()->getModifier()->addPlugin($args[1], $args[2]);
+                        $sender->sendMessage(TextFormat::GREEN."Added \"".$args[1]."\" to the plugin list.");
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Failed to add plugin, no name/version specified.");
+                    }
+                    return true;
                 case "help":
                     $this->sendCommandHelp($sender);
                     return true;
                 case "level":
                     if(isset($args[1])){
-                        if($this->getPlugin()->isApplicable(QueryFacade::MAP)){
-                            $this->getPlugin()->getModifier()->setLevelName($args[1]);
-                            $sender->sendMessage(TextFormat::GREEN."Set level name to \"".$args[1]."\", change will be applied in the next query.");
-                        }
-                        else{
-                            $sender->sendMessage(TextFormat::RED."Map cloak is not enabled.");
-                        }
+                        $this->getPlugin()->getModifier()->setLevelName($args[1]);
+                        $sender->sendMessage(TextFormat::GREEN."Set level name to \"".$args[1]."\".");
                     }
                     else{
-                        $sender->sendMessage(TextFormat::YELLOW."Current map name is \"".$this->getPlugin()->getServer()->getQueryInformation()->getWorld()."\".");
+                        $sender->sendMessage(TextFormat::YELLOW."Current map name is \"".$modifier->getLevelName()."\".");
                     }
                     return true;
                 case "mpc":
                 case "maxplayercount":
                     if(isset($args[1])){
                         if(is_numeric($args[1])){
-                            if($this->getPlugin()->isApplicable(QueryFacade::MAX_COUNT)){
-                                $this->getPlugin()->getModifier()->setMaxPlayerCount($args[1]);
-                                $sender->sendMessage(TextFormat::GREEN."Set max player count to ".$args[1].", change will be applied in the next query.");
-                            }
-                            else{
-                                $sender->sendMessage(TextFormat::RED."Max player count cloak is not enabled.");
-                            }
+                            $this->getPlugin()->getModifier()->setMaxPlayerCount($args[1]);
+                            $sender->sendMessage(TextFormat::GREEN."Set max player count to ".$args[1].".");
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."The specified amount is not an integer.");
                         }
                     }
                     else{
-                        $sender->sendMessage(TextFormat::YELLOW."Current max player count is ".$this->getPlugin()->getServer()->getQueryInformation()->getMaxPlayerCount().".");
+                        $sender->sendMessage(TextFormat::YELLOW."Current max player count is ".$modifier->getMaxPlayerCount().".");
                     }
                     return true;
                 case "pc":
                 case "playercount":
                     if(isset($args[1])){
                         if(is_numeric($args[1])){
-                            if($this->getPlugin()->isApplicable(QueryFacade::MAX_COUNT)){
-                                $this->getPlugin()->getModifier()->setPlayerCount($args[1]);
-                                $sender->sendMessage(TextFormat::GREEN."Set player count to ".$args[1].", change will be applied in the next query.");
-                            }
-                            else{
-                                $sender->sendMessage(TextFormat::RED."Player count cloak is not enabled.");
-                            }
+                            $this->getPlugin()->getModifier()->setPlayerCount($args[1]);
+                            $sender->sendMessage(TextFormat::GREEN."Set player count to ".$args[1].".");
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."The specified amount is not an integer.");
                         }
                     }
                     else{
-                        $sender->sendMessage(TextFormat::YELLOW."Current player count is ".$this->getPlugin()->getServer()->getQueryInformation()->getPlayerCount().".");
+                        $sender->sendMessage(TextFormat::YELLOW."Current player count is ".$modifier->getPlayerCount().".");
                     }
                     return true;
                 case "players":
-                    $modifier = $this->getPlugin()->getModifier();
-                    $sender->sendMessage(TextFormat::YELLOW."There are currently ".count($modifier->getPlayers())." players: ".$modifier->listPlayers().".");
+                    $sender->sendMessage(TextFormat::YELLOW."There are currently ".count($modifier->getPlayers())." player(s)".(count($modifier->getPlayers()) > 0 ? ": ".$modifier->listPlayers() : "").".");
                     return true;
                 case "plugins":
-                    $modifier = $this->getPlugin()->getModifier();
-                    $sender->sendMessage(TextFormat::YELLOW."There are currently ".count($modifier->getPlugins())." plugins: ".$modifier->listPlugins().".");
+                    $sender->sendMessage(TextFormat::YELLOW."There are currently ".count($modifier->getPlugins())." plugin(s)".(count($modifier->getPlugins()) > 0 ? ": ".$modifier->listPlugins() : "").".");
+                    return true;
+                case "rpr":
+                case "removeplayer":
+                    if(isset($args[1])){
+                        if($this->getPlugin()->getModifier()->removePlayer($args[1])){
+                            $sender->sendMessage(TextFormat::GREEN."Removed \"".$args[1]."\" from the player list.");
+                        }
+                        else{
+                            $sender->sendMessage(TextFormat::RED."That player couldn't be found.");
+                        }
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Please specify a player.");
+                    }
+                    return true;
+                case "rpn":
+                case "removeplugin":
+                    if(isset($args[1])){
+                        if($this->getPlugin()->getModifier()->removePlugin($args[1])){
+                            $sender->sendMessage(TextFormat::GREEN."Removed \"".$args[1]."\" from the plugin list.");
+                        }
+                        else{
+                            $sender->sendMessage(TextFormat::RED."That plugin couldn't be found.");
+                        }
+                    }
+                    else{
+                        $sender->sendMessage(TextFormat::RED."Please specify a plugin.");
+                    }
                     return true;
                 default:
                     $sender->sendMessage("Usage: /queryfacade <sub-command> [parameters]");

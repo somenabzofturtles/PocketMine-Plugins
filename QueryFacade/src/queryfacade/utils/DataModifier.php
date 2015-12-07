@@ -28,12 +28,28 @@ class DataModifier{
      * @param string[] $plugins
      */
     public function setPlugins(array $plugins){
-        $result = [];
         foreach($plugins as $plugin){
             $info = explode(";", $plugin);
-            $result[] = new DummyPlugin($info[0], isset($info[1]) ? $info[1] : "1.0.0");
+            $this->addPlugin($info[0], isset($info[1]) ? $info[1] : "1.0.0");
         }
-        $this->plugins = $result;
+    }
+    /**
+     * @param string $name
+     * @param string $version
+     */
+    public function addPlugin($name, $version = "1.0.0"){
+        $this->plugins[strtolower($name)] = new DummyPlugin($name, $version);
+    }
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function removePlugin($name){
+        if(array_key_exists(strtolower($name), $this->plugins)){
+            unset($this->plugins[strtolower($name)]);
+            return true;
+        }
+        return false;
     }
     /**
      * @return string
@@ -55,12 +71,29 @@ class DataModifier{
      * @param string[] $players
      */
     public function setPlayers(array $players){
-        $result = [];
         foreach($players as $player){
             $info = explode(";", $player);
-            $result[] = new DummyPlayer($info[0], isset($info[1]) ? $info[1] : "DUMMY", isset($info[2]) ? $info[2] : 19132);
+            $this->addPlayer($info[0], isset($info[1]) ? $info[1] : "DUMMY", isset($info[2]) ? $info[2] : 19132);
         }
-        $this->players = $result;
+    }
+    /**
+     * @param string $name
+     * @param string $ip
+     * @param int $port
+     */
+    public function addPlayer($name, $ip = "DUMMY", $port = 19132){
+        $this->players[strtolower($name)] = new DummyPlugin($name, $ip, $port);
+    }
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function removePlayer($name){
+        if(array_key_exists(strtolower($name), $this->players)){
+            unset($this->players[strtolower($name)]);
+            return true;
+        }
+        return false;
     }
     /**
      * @return string

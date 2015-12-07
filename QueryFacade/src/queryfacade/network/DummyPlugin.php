@@ -15,7 +15,7 @@ class DummyPlugin implements Plugin{
      * @param string $version
      */
     public function __construct($name, $version = "1.0.0"){
-        $this->description = new PluginDescription(["name" => (string) $name, "main" => "", "version" => (string) $version, "api" => "1.0.0"]);
+        $this->description = new PluginDescription(["name" => $name, "main" => "", "version" => $version, "api" => "1.0.0"]);
     }
     public function onLoad(){
     }
