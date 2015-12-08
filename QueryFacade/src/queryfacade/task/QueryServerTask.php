@@ -31,14 +31,12 @@ class QueryServerTask extends AsyncTask{
             $address = explode(":", $target);
             try{
                 $query->connect($address[0], isset($address[1]) ? $address[1] : 19132);
-                $data[]["info"] = $query->getInfo();
+                $data[] = ["info" => $query->getInfo()/*, "players" => $query->getPlayers()*/];
                 //var_dump($query->getInfo());
-                $data[]["players"] = $query->getPlayers();
-                //var_dump($query->getPlugins());
+                //var_dump($query->getPlayers());
             }
             catch(MinecraftQueryException $exception){
-                $data[] = false;
-                //echo "[".date("H:i:s")."]: ".$exception->getMessage()."\n";
+                $data[] = $exception->getMessage();
             }
         }
         $this->result = $data;
@@ -48,12 +46,16 @@ class QueryServerTask extends AsyncTask{
      */
     public function onCompletion(Server $server){
         //var_dump($this->result);
-        $numPlayers = 0;
-        $maxPlayers = 0;
+        $numPlayers = count($server->getOnlinePlayers());
+        $maxPlayers = $server->getMaxPlayers();
         foreach($this->result as $result){
-            if(is_array($result)) continue;
-            $numPlayers += $result["numplayers"];
-            $maxPlayers += $result["maxplayers"];
+            if(is_array($result)){
+                $numPlayers += $result["info"]["numplayers"];
+                $maxPlayers += $result["info"]["maxplayers"];
+            }
+            else{
+                $server->getLogger()->critical($result);
+            }
         }
         if(($plugin = $server->getPluginManager()->getPlugin("QueryFacade")) instanceof QueryFacade){
             $plugin->getModifier()->setPlayerCount($numPlayers);

@@ -67,12 +67,12 @@ class QueryFacade extends PluginBase{
             else{
                 $this->getServer()->getLogger()->alert("Map cloak disabled, real map name will be sent.");
             }
-            if($this->getConfig()->get("combine")){
+            if($this->getConfig()->get("combine") and is_array($this->getConfig()->get("servers"))){
                 $this->getServer()->getScheduler()->scheduleRepeatingTask(new UpdateDataTask($this), 2400);
-                $this->getServer()->getLogger()->notice("Query data will be combined with the servers specified in the configuration file. Data will be updated once every 2 minutes.");
+                $this->getServer()->getLogger()->notice("Query data will be combined with the servers specified in the config file, and will be updated every 2 minutes.");
             }
             else{
-                $this->getServer()->getLogger()->notice("Query data will not be combined.");
+                $this->getServer()->getLogger()->notice("Query data will not be combined, it was disabled or incorrectly set up.");
             }
         }
         else{

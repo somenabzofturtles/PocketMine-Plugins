@@ -2,11 +2,17 @@
 
 namespace queryfacade\utils;
 
-//use queryfacade\event\server\QueryInformationChangeEvent;
+use queryfacade\event\plugin\AddPlayerEvent;
+use queryfacade\event\plugin\AddPluginEvent;
+use queryfacade\event\plugin\ChangeLevelNameEvent;
+use queryfacade\event\plugin\ChangeMaxPlayerCountEvent;
+use queryfacade\event\plugin\ChangePlayerCountEvent;
+use queryfacade\event\plugin\RemovePlayerEvent;
+use queryfacade\event\plugin\RemovePluginEvent;
 use queryfacade\network\DummyPlayer;
 use queryfacade\network\DummyPlugin;
 
-//TODO: Fire QueryInformationChangeEvent when query data is modified, fully implement events
+//TODO: Implement calling of QueryFacade events
 class DataModifier{
     /** @var DummyPlugin[] */
     private $plugins = [];
