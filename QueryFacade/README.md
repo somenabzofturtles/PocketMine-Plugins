@@ -12,7 +12,7 @@ Main command: **queryfacade**, **qf**
 |addplayer|Adds a player to the player list|
 |addplugin|Adds a plugin to the plugin list|
 |help|Shows all QueryFacade commands|
-|level|Changes the server's current default level|
+|map|Changes the server's current default map name|
 |maxplayercount|Changes the server's max player count|
 |playercount|Changes the server's player count|
 |players|Returns a list of players being sent in query|

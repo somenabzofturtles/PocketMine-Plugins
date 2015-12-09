@@ -2,21 +2,21 @@
 
 namespace queryfacade\event\plugin;
 
+use pocketmine\event\Cancellable;
 use queryfacade\event\plugin\QueryFacadeEvent;
-use queryfacade\QueryFacade;
 
-class ChangeMaxPlayerCountEvent extends QueryFacadeEvent{
+class ChangeMaxPlayerCountEvent extends QueryFacadeEvent implements Cancellable{
+    /** @var \pocketmine\event\HandlerList */
+    public static $handlerList = null;
     /** @var int */
-    protected $oldCount;
+    private $oldCount;
     /** @var int */
-    protected $newCount;
+    private $newCount;
     /**
-     * @param QueryFacade $plugin
      * @param int $oldCount
      * @param int $newCount
      */
-    public function __construct(QueryFacade $plugin, $oldCount, $newCount){
-        parent::__construct($plugin);
+    public function __construct($oldCount, $newCount){
         $this->oldCount = (int) $oldCount;
         $this->newCount = (int) $newCount;
     }
@@ -29,7 +29,7 @@ class ChangeMaxPlayerCountEvent extends QueryFacadeEvent{
     /**
      * @param int $count
      */
-    public function setOldName($count){
+    public function setOldCount($count){
         $this->oldCount = (int) $count;
     }
     /**

@@ -34,7 +34,7 @@ class QueryFacadeListener implements Listener{
         //var_dump($event->getPlayerCount());
         if($this->getPlugin()->isApplicable(QueryFacade::MAX_COUNT)) $event->setMaxPlayerCount($this->getPlugin()->getModifier()->getMaxPlayerCount());
         //var_dump($event->getMaxPlayerCount());
-        if($this->getPlugin()->isApplicable(QueryFacade::MAP)) $event->setWorld($this->getPlugin()->getModifier()->getLevelName());
+        if($this->getPlugin()->isApplicable(QueryFacade::MAP)) $event->setWorld($this->getPlugin()->getModifier()->getWorld());
         //var_dump($event->getWorld());
         //var_dump($event->getExtraData());
         //var_dump($event->getLongQuery());

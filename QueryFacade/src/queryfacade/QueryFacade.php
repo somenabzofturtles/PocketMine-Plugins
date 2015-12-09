@@ -18,7 +18,7 @@ class QueryFacade extends PluginBase{
     private $modifier;
     public function onEnable(){
         $this->saveDefaultConfig();
-        $this->modifier = new DataModifier();
+        $this->modifier = new DataModifier($this->getServer());
     	$this->getServer()->getCommandMap()->register("queryfacade", new QueryFacadeCommand($this));
     	$this->getServer()->getPluginManager()->registerEvents(new QueryFacadeListener($this), $this);
         if($this->getServer()->getConfigBoolean("enable-query", true)){
@@ -61,8 +61,8 @@ class QueryFacade extends PluginBase{
                 $this->getServer()->getLogger()->alert("Max player count cloak disabled, real max player count will be sent.");
             }
             if($this->isApplicable(self::MAP)){
-                $this->getModifier()->setLevelName($this->getConfig()->get("level"));
-                $this->getServer()->getLogger()->notice("Current map name set to \"".$this->getModifier()->getLevelName()."\".");
+                $this->getModifier()->setWorld($this->getConfig()->get("level"));
+                $this->getServer()->getLogger()->notice("Current map name set to \"".$this->getModifier()->getWorld()."\".");
             }
             else{
                 $this->getServer()->getLogger()->alert("Map cloak disabled, real map name will be sent.");
@@ -72,7 +72,7 @@ class QueryFacade extends PluginBase{
                 $this->getServer()->getLogger()->notice("Query data will be combined with the servers specified in the config file, and will be updated every 2 minutes.");
             }
             else{
-                $this->getServer()->getLogger()->notice("Query data will not be combined, it was disabled or incorrectly set up.");
+                $this->getServer()->getLogger()->alert("Query data will not be combined, it was disabled or incorrectly set up.");
             }
         }
         else{

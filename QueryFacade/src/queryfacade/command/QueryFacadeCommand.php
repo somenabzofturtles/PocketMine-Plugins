@@ -32,7 +32,7 @@ class QueryFacadeCommand extends Command{
             "addplayer" => "Adds a player to the player list",
             "addplugin" => "Adds a plugin to the plugin list",
             "help" => "Shows all QueryFacade commands",
-            "level" => "Changes the server's current default level",
+            "map" => "Changes the server's current default map name",
             "maxplayercount" => "Changes the server's max player count",
             "playercount" => "Changes the server's player count",
             "players" => "Returns a list of players being sent in query",
@@ -79,13 +79,13 @@ class QueryFacadeCommand extends Command{
                 case "help":
                     $this->sendCommandHelp($sender);
                     return true;
-                case "level":
+                case "map":
                     if(isset($args[1])){
-                        $this->getPlugin()->getModifier()->setLevelName($args[1]);
-                        $sender->sendMessage(TextFormat::GREEN."Set level name to \"".$args[1]."\".");
+                        $this->getPlugin()->getModifier()->setWorld($args[1]);
+                        $sender->sendMessage(TextFormat::GREEN."Set map name to \"".$args[1]."\".");
                     }
                     else{
-                        $sender->sendMessage(TextFormat::YELLOW."Current map name is \"".$modifier->getLevelName()."\".");
+                        $sender->sendMessage(TextFormat::YELLOW."Current map name is \"".$modifier->getWorld()."\".");
                     }
                     return true;
                 case "mpc":

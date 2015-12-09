@@ -2,21 +2,21 @@
 
 namespace queryfacade\event\plugin;
 
+use pocketmine\event\Cancellable;
 use queryfacade\event\plugin\QueryFacadeEvent;
-use queryfacade\QueryFacade;
 
-class ChangeLevelNameEvent extends QueryFacadeEvent{
+class ChangeMapEvent extends QueryFacadeEvent implements Cancellable{
+    /** @var \pocketmine\event\HandlerList */
+    public static $handlerList = null;
     /** @var string */
-    protected $oldName;
+    private $oldName;
     /** @var string */
-    protected $newName;
+    private $newName;
     /**
-     * @param QueryFacade $plugin
      * @param string $oldName
      * @param string $newName
      */
-    public function __construct(QueryFacade $plugin, $oldName, $newName){
-        parent::__construct($plugin);
+    public function __construct($oldName, $newName){
         $this->oldName = (string) $oldName;
         $this->newName = (string) $newName;
     }

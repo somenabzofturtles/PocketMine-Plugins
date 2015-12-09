@@ -2,9 +2,10 @@
 
 namespace queryfacade\utils;
 
+use pocketmine\Server;
 use queryfacade\event\plugin\AddPlayerEvent;
 use queryfacade\event\plugin\AddPluginEvent;
-use queryfacade\event\plugin\ChangeLevelNameEvent;
+use queryfacade\event\plugin\ChangeMapEvent;
 use queryfacade\event\plugin\ChangeMaxPlayerCountEvent;
 use queryfacade\event\plugin\ChangePlayerCountEvent;
 use queryfacade\event\plugin\RemovePlayerEvent;
@@ -14,6 +15,8 @@ use queryfacade\network\DummyPlugin;
 
 //TODO: Implement calling of QueryFacade events
 class DataModifier{
+    /** @var Server */
+    private $server;
     /** @var DummyPlugin[] */
     private $plugins = [];
     /** @var DummyPlayer[] */
@@ -23,7 +26,13 @@ class DataModifier{
     /** @var int */
     private $maxPlayerCount = 0;
     /** @var string */
-    private $level = "world";
+    private $map = "world";
+    /**
+     * @param Server $server
+     */
+    public function __construct(Server $server = null){
+        $this->server = $server instanceof Server ? $server : Server::getInstance();
+    }
     /**
      * @return DummyPlugin[]
      */
@@ -138,13 +147,13 @@ class DataModifier{
     /**
      * @return string
      */
-    public function getLevelName(){
-        return $this->level;
+    public function getWorld(){
+        return $this->map;
     }
     /**
      * @param string $name
      */
-    public function setLevelName($name){
-        $this->level = (string) $name;
+    public function setWorld($name){
+        $this->map = (string) $name;
     }
 }

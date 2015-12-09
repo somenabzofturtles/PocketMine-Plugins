@@ -4,23 +4,22 @@ namespace queryfacade\event\plugin;
 
 use queryfacade\event\plugin\QueryFacadeEvent;
 use queryfacade\network\DummyPlayer;
-use queryfacade\QueryFacade;
 
 class RemovePlayerEvent extends QueryFacadeEvent{
+    /** @var \pocketmine\event\HandlerList */
+    public static $handlerList = null;
     /** @var DummyPlayer */
-    protected $dummy;
+    private $player;
     /**
-     * @param QueryFacade $plugin
-     * @param DummyPlayer $dummy
+     * @param DummyPlayer $player
      */
-    public function __construct(QueryFacade $plugin, DummyPlayer $dummy){
-        parent::__construct($plugin);
-        $this->dummy = $dummy;
+    public function __construct(DummyPlayer $player){
+        $this->player = $player;
     }
     /**
      * @return DummyPlayer
      */
-    public function getDummyPlayer(){
-        return $this->dummy;
+    public function getPlayer(){
+        return $this->player;
     }
 }
