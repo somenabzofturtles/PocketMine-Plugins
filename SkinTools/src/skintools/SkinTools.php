@@ -13,7 +13,7 @@ class SkinTools extends PluginBase{
     const NONE = 0;
     const GIVE = 1;
     const STEAL = 2;
-    /** @var SkinTools|null */
+    /** @var SkinTools */
     private static $instance = null;
     /** @var array */
     private $skinData = [];
@@ -44,7 +44,8 @@ class SkinTools extends PluginBase{
      * @param int $touchMode
      */
     public function setTouchMode(Player $player, $touchMode = self::NONE){
-        $this->getServer()->getPluginManager()->callEvent($event = new PlayerToggleTouchEvent($player, $this->getTouchMode($player), $touchMode));
+        $event = new PlayerToggleTouchEvent($player, $this->getTouchMode($player), $touchMode);
+        $this->getServer()->getPluginManager()->callEvent($event);
         if(!$event->isCancelled()){
             $this->touchMode[strtolower($player->getName())] = $event->getNewMode();
         }
