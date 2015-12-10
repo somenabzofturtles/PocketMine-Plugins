@@ -2,7 +2,6 @@
 
 namespace queryfacade\utils;
 
-use pocketmine\Server;
 use queryfacade\event\plugin\AddPlayerEvent;
 use queryfacade\event\plugin\AddPluginEvent;
 use queryfacade\event\plugin\ChangeMapEvent;
@@ -12,11 +11,11 @@ use queryfacade\event\plugin\RemovePlayerEvent;
 use queryfacade\event\plugin\RemovePluginEvent;
 use queryfacade\network\DummyPlayer;
 use queryfacade\network\DummyPlugin;
+use queryfacade\QueryFacade;
 
-//TODO: Implement calling of QueryFacade events
 class DataModifier{
-    /** @var Server */
-    private $server;
+    /** @var QueryFacade */
+    private $plugin;
     /** @var DummyPlugin[] */
     private $plugins = [];
     /** @var DummyPlayer[] */
@@ -28,10 +27,10 @@ class DataModifier{
     /** @var string */
     private $map = "world";
     /**
-     * @param Server $server
+     * @param QueryFacade $plugin
      */
-    public function __construct(Server $server = null){
-        $this->server = $server instanceof Server ? $server : Server::getInstance();
+    public function __construct(QueryFacade $plugin){
+        $this->plugin = $plugin;
     }
     /**
      * @return DummyPlugin[]
@@ -53,7 +52,9 @@ class DataModifier{
      * @param string $version
      */
     public function addPlugin($name, $version = "1.0.0"){
-        $this->plugins[strtolower($name)] = new DummyPlugin($name, $version);
+        $plugin = new DummyPlugin($name, $version);
+        $this->plugin->getServer()->getPluginManager()->callEvent(new AddPluginEvent($plugin));
+        $this->plugins[strtolower($name)] = $plugin;
     }
     /**
      * @param string $name
@@ -61,7 +62,9 @@ class DataModifier{
      */
     public function removePlugin($name){
         if(array_key_exists(strtolower($name), $this->plugins)){
-            unset($this->plugins[strtolower($name)]);
+            $plugin = $this->plugins[strtolower($name)];
+            $this->plugin->getServer()->getPluginManager()->callEvent(new RemovePluginEvent($plugin));
+            unset($plugin);
             return true;
         }
         return false;
@@ -97,7 +100,9 @@ class DataModifier{
      * @param int $port
      */
     public function addPlayer($name, $ip = "DUMMY", $port = 19132){
-        $this->players[strtolower($name)] = new DummyPlugin($name, $ip, $port);
+        $player = new DummyPlayer($name, $ip, $port);
+        $this->plugin->getServer()->getPluginManager()->callEvent(new AddPlayerEvent($player));
+        $this->players[strtolower($name)] = $player;
     }
     /**
      * @param string $name
@@ -105,7 +110,9 @@ class DataModifier{
      */
     public function removePlayer($name){
         if(array_key_exists(strtolower($name), $this->players)){
-            unset($this->players[strtolower($name)]);
+            $player = $this->players[strtolower($name)];
+            $this->plugin->getServer()->getPluginManager()->callEvent(new RemovePlayerEvent($player));
+            unset($player);
             return true;
         }
         return false;
@@ -130,7 +137,11 @@ class DataModifier{
      * @param int $count
      */
     public function setPlayerCount($count){
-        $this->playerCount = (int) $count;
+        $event = new ChangePlayerCountEvent($this->getPlayerCount(), $this->getPlayerCount() + $count);
+        $this->plugin->getServer()->getPluginManager()->callEvent($event);
+        if(!$event->isCancelled()){
+            $this->playerCount = (int) $count;
+        }
     }
     /** 
      * @return int
@@ -142,7 +153,11 @@ class DataModifier{
      * @param int $count
      */
     public function setMaxPlayerCount($count){
-        $this->maxPlayerCount = (int) $count;
+        $event = new ChangeMaxPlayerCountEvent($this->getMaxPlayerCount(), $this->getMaxPlayerCount() + $count);
+        $this->plugin->getServer()->getPluginManager()->callEvent($event);
+        if(!$event->isCancelled()){
+            $this->maxPlayerCount = (int) $count;
+        }
     }
     /**
      * @return string
@@ -154,6 +169,10 @@ class DataModifier{
      * @param string $name
      */
     public function setWorld($name){
-        $this->map = (string) $name;
+        $event = new ChangeMapEvent($this->getWorld(), $name);
+        $this->plugin->getServer()->getPluginManager()->callEvent($event);
+        if(!$event->isCancelled()){
+            $this->map = (string) $name;
+        }
     }
 }

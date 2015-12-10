@@ -18,7 +18,7 @@ class QueryFacade extends PluginBase{
     private $modifier;
     public function onEnable(){
         $this->saveDefaultConfig();
-        $this->modifier = new DataModifier($this->getServer());
+        $this->modifier = new DataModifier($this);
     	$this->getServer()->getCommandMap()->register("queryfacade", new QueryFacadeCommand($this));
     	$this->getServer()->getPluginManager()->registerEvents(new QueryFacadeListener($this), $this);
         if($this->getServer()->getConfigBoolean("enable-query", true)){
