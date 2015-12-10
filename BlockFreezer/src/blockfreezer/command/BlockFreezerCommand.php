@@ -18,12 +18,6 @@ class BlockFreezerCommand extends Command{
         $this->plugin = $plugin;
     }
     /**
-     * @return BlockFreezer
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /**
      * @param CommandSender $sender
      */
     public function sendCommandHelp(CommandSender $sender){

@@ -16,18 +16,12 @@ class ScrollingTipTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** 
-     * @return EasyMessages 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /**
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        $tip = $this->getPlugin()->getScrollingTip();
-        $this->getPlugin()->broadcastTip($tip);
-        $this->getPlugin()->setScrollingTip(Utils::next($tip));
+        $tip = $this->plugin->getScrollingTip();
+        $this->plugin->broadcastTip($tip);
+        $this->plugin->setScrollingTip(Utils::next($tip));
     }
 }

@@ -18,12 +18,6 @@ class RapidCMDListener implements Listener{
         $this->plugin = $plugin;
     }
     /**
-     * @return RapidCMD
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /**
      * @param PlayerCommandPreprocessEvent $event
      * @priority LOWEST
      * @ignoreCancelled true

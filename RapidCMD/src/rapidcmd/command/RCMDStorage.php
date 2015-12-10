@@ -14,14 +14,8 @@ class RCMDStorage{
     public function __construct(RapidCMD $plugin){
         $this->plugin = $plugin;
     }
-    /**
-     * @return RapidCMD
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     public function registerDefaults(){
-        if(is_array($commands = $this->getPlugin()->getConfig()->get("commands"))){
+        if(is_array($commands = $this->plugin->getConfig()->get("commands"))){
             $count = 0;
             foreach($commands as $command){
                 if(!$this->isCommandRegistered($command["name"])){
@@ -30,10 +24,10 @@ class RCMDStorage{
                     $count++;
                 }
             }
-            $this->getPlugin()->getServer()->getLogger()->info("Loaded ".$count."/".count($commands)." RCMD(s).");
+            $this->plugin->getServer()->getLogger()->info("Loaded ".$count."/".count($commands)." RCMD(s).");
         }
         else{
-            $this->getPlugin()->getServer()->getLogger()->critical("Failed to load RCMD(s), please make sure the config file is properly set up.");
+            $this->plugin->getServer()->getLogger()->critical("Failed to load RCMD(s), please make sure the config file is properly set up.");
         }
     }
     /**
@@ -42,7 +36,7 @@ class RCMDStorage{
      */
     public function addCommand(RCMD $command){
         if(!$this->isCommandRegistered($command->getName())){
-            $this->getPlugin()->getServer()->getCommandMap()->register($command->getName(), $command);
+            $this->plugin->getServer()->getCommandMap()->register($command->getName(), $command);
             return true;
         }
         return false;
@@ -53,7 +47,7 @@ class RCMDStorage{
      */
     public function removeCommand($command){
         if($this->isCommandRegistered($command)){
-            $this->getCommand($command)->unregister($this->getPlugin()->getServer()->getCommandMap());
+            $this->getCommand($command)->unregister($this->plugin->getServer()->getCommandMap());
             return true;
         }
         return false;
@@ -63,7 +57,7 @@ class RCMDStorage{
      */
     public function getCommands(){
         $rcmds = [];
-        foreach($this->getPlugin()->getServer()->getCommandMap()->getCommands() as $command){
+        foreach($this->plugin->getServer()->getCommandMap()->getCommands() as $command){
             if($this->isCommandRegistered($command->getName())) $rcmds[] = $command;
         }
         return $rcmds;
@@ -74,7 +68,7 @@ class RCMDStorage{
      */
     public function getCommand($name){
         if($this->isCommandRegistered($name)){
-            return $this->getPlugin()->getServer()->getCommandMap()->getCommand($name);
+            return $this->plugin->getServer()->getCommandMap()->getCommand($name);
         }
         return false;
     }
@@ -83,7 +77,7 @@ class RCMDStorage{
      * @return bool
      */
     public function isCommandRegistered($name){
-        $rcmd = $this->getPlugin()->getServer()->getCommandMap()->getCommand(strtolower($name));
+        $rcmd = $this->plugin->getServer()->getCommandMap()->getCommand(strtolower($name));
         return $rcmd instanceof RCMD and $rcmd->isRegistered();
     }
 }

@@ -17,15 +17,9 @@ class UpdateDataTask extends PluginTask{
         $this->plugin = $plugin;
     }
     /**
-     * @return QueryFacade
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /**
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        $this->getPlugin()->getServer()->getScheduler()->scheduleAsyncTask(new QueryServerTask($this->getPlugin()->getConfig()->get("servers"), $this->getPlugin()->getConfig()->get("timeout")));
+        $this->plugin->getServer()->getScheduler()->scheduleAsyncTask(new QueryServerTask($this->plugin->getConfig()->get("servers"), $this->plugin->getConfig()->get("timeout")));
     }
 }

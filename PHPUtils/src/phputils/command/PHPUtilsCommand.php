@@ -20,12 +20,6 @@ class PHPUtilsCommand extends Command{
         $this->plugin = $plugin;
     }
     /**
-     * @return PHPUtils
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /**
      * @param CommandSender $sender
      */
     private function sendCommandHelp(CommandSender $sender){
@@ -43,7 +37,7 @@ class PHPUtilsCommand extends Command{
         ];
         $sender->sendMessage("PHPUtils commands:");
         foreach($commands as $name => $description){
-            $sender->sendMessage(($this->getPlugin()->isCommandEnabled($name) ? TextFormat::GREEN : TextFormat::RED)."/phputils ".$name.": ".$description);
+            $sender->sendMessage(($this->plugin->isCommandEnabled($name) ? TextFormat::GREEN : TextFormat::RED)."/phputils ".$name.": ".$description);
         }
     }
     /**
@@ -55,17 +49,17 @@ class PHPUtilsCommand extends Command{
     public function execute(CommandSender $sender, $label, array $args){
         if(!$this->testPermission($sender)) return false;
         if(isset($args[0])){
-            if($this->getPlugin()->isCommandEnabled($args[0]) === PHPUtils::NOT_FOUND){
+            if($this->plugin->isCommandEnabled($args[0]) === PHPUtils::NOT_FOUND){
                 $sender->sendMessage(TextFormat::RED."Invalid sub-command specified, please use \"/phputils help\".");
                 return false;
             }
-            if($this->getPlugin()->isCommandEnabled($args[0]) === PHPUtils::DISABLED){
+            if($this->plugin->isCommandEnabled($args[0]) === PHPUtils::DISABLED){
                 $sender->sendMessage(TextFormat::RED."That command is disabled.");
                 return false;
             }
             switch(strtolower($args[0])){
                 case "algos":
-                    $algo = $this->getPlugin()->getAlgorithms();
+                    $algo = $this->plugin->getAlgorithms();
                     $sender->sendMessage("Algorithms (".$algo[0]."): ".$algo[1]);
                     return true;
                 case "class":
@@ -79,7 +73,7 @@ class PHPUtilsCommand extends Command{
                 case "const":
                     if(isset($args[1])){
                         if(defined($args[1])){
-                            $sender->sendMessage("Constant ".$args[1]." has the value: ".$this->getPlugin()->getConstantValue($args[1]).".");
+                            $sender->sendMessage("Constant ".$args[1]." has the value: ".$this->plugin->getConstantValue($args[1]).".");
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."That constant is undefined.");
@@ -90,7 +84,7 @@ class PHPUtilsCommand extends Command{
                     }
                     return true;
                 case "extens":
-                    $ext = $this->getPlugin()->getExtensions();
+                    $ext = $this->plugin->getExtensions();
                     $sender->sendMessage("Extensions (".$ext[0]."): ".$ext[1]);
                     return true;
                 case "func":
@@ -123,13 +117,13 @@ class PHPUtilsCommand extends Command{
                     $this->sendCommandHelp($sender);
                     return true;
                 case "php":
-                    $this->getPlugin()->sendPHPInfo($sender);
+                    $this->plugin->sendPHPInfo($sender);
                     return true;
                 case "plugin":
                     if(isset($args[1])){
                         $plugin = implode(" ", array_slice($args, 1));
                         $sender->sendMessage(TextFormat::GREEN."Searching for \"".$plugin."\", this may take a moment...");
-                        $this->getPlugin()->getServer()->getScheduler()->scheduleAsyncTask(new QueryPocketMineTask($plugin, $sender->getName()));
+                        $sender->getServer()->getScheduler()->scheduleAsyncTask(new QueryPocketMineTask($plugin, $sender->getName()));
                     }
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a plugin name.");

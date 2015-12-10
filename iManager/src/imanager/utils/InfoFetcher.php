@@ -21,12 +21,6 @@ class InfoFetcher{
         $this->plugin = $plugin;
     }
     /**
-     * @return iManager
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /**
      * @param CommandSender $sender
      * @param Block $block
      */
@@ -146,9 +140,9 @@ class InfoFetcher{
     	$sender->sendMessage("Is-alive: ".($player->isAlive() ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
     	$sender->sendMessage("Is-op: ".($player->isOp() ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
     	$sender->sendMessage("Is-banned: ".($player->isBanned() ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
-    	$sender->sendMessage("Is-exempt: ".($this->getPlugin()->isExempted($player) ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
+    	$sender->sendMessage("Is-exempt: ".($this->plugin->isExempted($player) ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
     	$sender->sendMessage("Is-name-whitelisted: ".($player->isWhitelisted() ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
-    	$sender->sendMessage("Is-ip-whitelisted: ".($this->getPlugin()->isAddressWhitelisted($player->getAddress()) ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
+    	$sender->sendMessage("Is-ip-whitelisted: ".($this->plugin->isAddressWhitelisted($player->getAddress()) ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
         $effectCount = 0;
         $effectNames = "";
         foreach($player->getEffects() as $effect){

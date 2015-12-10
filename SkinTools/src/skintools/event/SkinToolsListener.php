@@ -21,12 +21,6 @@ class SkinToolsListener implements Listener{
         $this->plugin = $plugin;
     }
     /** 
-     * @return SkinTools 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /** 
      * @param EntityDamageEvent $event 
      * @priority MONITOR
      * @ignoreCancelled true
@@ -34,16 +28,16 @@ class SkinToolsListener implements Listener{
     public function onEntityDamage(EntityDamageEvent $event){
         if($event instanceof EntityDamageByEntityEvent){
             if($event->getDamager() instanceof Player and $event->getEntity() instanceof Player){
-                switch($this->getPlugin()->getTouchMode($event->getDamager())){
+                switch($this->plugin->getTouchMode($event->getDamager())){
                     case SkinTools::GIVE:
                         $event->setCancelled(true);
-                        $this->getPlugin()->setStolenSkin($event->getEntity(), $event->getDamager());
+                        $this->plugin->setStolenSkin($event->getEntity(), $event->getDamager());
                         $event->getEntity()->sendMessage(TextFormat::GREEN.$event->getDamager()->getName()." gave you their skin!");
                         $event->getDamager()->sendMessage(TextFormat::GREEN.$event->getEntity()->getName()." has your skin now!");
                         break;
                     case SkinTools::STEAL:
                         $event->setCancelled(true);
-                        $this->getPlugin()->setStolenSkin($event->getDamager(), $event->getEntity());
+                        $this->plugin->setStolenSkin($event->getDamager(), $event->getEntity());
                         $event->getDamager()->sendMessage(TextFormat::GREEN."You got ".$event->getEntity()->getName()."'s skin.");
                         break;
                 }
@@ -56,17 +50,17 @@ class SkinToolsListener implements Listener{
      * @ignoreCancelled true
      */
     public function onPlayerLogin(PlayerLoginEvent $event){
-        $this->getPlugin()->storeSkinData($event->getPlayer());
-        $this->getPlugin()->setTouchMode($event->getPlayer(), SkinTools::NONE);
+        $this->plugin->storeSkinData($event->getPlayer());
+        $this->plugin->setTouchMode($event->getPlayer(), SkinTools::NONE);
     }
     /** 
      * @param PlayerQuitEvent $event 
      * @priority MONITOR
      */
     public function onPlayerQuit(PlayerQuitEvent $event){
-        if($this->getPlugin()->isSkinStored($event->getPlayer())){
-            $this->getPlugin()->removeSkinData($event->getPlayer());
+        if($this->plugin->isSkinStored($event->getPlayer())){
+            $this->plugin->removeSkinData($event->getPlayer());
         }
-        $this->getPlugin()->clearTouchMode($event->getPlayer());
+        $this->plugin->clearTouchMode($event->getPlayer());
     }
 }

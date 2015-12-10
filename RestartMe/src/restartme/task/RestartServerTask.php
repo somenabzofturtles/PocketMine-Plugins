@@ -15,23 +15,17 @@ class RestartServerTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** 
-     * @return RestartMe 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /**
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        if(!$this->getPlugin()->isTimerPaused()){
-            $this->getPlugin()->subtractTime(1);
-            if($this->getPlugin()->getTime() <= $this->getPlugin()->getConfig()->get("startCountdown")){
-                $this->getPlugin()->broadcastTime($this->getPlugin()->getConfig()->get("countdownMessage"), $this->getPlugin()->getConfig()->get("displayType"));
+        if(!$this->plugin->isTimerPaused()){
+            $this->plugin->subtractTime(1);
+            if($this->plugin->getTime() <= $this->plugin->getConfig()->get("startCountdown")){
+                $this->plugin->broadcastTime($this->plugin->getConfig()->get("countdownMessage"), $this->plugin->getConfig()->get("displayType"));
             }
-            if($this->getPlugin()->getTime() < 1){
-                $this->getPlugin()->initiateRestart(RestartMe::NORMAL);
+            if($this->plugin->getTime() < 1){
+                $this->plugin->initiateRestart(RestartMe::NORMAL);
             }
         }
     }

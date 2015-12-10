@@ -2,8 +2,9 @@
 
 namespace restartme\utils;
 
-class MemoryChecker{
+class Utils{
     /**
+     * Calculates the memory usage threshold from a string
      * @param string $toCheck
      * @return int
      */
@@ -25,6 +26,7 @@ class MemoryChecker{
         return $byteLimit;
     }
     /**
+     * Returns true if $toCheck is greater than the current memory usage
      * @param string $toCheck
      * @return bool
      */

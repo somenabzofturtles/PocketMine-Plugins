@@ -20,12 +20,6 @@ class EasyMessagesCommand extends Command{
         $this->plugin = $plugin;
     }
     /** 
-     * @return EasyMessages 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /** 
      * @param CommandSender $sender 
      */
     private function sendCommandHelp(CommandSender $sender){
@@ -82,7 +76,7 @@ class EasyMessagesCommand extends Command{
                     if(isset($args[1])){
                         $popup = Utils::replaceSymbols(implode(" ", array_slice($args, 2)));
                         if(strtolower($args[1]) === "@all"){
-                            $this->getPlugin()->broadcastPopup($popup);
+                            $this->plugin->broadcastPopup($popup);
                             $sender->sendMessage(TextFormat::GREEN."Sent popup to @all.");
                         }
                         elseif($player = $sender->getServer()->getPlayer($args[1])){
@@ -102,7 +96,7 @@ class EasyMessagesCommand extends Command{
                     if(isset($args[1])){
                         $tip = Utils::replaceSymbols(implode(" ", array_slice($args, 2)));
                         if(strtolower($args[1]) === "@all"){
-                            $this->getPlugin()->broadcastTip($tip);
+                            $this->plugin->broadcastTip($tip);
                             $sender->sendMessage(TextFormat::GREEN."Sent tip to @all.");
                         }
                         elseif($player = $sender->getServer()->getPlayer($args[1])){

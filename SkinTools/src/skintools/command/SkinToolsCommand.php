@@ -21,12 +21,6 @@ class SkinToolsCommand extends Command{
         $this->plugin = $plugin;
     }
     /** 
-     * @return SkinTools 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /** 
      * @param CommandSender $sender 
      */
     private function sendCommandHelp(CommandSender $sender){
@@ -80,7 +74,7 @@ class SkinToolsCommand extends Command{
                     if($sender instanceof Player){
                         if(isset($args[1])){
                             if($player = $sender->getServer()->getPlayer($args[1])){
-                                $this->getPlugin()->setStolenSkin($sender, $player);
+                                $this->plugin->setStolenSkin($sender, $player);
                                 $sender->sendMessage(TextFormat::GREEN."You got ".$player->getName()."'s skin.");
                             }
                             else{
@@ -97,7 +91,7 @@ class SkinToolsCommand extends Command{
                     return true;
                 case "restore":
                     if($sender instanceof Player){
-                        $sender->setSkin($this->getPlugin()->retrieveSkinData($sender));
+                        $sender->setSkin($this->plugin->retrieveSkinData($sender));
                         $sender->sendMessage(TextFormat::GREEN."Your original skin has been restored.");
                     }
                     else{
@@ -121,19 +115,19 @@ class SkinToolsCommand extends Command{
                                 case (string) SkinTools::NONE:
                                 case "n":
                                 case "none":
-                                    $this->getPlugin()->setTouchMode($sender);
+                                    $this->plugin->setTouchMode($sender);
                                     $sender->sendMessage(TextFormat::GREEN."Skin touch mode set to NONE.");
                                     break;
                                 case (string) SkinTools::GIVE:
                                 case "g":
                                 case "give":
-                                    $this->getPlugin()->setTouchMode($sender, SkinTools::GIVE);
+                                    $this->plugin->setTouchMode($sender, SkinTools::GIVE);
                                     $sender->sendMessage(TextFormat::GREEN."Skin touch mode set to GIVE.");
                                     break;
                                 case (string) SkinTools::STEAL:
                                 case "s":
                                 case "steal":
-                                    $this->getPlugin()->setTouchMode($sender, SkinTools::STEAL);
+                                    $this->plugin->setTouchMode($sender, SkinTools::STEAL);
                                     $sender->sendMessage(TextFormat::GREEN."Skin touch mode set to STEAL.");
                                     break;
                                 default:
@@ -142,7 +136,7 @@ class SkinToolsCommand extends Command{
                             }
                         }
                         else{
-                            $sender->sendMessage(TextFormat::YELLOW."Your touch mode is ".$this->getPlugin()->getTouchMode($sender).".");
+                            $sender->sendMessage(TextFormat::YELLOW."Your touch mode is ".$this->plugin->getTouchMode($sender).".");
                         }
                     }
                     else{

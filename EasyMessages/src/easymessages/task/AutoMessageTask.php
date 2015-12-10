@@ -16,16 +16,10 @@ class AutoMessageTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** 
-     * @return EasyMessages 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /**
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        $this->getPlugin()->getServer()->broadcastMessage(Utils::getRandom($this->getPlugin()->getConfig()->getNested("message.messages")));
+        $this->plugin->getServer()->broadcastMessage(Utils::getRandom($this->plugin->getConfig()->getNested("message.messages")));
     }
 }

@@ -15,19 +15,13 @@ class AutoBroadcastTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** 
-     * @return RestartMe 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /**
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        if(!$this->getPlugin()->isTimerPaused()){
-            if($this->getPlugin()->getTime() >= $this->getPlugin()->getConfig()->get("startCountdown")){
-                $this->getPlugin()->broadcastTime($this->getPlugin()->getConfig()->get("broadcastMessage"), $this->getPlugin()->getConfig()->get("displayType"));
+        if(!$this->plugin->isTimerPaused()){
+            if($this->plugin->getTime() >= $this->plugin->getConfig()->get("startCountdown")){
+                $this->plugin->broadcastTime($this->plugin->getConfig()->get("broadcastMessage"), $this->plugin->getConfig()->get("displayType"));
             }
         }
     }

@@ -3,7 +3,7 @@
 namespace restartme\task;
 
 use pocketmine\scheduler\PluginTask;
-use restartme\utils\MemoryChecker;
+use restartme\utils\Utils;
 use restartme\RestartMe;
 
 class CheckMemoryTask extends PluginTask{
@@ -16,19 +16,13 @@ class CheckMemoryTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** 
-     * @return RestartMe 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /**
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        if(!$this->getPlugin()->isTimerPaused()){
-            if(MemoryChecker::isOverloaded($this->getPlugin()->getMemoryLimit())){
-                $this->getPlugin()->initiateRestart(RestartMe::OVERLOADED);
+        if(!$this->plugin->isTimerPaused()){
+            if(Utils::isOverloaded($this->plugin->getMemoryLimit())){
+                $this->plugin->initiateRestart(RestartMe::OVERLOADED);
             }
         }
     }

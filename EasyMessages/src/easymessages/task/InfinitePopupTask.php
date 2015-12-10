@@ -15,16 +15,10 @@ class InfinitePopupTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** 
-     * @return EasyMessages 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /**
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        $this->getPlugin()->broadcastPopup($this->getConfig()->getNested("popup.infiniteMessage"));
+        $this->plugin->broadcastPopup($this->plugin->getConfig()->getNested("popup.infiniteMessage"));
     }
 }

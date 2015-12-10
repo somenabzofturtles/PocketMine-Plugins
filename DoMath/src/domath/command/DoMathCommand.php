@@ -23,12 +23,6 @@ class DoMathCommand extends Command{
         $this->plugin = $plugin;
     }
     /**
-     * @return DoMath
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /**
      * @param CommandSender $sender
      */
     public function sendCommandHelp(CommandSender $sender){

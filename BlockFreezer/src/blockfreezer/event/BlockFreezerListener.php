@@ -16,18 +16,12 @@ class BlockFreezerListener implements Listener{
         $this->plugin = $plugin;
     }
     /**
-     * @return BlockFreezer
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /**
      * @param BlockUpdateEvent $event
      * @priority HIGHEST
      * @ignoreCancelled true
      */
     public function onBlockUpdate(BlockUpdateEvent $event){
-	if($this->getPlugin()->isBlockSpecified($event->getBlock())){
+	if($this->plugin->isBlockSpecified($event->getBlock())){
 	    $event->setCancelled(true);
 	}
     }

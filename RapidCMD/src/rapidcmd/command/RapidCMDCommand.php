@@ -19,12 +19,6 @@ class RapidCMDCommand extends Command{
         $this->plugin = $plugin;
     }
     /**
-     * @return RapidCMD
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /**
      * @param CommandSender $sender
      */
     public function sendCommandHelp(CommandSender $sender){
@@ -58,7 +52,7 @@ class RapidCMDCommand extends Command{
                 case "dc":
                 case "delcmd":
                     if(isset($args[1])){
-                        if($this->getPlugin()->getCommandStorage()->removeCommand($args[1])){
+                        if($this->plugin->getCommandStorage()->removeCommand($args[1])){
                             $sender->sendMessage(TextFormat::GREEN."Successfully disabled RCMD: ".strtolower($args[1]).".");
                         }
                         else{
@@ -75,7 +69,7 @@ class RapidCMDCommand extends Command{
                 case "list":
                     $count = 0;
                     $names = "";
-                    foreach($this->getPlugin()->getCommandStorage()->getCommands() as $command){
+                    foreach($this->plugin->getCommandStorage()->getCommands() as $command){
                         $names .= $command->getName().", ";
                         $count++;
                     }

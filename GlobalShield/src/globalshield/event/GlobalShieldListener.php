@@ -23,12 +23,6 @@ class GlobalShieldListener implements Listener{
         $this->plugin = $plugin;
     }
     /** 
-     * @return GlobalShield 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /** 
      * @param BlockBreakEvent $event
      * @priority HIGHEST
      * @ignoreCancelled true

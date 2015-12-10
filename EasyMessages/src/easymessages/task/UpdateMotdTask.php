@@ -15,17 +15,11 @@ class UpdateMotdTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** 
-     * @return EasyMessages 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /**
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        $this->getPlugin()->getServer()->getNetwork()->setName(str_replace(
+        $this->plugin->getServer()->getNetwork()->setName(str_replace(
             [
                 "{SERVER_DEFAULT_LEVEL}",
                 "{SERVER_MAX_PLAYER_COUNT}",
@@ -35,14 +29,14 @@ class UpdateMotdTask extends PluginTask{
                 "{SERVER_TPS}"
             ],
             [
-                $this->getPlugin()->getServer()->getDefaultLevel()->getName(),
-                $this->getPlugin()->getServer()->getMaxPlayers(),
-                count($this->getPlugin()->getServer()->getOnlinePlayers()),
-                $this->getPlugin()->getServer()->getServerName(),
-                $this->getPlugin()->getServer()->getPort(),
-                $this->getPlugin()->getServer()->getTicksPerSecond()
+                $this->plugin->getServer()->getDefaultLevel()->getName(),
+                $this->plugin->getServer()->getMaxPlayers(),
+                count($this->plugin->getServer()->getOnlinePlayers()),
+                $this->plugin->getServer()->getServerName(),
+                $this->plugin->getServer()->getPort(),
+                $this->plugin->getServer()->getTicksPerSecond()
             ],
-            $this->getPlugin()->getConfig()->getNested("motd.dynamicMotd")
+            $this->plugin->getConfig()->getNested("motd.dynamicMotd")
         ));
     }
 }

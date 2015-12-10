@@ -5,7 +5,7 @@ namespace restartme\command;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\utils\TextFormat;
-use restartme\utils\MemoryChecker;
+use restartme\utils\Utils;
 use restartme\RestartMe;
 
 class RestartMeCommand extends Command{
@@ -18,12 +18,6 @@ class RestartMeCommand extends Command{
         parent::__construct("restartme", "Shows all RestartMe commands", null, ["rm"]);
         $this->setPermission("restartme.command.restartme");
         $this->plugin = $plugin;
-    }
-    /** 
-     * @return RestartMe 
-     */
-    public function getPlugin(){
-        return $this->plugin;
     }
     /** 
      * @param CommandSender $sender 
@@ -59,7 +53,7 @@ class RestartMeCommand extends Command{
                     if(isset($args[1])){
                         if(is_numeric($args[1])){
                             $time = (int) $args[1];
-                            $this->getPlugin()->addTime($time);
+                            $this->plugin->addTime($time);
                             $sender->sendMessage(TextFormat::GREEN."Added ".$time." to restart timer.");
                         }
                         else{
@@ -75,16 +69,16 @@ class RestartMeCommand extends Command{
                     return true;
                 case "m":
                 case "memory":
-                    $memLimit = $this->getPlugin()->getMemoryLimit();
-                    $sender->sendMessage("Bytes: ".memory_get_usage(true)."/".MemoryChecker::calculateBytes($memLimit));
+                    $memLimit = $this->plugin->getMemoryLimit();
+                    $sender->sendMessage("Bytes: ".memory_get_usage(true)."/".Utils::calculateBytes($memLimit));
                     $sender->sendMessage("Memory-limit: ".$memLimit);
-                    $sender->sendMessage("Overloaded: ".(MemoryChecker::isOverloaded($memLimit) ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
+                    $sender->sendMessage("Overloaded: ".(Utils::isOverloaded($memLimit) ? TextFormat::GREEN."yes" : TextFormat::RED."no"));
                     return true;
                 case "set":
                     if(isset($args[1])){
                         if(is_numeric($args[1])){
                             $time = (int) $args[1];
-                            $this->getPlugin()->setTime($time);
+                            $this->plugin->setTime($time);
                             $sender->sendMessage(TextFormat::GREEN."Set restart timer to ".$time.".");
                         }
                         else{
@@ -96,8 +90,8 @@ class RestartMeCommand extends Command{
                     }
                     return true;
                 case "start":
-                    if($this->getPlugin()->isTimerPaused()){
-                        $this->getPlugin()->setPaused(false);
+                    if($this->plugin->isTimerPaused()){
+                        $this->plugin->setPaused(false);
                         $sender->sendMessage(TextFormat::YELLOW."Timer is no longer paused.");
                     }
                     else{
@@ -105,11 +99,11 @@ class RestartMeCommand extends Command{
                     }
                     return true;
                 case "stop":
-                    if($this->getPlugin()->isTimerPaused()){
+                    if($this->plugin->isTimerPaused()){
                         $sender->sendMessage(TextFormat::RED."Timer is already paused.");
                     }
                     else{
-                        $this->getPlugin()->setPaused(true);
+                        $this->plugin->setPaused(true);
                         $sender->sendMessage(TextFormat::YELLOW."Timer has been paused.");
                     }
                     return true;
@@ -118,7 +112,7 @@ class RestartMeCommand extends Command{
                     if(isset($args[1])){
                         if(is_numeric($args[1])){
                             $time = (int) $args[1];
-                            $this->getPlugin()->subtractTime($time);
+                            $this->plugin->subtractTime($time);
                             $sender->sendMessage(TextFormat::GREEN."Subtracted ".$time." from restart timer.");
                         }
                         else{
@@ -130,7 +124,7 @@ class RestartMeCommand extends Command{
                     }
                     return true;
                 case "time":
-                    $sender->sendMessage(TextFormat::YELLOW."Time remaining: ".$this->getPlugin()->getFormattedTime());
+                    $sender->sendMessage(TextFormat::YELLOW."Time remaining: ".$this->plugin->getFormattedTime());
                     return true;
                 default:
                     $sender->sendMessage("Usage: /restartme <sub-command> [parameters]");

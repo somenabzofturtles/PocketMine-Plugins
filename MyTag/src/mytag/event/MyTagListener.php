@@ -18,12 +18,6 @@ class MyTagListener implements Listener{
     	$this->plugin = $plugin;
     }
     /**
-     * @return MyTag
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /**
      * @param PlayerChatEvent $event
      * @priority MONITOR
      * @ignoreCancelled true

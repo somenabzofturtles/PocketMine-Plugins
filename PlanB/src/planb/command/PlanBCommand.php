@@ -19,12 +19,6 @@ class PlanBCommand extends Command{
         $this->setPermission("planb.command.planb");
         $this->plugin = $plugin;
     }
-    /**  
-     * @return PlanB  
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /** 
      * @param CommandSender $sender 
      */
@@ -55,11 +49,11 @@ class PlanBCommand extends Command{
                 case "addbackup":
                     if(isset($args[1])){
                         if($sender instanceof ConsoleCommandSender){
-                            if($this->getPlugin()->isBackupPlayer($args[1])){
+                            if($this->plugin->isBackupPlayer($args[1])){
                                 $sender->sendMessage(TextFormat::RED.$args[1]." already exists in backups.txt.");
                             }
                             else{
-                                $this->getPlugin()->addBackup($args[1]);
+                                $this->plugin->addBackup($args[1]);
                                 $sender->sendMessage(TextFormat::GREEN."Added ".$args[1]." to backups.txt.");
                             }
                         }
@@ -75,8 +69,8 @@ class PlanBCommand extends Command{
                 case "delbackup":
                     if(isset($args[1])){
                         if($sender instanceof ConsoleCommandSender){
-                            if($this->getPlugin()->isBackupPlayer($args[1])){
-                                $this->getPlugin()->removeBackup($args[1]);
+                            if($this->plugin->isBackupPlayer($args[1])){
+                                $this->plugin->removeBackup($args[1]);
                                 $sender->sendMessage(TextFormat::GREEN."Removed ".$args[1]." from backups.txt.");
                             }
                             else{
@@ -95,11 +89,11 @@ class PlanBCommand extends Command{
                     $this->sendCommandHelp($sender);
                     return true;
                 case "list":
-                    $this->getPlugin()->sendBackups($sender);
+                    $this->plugin->sendBackups($sender);
                     return true;
                 case "restore":
-                    if($this->getPlugin()->isBackupPlayer($sender->getName()) or $sender instanceof ConsoleCommandSender){
-                        $this->getPlugin()->restoreOps();
+                    if($this->plugin->isBackupPlayer($sender->getName()) or $sender instanceof ConsoleCommandSender){
+                        $this->plugin->restoreOps();
                         $sender->sendMessage(TextFormat::YELLOW."Restoring the statuses of OPs...");
                     }
                     else{

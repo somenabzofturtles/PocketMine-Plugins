@@ -86,7 +86,7 @@ class PHPUtils extends PluginBase{
         else{
             switch($data){
                 case QueryPocketMineTask::SERVER_OFFLINE:
-                    $sender->sendMessage(TextFormat::RED."Failed to retrieve data, the PocketMine server appears to be offline."); //Server is offline
+                    $sender->sendMessage(TextFormat::RED."Failed to retrieve data, either you or the server is offline."); //Server is offline
                     break;
                 case QueryPocketMineTask::PLUGIN_NOT_FOUND:
                     $sender->sendMessage(TextFormat::RED."Failed to retrieve data, the plugin wasn't found."); //Server is online, but the plugin wasn't found

@@ -20,12 +20,6 @@ class iManagerCommand extends Command{
     	$this->plugin = $plugin;
     }
     /**
-     * @return iManager
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
-    /**
      * @param CommandSender $sender
      */
     private function sendCommandHelp(CommandSender $sender){
@@ -70,7 +64,7 @@ class iManagerCommand extends Command{
                 case "level":
                     if(isset($args[1])){
                         if($level = $sender->getServer()->getLevelByName($args[1])){
-                            $this->getPlugin()->getInfoFetcher()->sendLevelInfo($sender, $level);
+                            $this->plugin->getInfoFetcher()->sendLevelInfo($sender, $level);
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."Failed to get information due to invalid level name.");
@@ -83,7 +77,7 @@ class iManagerCommand extends Command{
                 case "player":
                     if(isset($args[1])){
                         if($player = $sender->getServer()->getPlayer($args[1])){
-                            $this->getPlugin()->getInfoFetcher()->sendPlayerInfo($sender, $player);
+                            $this->plugin->getInfoFetcher()->sendPlayerInfo($sender, $player);
                         }
                         else{
                             $sender->sendMessage(TextFormat::RED."Failed to get information due to invalid recipient.");

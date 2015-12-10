@@ -16,18 +16,12 @@ class ScrollingPopupTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** 
-     * @return EasyMessages 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /**
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        $popup = $this->getPlugin()->getScrollingPopup();
-        $this->getPlugin()->broadcastPopup($popup);
-        $this->getPlugin()->setScrollingPopup(Utils::next($popup));
+        $popup = $this->plugin->getScrollingPopup();
+        $this->plugin->broadcastPopup($popup);
+        $this->plugin->setScrollingPopup(Utils::next($popup));
     }
 }

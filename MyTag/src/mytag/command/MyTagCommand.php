@@ -19,12 +19,6 @@ class MyTagCommand extends Command{
     	$this->plugin = $plugin;
     }
     /**
-     * @return MyTag
-     */
-    public function getPlugin(){
-    	return $this->plugin;
-    }
-    /**
      * @param CommandSender $sender
      */
     private function sendCommandHelp(CommandSender $sender){

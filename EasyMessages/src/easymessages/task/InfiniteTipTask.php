@@ -15,16 +15,10 @@ class InfiniteTipTask extends PluginTask{
         parent::__construct($plugin);
         $this->plugin = $plugin;
     }
-    /** 
-     * @return EasyMessages 
-     */
-    public function getPlugin(){
-        return $this->plugin;
-    }
     /**
      * @param int $currentTick
      */
     public function onRun($currentTick){
-        $this->getPlugin()->broadcastTip($this->getPlugin()->getConfig()->getNested("tip.infiniteMessage"));
+        $this->plugin->broadcastTip($this->plugin->getConfig()->getNested("tip.infiniteMessage"));
     }
 }
