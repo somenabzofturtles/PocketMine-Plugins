@@ -26,7 +26,6 @@ class PHPUtilsCommand extends Command{
         $commands = [
             "algos" => "Lists all the registered hashing algorithms",
             "class" => "Checks if the specified class exists",
-            "const" => "Returns the value of a constant, if it exists",
             "extens" => "Lists all the loaded PHP extensions",
             "func" => "Checks if the specified function exists",
             "hash" => "Returns a hash the specified string using the specified hashing algorithm",
@@ -47,7 +46,9 @@ class PHPUtilsCommand extends Command{
      * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
-        if(!$this->testPermission($sender)) return false;
+        if(!$this->testPermission($sender)){
+            return false;
+        }
         if(isset($args[0])){
             if($this->plugin->isCommandEnabled($args[0]) === PHPUtils::NOT_FOUND){
                 $sender->sendMessage(TextFormat::RED."Invalid sub-command specified, please use \"/phputils help\".");
@@ -68,19 +69,6 @@ class PHPUtilsCommand extends Command{
                     }
                     else{
                         $sender->sendMessage(TextFormat::RED."Please specify a class path.");
-                    }
-                    return true;
-                case "const":
-                    if(isset($args[1])){
-                        if(defined($args[1])){
-                            $sender->sendMessage("Constant ".$args[1]." has the value: ".$this->plugin->getConstantValue($args[1]).".");
-                        }
-                        else{
-                            $sender->sendMessage(TextFormat::RED."That constant is undefined.");
-                        }
-                    }
-                    else{
-                        $sender->sendMessage(TextFormat::RED."Please specify a constant name.");
                     }
                     return true;
                 case "extens":
@@ -123,6 +111,7 @@ class PHPUtilsCommand extends Command{
                     if(isset($args[1])){
                         $plugin = implode(" ", array_slice($args, 1));
                         $sender->sendMessage(TextFormat::GREEN."Searching for \"".$plugin."\", this may take a moment...");
+                        $this->plugin->addActive($sender);
                         $sender->getServer()->getScheduler()->scheduleAsyncTask(new QueryPocketMineTask($plugin, $sender->getName()));
                     }
                     else{

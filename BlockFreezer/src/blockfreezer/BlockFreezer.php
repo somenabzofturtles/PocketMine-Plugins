@@ -35,6 +35,8 @@ class BlockFreezer extends PluginBase implements Listener{
     public function isBlockSpecified(Block $block){
         $key = array_change_key_case($this->getConfig()->get("level"), CASE_LOWER);
         $levelKey = $key[strtolower($block->getLevel()->getName())];
-    	if(is_array($levelKey)) return in_array($block->getId().":".$block->getDamage(), $levelKey);	
+    	if(is_array($levelKey)){
+            return in_array($block->getId().":".$block->getDamage(), $levelKey);	
+        }
     }
 }

@@ -64,7 +64,9 @@ class SkinTools extends PluginBase{
      * @param Player $player
      */
     public function clearTouchMode(Player $player){
-        if($this->hasTouchMode($player)) unset($this->touchMode[strtolower($player->getName())]);
+        if($this->hasTouchMode($player)){
+            unset($this->touchMode[strtolower($player->getName())]);
+        }
     }
     /**
      * @param Player $player
@@ -90,7 +92,9 @@ class SkinTools extends PluginBase{
      * @param Player $player 
      */
     public function removeSkinData(Player $player){
-        if($this->isSkinStored($player)) unset($this->skinData[strtolower($player->getName())]);
+        if($this->isSkinStored($player)){
+            unset($this->skinData[strtolower($player->getName())]);
+        }
     }
     /**
      * @param Player $player

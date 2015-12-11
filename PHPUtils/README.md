@@ -11,7 +11,6 @@ Main command: **phputils**, **pu**
 |-----------|-----------|
 |algos|Lists all the registered hashing algorithms|
 |class|Checks if the specified class exists|
-|const|Returns the value of a constant, if it exists|
 |extens|Lists all the loaded PHP extensions|
 |func|Checks if the specified function exists|
 |hash|Returns a hash the specified string using the specified hashing algorithm|

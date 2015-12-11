@@ -39,7 +39,9 @@ class MyTagCommand extends Command{
      * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
-        if(!$this->testPermission($sender)) return false;
+        if(!$this->testPermission($sender)){
+            return false;
+        }
         if(isset($args[0])){
 	    switch(strtolower($args[0])){
 	    	case "address":

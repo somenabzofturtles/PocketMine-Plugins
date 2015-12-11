@@ -3,9 +3,7 @@
 namespace phputils\task;
 
 use phputils\PHPUtils;
-use pocketmine\command\ConsoleCommandSender;
 use pocketmine\scheduler\AsyncTask;
-use pocketmine\Player;
 use pocketmine\Server;
 
 class QueryPocketMineTask extends AsyncTask{
@@ -51,12 +49,7 @@ class QueryPocketMineTask extends AsyncTask{
      */
     public function onCompletion(Server $server){
         if(($plugin = $server->getPluginManager()->getPlugin("PHPUtils")) instanceof PHPUtils){
-            if(($player = $server->getPlayer($this->sender)) instanceof Player){
-                $plugin->sendPluginInfo($player, $this->result);
-            }
-            else{
-                $plugin->sendPluginInfo(new ConsoleCommandSender(), $this->result);
-            }
+            $plugin->sendPluginInfo($this->sender, $this->result);
         }
     }
 }

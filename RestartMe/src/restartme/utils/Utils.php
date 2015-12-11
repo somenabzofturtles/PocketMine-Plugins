@@ -33,4 +33,22 @@ class Utils{
     public static function isOverloaded($toCheck){
         return memory_get_usage(true) > self::calculateBytes($toCheck);
     }
+    /**
+     * Returns 0 => hours, 1 => minutes, 2 => seconds, calculated from $time
+     * @param int $time
+     * @return array
+     * @throws \InvalidArgumentException
+     */
+    public static function toArray($time){
+        if(is_int($time)){
+            return [
+                floor($time / 3600), //hour
+                floor(($time / 60) - (floor($time / 3600) * 60)), //minute
+                floor($time % 60) //second
+            ];
+        }
+        else{
+            throw new \InvalidArgumentException("Expected integer, ".gettype($time)." given.");
+        }
+    }
 }

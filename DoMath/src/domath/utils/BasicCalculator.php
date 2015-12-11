@@ -21,31 +21,45 @@ class BasicCalculator{
         switch($mode){
             case self::ADD:
                 $symbol = "+";
-                if(is_array($input)) $answer = self::add($input);
+                if(is_array($input)){
+                    $answer = self::add($input);
+                }
                 break;
             case self::SUBTRACT:
                 $symbol = "-";
-                if(is_array($input)) $answer = self::subtract($input);
+                if(is_array($input)){
+                    $answer = self::subtract($input);
+                }
                 break;
             case self::MULTIPLY:
                 $symbol = "*";
-                if(is_array($input)) $answer = self::multiply($input);
+                if(is_array($input)){
+                    $answer = self::multiply($input);
+                }
                 break;
             case self::DIVIDE:
                 $symbol = "/";
-                if(is_array($input)) $answer = self::divide($input);
+                if(is_array($input)){
+                    $answer = self::divide($input);
+                }
                 break;
             case self::PERCENT:
                 $symbol = "%";
-                if(is_array($input)) $answer = self::percent($input[0], $input[1]);
+                if(is_array($input)){
+                    $answer = self::percent($input[0], $input[1]);
+                }
                 break;
             case self::SQUARE:
                 $symbol = "√";
-                if(is_string($input)) $answer = self::square($input);
+                if(is_string($input)){
+                    $answer = self::square($input);
+                }
                 break;
             case self::EXPONENT:
                 $symbol = "^";
-                if(is_array($input)) $answer = self::exponent($input[0], $input[1]);
+                if(is_array($input)){
+                    $answer = self::exponent($input[0], $input[1]);
+                }
                 break;
             default:
                 $symbol = "";
@@ -113,7 +127,9 @@ class BasicCalculator{
         if(is_array($inputs)){
             $output = $inputs[0];
             foreach(array_slice($inputs, 1) as $input){
-                if($input != 0) $output /= $input; //If the value is 0, it won't perform the calculation
+                if($input != 0){
+                    $output /= $input; //If the value is 0, it won't perform the calculation
+                }
             }
             if(in_array(0, array_slice($inputs, 1), 0)){
                 return "ERROR"; //There was one or more zeros encountered

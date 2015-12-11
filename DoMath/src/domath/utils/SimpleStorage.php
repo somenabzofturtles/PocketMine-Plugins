@@ -44,6 +44,10 @@ class SimpleStorage{
     public static function exists($key){
         return self::$answers[strtolower($key)] !== null;
     }
+    /**
+     * Clears all the answers that are currently stored
+     * @return void
+     */
     public static function clear(){
         self::$answers = [];
     }

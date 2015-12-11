@@ -45,7 +45,9 @@ class RestartMeCommand extends Command{
      * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
-        if(!$this->testPermission($sender)) return false;
+        if(!$this->testPermission($sender)){
+            return false;
+        }
         if(isset($args[0])){
             switch(strtolower($args[0])){
                 case "a":
@@ -123,6 +125,7 @@ class RestartMeCommand extends Command{
                         $sender->sendMessage(TextFormat::RED."Please specify a time value.");
                     }
                     return true;
+                case "t":
                 case "time":
                     $sender->sendMessage(TextFormat::YELLOW."Time remaining: ".$this->plugin->getFormattedTime());
                     return true;

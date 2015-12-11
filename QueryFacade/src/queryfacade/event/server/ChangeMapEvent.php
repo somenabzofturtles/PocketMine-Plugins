@@ -1,11 +1,11 @@
 <?php
 
-namespace queryfacade\event\plugin;
+namespace queryfacade\event\server;
 
+use pocketmine\event\server\ServerEvent;
 use pocketmine\event\Cancellable;
-use queryfacade\event\plugin\QueryFacadeEvent;
 
-class ChangeMapEvent extends QueryFacadeEvent implements Cancellable{
+class ChangeMapEvent extends ServerEvent implements Cancellable{
     /** @var \pocketmine\event\HandlerList */
     public static $handlerList = null;
     /** @var string */

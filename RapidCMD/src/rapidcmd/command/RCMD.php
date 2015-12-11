@@ -7,7 +7,7 @@ use pocketmine\command\CommandSender;
 
 class RCMD extends Command{
     /** @var string[] */
-    protected $actions;
+    private $actions;
     /**
      * @param string $name
      * @param string $description
@@ -26,18 +26,20 @@ class RCMD extends Command{
      * @param string[] $args
      */
     public function execute(CommandSender $sender, $label, array $args){
-        if(!$this->testPermission($sender)) return false;
-    }
-    /**
-     * @param string[] $actions
-     */
-    public function setActions(array $actions){
-        $this->actions = $actions;
+        if(!$this->testPermission($sender)){
+            return false;
+        }
     }
     /**
      * @return string[]
      */
     public function getActions(){
         return $this->actions;
+    }
+    /**
+     * @param string[] $actions
+     */
+    public function setActions(array $actions){
+        $this->actions = $actions;
     }
 }

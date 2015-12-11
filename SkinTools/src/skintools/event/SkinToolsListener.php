@@ -27,18 +27,18 @@ class SkinToolsListener implements Listener{
      */
     public function onEntityDamage(EntityDamageEvent $event){
         if($event instanceof EntityDamageByEntityEvent){
-            if($event->getDamager() instanceof Player and $event->getEntity() instanceof Player){
-                switch($this->plugin->getTouchMode($event->getDamager())){
+            if(($damager = $event->getDamager()) instanceof Player and ($entity = $event->getEntity()) instanceof Player){
+                switch($this->plugin->getTouchMode($damager)){
                     case SkinTools::GIVE:
                         $event->setCancelled(true);
-                        $this->plugin->setStolenSkin($event->getEntity(), $event->getDamager());
-                        $event->getEntity()->sendMessage(TextFormat::GREEN.$event->getDamager()->getName()." gave you their skin!");
-                        $event->getDamager()->sendMessage(TextFormat::GREEN.$event->getEntity()->getName()." has your skin now!");
+                        $this->plugin->setStolenSkin($entity, $damager);
+                        $entity->sendMessage(TextFormat::GREEN.$damager->getName()." gave you their skin!");
+                        $damager->sendMessage(TextFormat::GREEN.$entity->getName()." has your skin now!");
                         break;
                     case SkinTools::STEAL:
                         $event->setCancelled(true);
-                        $this->plugin->setStolenSkin($event->getDamager(), $event->getEntity());
-                        $event->getDamager()->sendMessage(TextFormat::GREEN."You got ".$event->getEntity()->getName()."'s skin.");
+                        $this->plugin->setStolenSkin($damager, $entity);
+                        $event->getDamager()->sendMessage(TextFormat::GREEN."You got ".$entity->getName()."'s skin.");
                         break;
                 }
             }

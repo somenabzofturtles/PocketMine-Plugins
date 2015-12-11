@@ -85,12 +85,6 @@ class EasyMessages extends PluginBase{
     	}
     }
     /**
-     * @param string $message
-     */
-    public function setScrollingPopup($message){
-        $this->scrollingPopup = (string) $message;
-    }
-    /**
      * @return string
      */
     public function getScrollingPopup(){
@@ -99,13 +93,19 @@ class EasyMessages extends PluginBase{
     /**
      * @param string $message
      */
-    public function setScrollingTip($message){
-        $this->scrollingTip = (string) $message;
+    public function setScrollingPopup($message){
+        $this->scrollingPopup = (string) $message;
     }
     /**
      * @return string
      */
     public function getScrollingTip(){
         return $this->scrollingTip;
+    }
+    /**
+     * @param string $message
+     */
+    public function setScrollingTip($message){
+        $this->scrollingTip = (string) $message;
     }
 }

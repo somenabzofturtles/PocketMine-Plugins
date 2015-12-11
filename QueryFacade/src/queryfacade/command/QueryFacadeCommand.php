@@ -46,7 +46,9 @@ class QueryFacadeCommand extends Command{
      * @return bool
      */
     public function execute(CommandSender $sender, $label, array $args){
-        if(!$this->testPermission($sender)) return false;
+        if(!$this->testPermission($sender)){
+            return false;
+        }
         if(isset($args[0])){
             $modifier = $this->plugin->getModifier();
             switch(strtolower($args[0])){
@@ -112,9 +114,11 @@ class QueryFacadeCommand extends Command{
                         $sender->sendMessage(TextFormat::YELLOW."Current player count is ".$modifier->getPlayerCount().".");
                     }
                     return true;
+                case "pr":
                 case "players":
                     $sender->sendMessage(TextFormat::YELLOW."There are currently ".count($modifier->getPlayers())." player(s)".(count($modifier->getPlayers()) > 0 ? ": ".$modifier->listPlayers() : "").".");
                     return true;
+                case "pn":
                 case "plugins":
                     $sender->sendMessage(TextFormat::YELLOW."There are currently ".count($modifier->getPlugins())." plugin(s)".(count($modifier->getPlugins()) > 0 ? ": ".$modifier->listPlugins() : "").".");
                     return true;

@@ -11,8 +11,8 @@ namespace queryfacade\utils;
 use queryfacade\utils\MinecraftQueryException;
 
 class MinecraftQuery{
-    const STATISTIC = 0x00;
-    const HANDSHAKE = 0x09;
+    const STATISTIC = 0x00; //0
+    const HANDSHAKE = 0x09; //9
     /** @var array|bool */
     private $info;
     /** @var array|bool */

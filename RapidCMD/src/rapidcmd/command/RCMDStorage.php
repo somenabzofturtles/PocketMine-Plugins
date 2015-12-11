@@ -58,7 +58,9 @@ class RCMDStorage{
     public function getCommands(){
         $rcmds = [];
         foreach($this->plugin->getServer()->getCommandMap()->getCommands() as $command){
-            if($this->isCommandRegistered($command->getName())) $rcmds[] = $command;
+            if($this->isCommandRegistered($command->getName())){
+                $rcmds[] = $command;
+            }
         }
         return $rcmds;
     }

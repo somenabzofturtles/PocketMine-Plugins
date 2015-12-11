@@ -7,6 +7,7 @@ use restartme\command\RestartMeCommand;
 use restartme\task\AutoBroadcastTask;
 use restartme\task\CheckMemoryTask;
 use restartme\task\RestartServerTask;
+use restartme\utils\Utils;
 
 class RestartMe extends PluginBase{
     const NORMAL = 0;
@@ -40,18 +41,8 @@ class RestartMe extends PluginBase{
      * @return string
      */
     public function getFormattedTime(){
-        $time = $this->toArray();
+        $time = Utils::toArray($this->getTime());
         return $time[0]." hr ".$time[1]." min ".$time[2]." sec";
-    }
-    /**
-     * @return array
-     */
-    public function toArray(){
-        return [
-            floor($this->getTime() / 3600), //hour
-            floor(($this->getTime() / 60) - (floor($this->getTime() / 3600) * 60)), //minute
-            floor($this->getTime() % 60) //second
-        ];
     }
     /** 
      * @param int $seconds 
@@ -63,19 +54,24 @@ class RestartMe extends PluginBase{
      * @param int $seconds 
      */
     public function addTime($seconds){
-    	if(is_numeric($seconds)) $this->timer += (int) $seconds;
+    	if(is_numeric($seconds)){
+            $this->timer += (int) $seconds;
+        }
     }
     /** 
      * @param int $seconds 
      */
     public function subtractTime($seconds){
-    	if(is_numeric($seconds)) $this->timer -= (int) $seconds;
+    	if(is_numeric($seconds)){
+            $this->timer -= (int) $seconds;
+        }
     }
     /** 
      * @param string $message
      * @param string $messageType
      */
     public function broadcastTime($message, $messageType){
+        $time = Utils::toArray($this->getTime());
         $outMessage = str_replace(
             [
                 "{RESTART_FORMAT_TIME}",
@@ -86,9 +82,9 @@ class RestartMe extends PluginBase{
             ], 
             [
                 $this->getFormattedTime(),
-                $this->toArray()[0],
-                $this->toArray()[1],
-                $this->toArray()[2],
+                $time[0],
+                $time[1],
+                $time[2],
                 $this->getTime()
             ], 
             $message

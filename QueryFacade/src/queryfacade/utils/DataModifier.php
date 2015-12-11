@@ -2,13 +2,13 @@
 
 namespace queryfacade\utils;
 
-use queryfacade\event\plugin\AddPlayerEvent;
-use queryfacade\event\plugin\AddPluginEvent;
-use queryfacade\event\plugin\ChangeMapEvent;
-use queryfacade\event\plugin\ChangeMaxPlayerCountEvent;
-use queryfacade\event\plugin\ChangePlayerCountEvent;
-use queryfacade\event\plugin\RemovePlayerEvent;
-use queryfacade\event\plugin\RemovePluginEvent;
+use queryfacade\event\server\AddPlayerEvent;
+use queryfacade\event\server\AddPluginEvent;
+use queryfacade\event\server\ChangeMapEvent;
+use queryfacade\event\server\ChangeMaxPlayerCountEvent;
+use queryfacade\event\server\ChangePlayerCountEvent;
+use queryfacade\event\server\RemovePlayerEvent;
+use queryfacade\event\server\RemovePluginEvent;
 use queryfacade\network\DummyPlayer;
 use queryfacade\network\DummyPlugin;
 use queryfacade\QueryFacade;
@@ -137,7 +137,7 @@ class DataModifier{
      * @param int $count
      */
     public function setPlayerCount($count){
-        $event = new ChangePlayerCountEvent($this->getPlayerCount(), $this->getPlayerCount() + $count);
+        $event = new ChangePlayerCountEvent($this->getPlayerCount(), $count);
         $this->plugin->getServer()->getPluginManager()->callEvent($event);
         if(!$event->isCancelled()){
             $this->playerCount = (int) $count;
@@ -153,7 +153,7 @@ class DataModifier{
      * @param int $count
      */
     public function setMaxPlayerCount($count){
-        $event = new ChangeMaxPlayerCountEvent($this->getMaxPlayerCount(), $this->getMaxPlayerCount() + $count);
+        $event = new ChangeMaxPlayerCountEvent($this->getMaxPlayerCount(), $count);
         $this->plugin->getServer()->getPluginManager()->callEvent($event);
         if(!$event->isCancelled()){
             $this->maxPlayerCount = (int) $count;

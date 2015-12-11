@@ -1,11 +1,11 @@
 <?php
 
-namespace queryfacade\event\plugin;
+namespace queryfacade\event\server;
 
-use queryfacade\event\plugin\QueryFacadeEvent;
+use pocketmine\event\server\ServerEvent;
 use queryfacade\network\DummyPlugin;
 
-class RemovePluginEvent extends QueryFacadeEvent{
+class AddPluginEvent extends ServerEvent{
     /** @var \pocketmine\event\HandlerList */
     public static $handlerList = null;
     /** @var DummyPlugin */

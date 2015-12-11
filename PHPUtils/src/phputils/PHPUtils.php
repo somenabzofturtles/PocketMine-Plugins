@@ -12,6 +12,8 @@ class PHPUtils extends PluginBase{
     const NOT_FOUND = -1;
     const DISABLED = 0;
     const ENABLED = 1;
+    /** @var CommandSender[] */
+    private $active = [];
     public function onEnable(){
         $this->saveDefaultConfig();
         $this->getServer()->getCommandMap()->register("phputils", new PHPUtilsCommand($this));
@@ -72,10 +74,11 @@ class PHPUtils extends PluginBase{
         }
     }
     /**
-     * @param CommandSender $sender
+     * @param string $sender
      * @param mixed $data
      */
-    public function sendPluginInfo(CommandSender $sender, $data){
+    public function sendPluginInfo($sender, $data){
+        $sender = $this->active[strtolower($sender)];
         if(is_array($data)){
             $sender->sendMessage(TextFormat::GREEN."Successfully retrieved information on ".$data["title"]." by ".$data["author_username"]."!"); //Server is online, the plugin was found
             foreach($data as $name => $info){
@@ -98,27 +101,25 @@ class PHPUtils extends PluginBase{
                  */
             }
         }
+        $this->removeActive($sender);
     }
     /**
-     * @param mixed $const
-     * @return string
+     * @param CommandSender $sender
      */
-    public function getConstantValue($const){
-        $const = constant($const);
-        if(is_array($const)){
-            return implode(", ", $const);
-        }
-        elseif(is_bool($const) or is_float($const) or is_int($const) or is_string($const)){
-            return (string) $const;
-        }
-        elseif(is_resource($const)){
-            return "FAILED_TO_READ";
-        }
-        elseif(is_null($const)){
-            return "NULL";
+    public function addActive(CommandSender $sender){
+        if(isset($this->active[strtolower($sender->getName())])){
+            $sender->sendMessage(TextFormat::RED."Please wait until the current search finishes.");
         }
         else{
-            return "UNKNOWN_VALUE";
+            $this->active[strtolower($sender->getName())] = $sender;
+        }
+    }
+    /**
+     * @param CommandSender $sender
+     */
+    public function removeActive(CommandSender $sender){
+        if(isset($this->active[strtolower($sender->getName())])){
+            unset($this->active[strtolower($sender->getName())]);
         }
     }
 }
