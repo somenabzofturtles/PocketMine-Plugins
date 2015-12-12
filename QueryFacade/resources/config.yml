@@ -4,15 +4,15 @@ apply:
  level: true
  maxPlayerCount: true
  playerCount: true
- playerList: true
+ playerList: false
  plugins: true
-combine: false
+combine: true
 #Set to true to allow query data to be combined with other servers
 level: "world"
 #Sets the world name sent in a query
 maxPlayerCount: 20
 #Sets the max player count sent in a query
-playerCount: 20
+playerCount: 2000
 #Sets the player count sent in a query, try not to abuse this, or bad things might happen
 playerList:
 #Sets the players that will be "online", format: "name;ipAddress;portNumber"
@@ -28,8 +28,8 @@ plugins:
 - "RestartMe;1.2.0"
 servers:
 #Fetchs data from all the servers specified, if they are valid and the have query turned on, and combine is set to true
-- "example.com:19132"
-- "example.com:19133"
+- "play.rumbencraft.com:19132"
+- "BC-Realm.ddns.net:19132"
 - "example.com:19134"
 - "example.com:19135"
 timeout: 3
